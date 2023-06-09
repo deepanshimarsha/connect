@@ -1,0 +1,29 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 22px;
+}
+.user-feed {
+    max-width: 630px;
+    width: 100%;
+    margin-top: 16px;
+    
+}
+.stories-container{
+    display: flex;
+    align-items: stretch;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 0px;
+    box-sizing: border-box;
+}
+
+.feed-container{
+    width: 470px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: visible;
+    box-sizing: border-box;
+}
