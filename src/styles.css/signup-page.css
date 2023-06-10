@@ -1,0 +1,11 @@
+.signup-main{
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow-x: hidden;
+    align-self: auto;
+    align-items: center;
+    flex-grow: 0;
+    overflow-y: hidden;
+    height: 100%;
+}

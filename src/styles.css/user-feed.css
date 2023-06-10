@@ -1,3 +1,15 @@
+
+.main{
+    display: flex;
+    height: 100vh;
+  }
+  /* Small devices (portrait tablets and large phones, 600px and up)
+  @media only screen and (min-width: 600px) {...} */
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  /* @media only screen and (min-width: 768px) {...} */
+  
+
 .home-container {
     display: flex;
     justify-content: center;
@@ -26,4 +38,21 @@
     flex-direction: column;
     overflow-y: visible;
     box-sizing: border-box;
+}
+
+.suggestion-container  {
+    width: 319px;
+    padding-left: 64px;
+    height: 100vh;
+}
+.suggestion-main{
+    margin-top: 36px;
+    overflow-y: visible;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    position: static;
+    align-items: stretch;
+    overflow-x: visible;
+    justify-content: flex-start;
 }

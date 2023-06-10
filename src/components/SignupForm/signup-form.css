@@ -1,0 +1,20 @@
+.signupForm{
+    line-height: 22px;
+}
+.container{
+    padding-top: 2rem !important;
+}
+
+.formContainer{
+    padding-bottom: 0rem !important;
+    padding-top: 1.5rem !important;
+}
+
+/* .card{
+    border: none !important;
+} */
+
+.signupFooter{
+    margin-bottom: 10px !important;
+    
+}
