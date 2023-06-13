@@ -1,6 +1,7 @@
 import "./signup-form.css";
 import { useAuthContext } from "../../context/authContext";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 export default function SignupForm() {
   const { authState, authDispatch, signupHandler } = useAuthContext();
 
@@ -168,7 +169,7 @@ export default function SignupForm() {
                         {!authState.signupError
                           ? error
                             ? error
-                            : "Sign into your account"
+                            : "Sign up to see photos and videos from your friends"
                           : authState.signupError}
                       </h5>
                       <div class="form-outline mb-4">
@@ -262,9 +263,10 @@ export default function SignupForm() {
                         style={{ color: "#393f81" }}
                       >
                         Already have an account?{" "}
-                        <a href="#!" style={{ color: "#393f81" }}>
+                        <NavLink style={{ color: "#393f81" }} to="/login">
+                          {" "}
                           Login here
-                        </a>
+                        </NavLink>
                       </p>
                     </form>
                   </div>

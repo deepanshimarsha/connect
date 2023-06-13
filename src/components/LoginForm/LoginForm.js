@@ -1,6 +1,7 @@
 import "./login-form.css";
 import { useAuthContext } from "../../context/authContext";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function LoginForm() {
   const { authState, authDispatch, loginHandler } = useAuthContext();
@@ -138,7 +139,7 @@ export default function LoginForm() {
                         {!authState.loginError
                           ? error
                             ? error
-                            : "Sign into your account"
+                            : "Login to your account"
                           : authState.loginError}
                       </h5>
 
@@ -186,7 +187,7 @@ export default function LoginForm() {
                           class="btn btn-dark btn-lg btn-block"
                           type="button"
                         >
-                          Login
+                          Log in
                         </button>
                       </div>
 
@@ -195,9 +196,10 @@ export default function LoginForm() {
                       </a>
                       <p class="mb-5 pb-lg-2" style={{ color: "#393f81" }}>
                         Don't have an account?{" "}
-                        <a href="#!" style={{ color: "#393f81" }}>
+                        <NavLink style={{ color: "#393f81" }} to="/signup">
+                          {" "}
                           Register here
-                        </a>
+                        </NavLink>
                       </p>
                       <a href="#!" class="small text-muted">
                         Terms of use.
