@@ -1,5 +1,98 @@
 import "./login-form.css";
+import { useAuthContext } from "../../context/authContext";
+import { useState } from "react";
+
 export default function LoginForm() {
+  const { authState, authDispatch, loginHandler } = useAuthContext();
+
+  const [error, setError] = useState();
+
+  function validateForm(e) {
+    e.preventDefault();
+    const password = authState.loginCred.password;
+    const username = authState.loginCred.username;
+    if (!username) {
+      setError("Username can not be empty!");
+      return;
+    }
+    if (!password || password.length < 8) {
+      setError("Password must contain greater than or equal to 8 characters!");
+      return;
+    }
+
+    // variable to count upper case characters in the password.
+    let countUpperCase = 0;
+    // variable to count lowercase characters in the password.
+    let countLowerCase = 0;
+    // variable to count digit characters in the password.
+    let countDigit = 0;
+    // variable to count special characters in the password.
+    let countSpecialCharacters = 0;
+
+    for (let i = 0; i < password.length; i++) {
+      const specialChars = [
+        "!",
+        "@",
+        "#",
+        "$",
+        "%",
+        "^",
+        "&",
+        "*",
+        "(",
+        ")",
+        "_",
+        "-",
+        "+",
+        "=",
+        "[",
+        "{",
+        "]",
+        "}",
+        ":",
+        ";",
+        "<",
+        ">",
+      ];
+
+      if (specialChars.includes(password[i])) {
+        countSpecialCharacters++;
+      } else if (!isNaN(password[i] * 1)) {
+        countDigit++;
+      } else {
+        if (password[i] === password[i].toUpperCase()) {
+          countUpperCase++;
+        }
+        if (password[i] === password[i].toLowerCase()) {
+          countLowerCase++;
+        }
+      }
+    }
+
+    if (countLowerCase === 0) {
+      setError("Invalid Form, 0 lower case characters in password");
+      return;
+    }
+
+    if (countUpperCase === 0) {
+      setError("Invalid Form, 0 upper case characters in password");
+      return;
+    }
+
+    if (countDigit === 0) {
+      setError("Invalid Form, 0 digit characters in password");
+      return;
+    }
+
+    if (countSpecialCharacters === 0) {
+      setError("Invalid Form, 0 special characters in password");
+      return;
+    }
+
+    setError("");
+
+    loginHandler();
+  }
   return (
     <section class="vh-100">
       <div class="container py-5 h-100">
@@ -32,13 +125,33 @@ export default function LoginForm() {
 
                       <h5
                         class="fw-normal mb-3 pb-3"
-                        style={{ letterSpacing: "1px" }}
+                        style={{
+                          letterSpacing: "1px",
+                          color:
+                            error || authState.loginError ? "red" : "black",
+                          fontSize:
+                            error || authState.loginError ? "16px" : "20px",
+                          fontWeight:
+                            error || authState.loginError ? "400" : "500",
+                        }}
                       >
-                        Sign into your account
+                        {!authState.loginError
+                          ? error
+                            ? error
+                            : "Sign into your account"
+                          : authState.loginError}
                       </h5>
 
                       <div class="form-outline mb-4">
                         <input
+                          onChange={(e) => {
+                            authDispatch({
+                              type: "SET_LOGIN_CRED",
+                              field: "USERNAME",
+                              data: e.target.value,
+                            });
+                          }}
+                          autoComplete="off"
                           type="text"
                           id="form2Example17"
                           class="form-control form-control-lg"
@@ -50,6 +163,14 @@ export default function LoginForm() {
 
                       <div class="form-outline mb-4">
                         <input
+                          onChange={(e) => {
+                            authDispatch({
+                              type: "SET_LOGIN_CRED",
+                              field: "PASSWORD",
+                              data: e.target.value,
+                            });
+                          }}
+                          autoComplete="off"
                           type="password"
                           id="form2Example27"
                           class="form-control form-control-lg"
@@ -61,6 +182,7 @@ export default function LoginForm() {
 
                       <div class="pt-1 mb-4">
                         <button
+                          onClick={(e) => validateForm(e)}
                           class="btn btn-dark btn-lg btn-block"
                           type="button"
                         >

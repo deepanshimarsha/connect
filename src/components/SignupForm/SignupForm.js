@@ -1,5 +1,128 @@
 import "./signup-form.css";
+import { useAuthContext } from "../../context/authContext";
+import { useState } from "react";
 export default function SignupForm() {
+  const { authState, authDispatch, signupHandler } = useAuthContext();
+
+  const [error, setError] = useState();
+
+  function validateForm(e) {
+    // Check if the First Name is an Empty string or not.
+    e.preventDefault();
+
+    const fullName = authState.signupCred.fullName;
+    const email = authState.signupCred.email;
+    const password = authState.signupCred.password;
+    const username = authState.signupCred.username;
+
+    if (!email) {
+      setError("Email Address can not be empty");
+      return;
+    }
+    if (!fullName) {
+      setError("Fullname can not be empty!");
+      return;
+    }
+    if (!username) {
+      setError("Username can not be empty!");
+      return;
+    }
+
+    // Check if the Email is an Empty string or not.
+
+    // check if the password follows constraints or not.
+
+    // if password length is less than 8 characters, alert invalid form.
+
+    if (!password || password.length < 8) {
+      setError("Password must contain greater than or equal to 8 characters.");
+      return;
+    }
+
+    // variable to count upper case characters in the password.
+    let countUpperCase = 0;
+    // variable to count lowercase characters in the password.
+    let countLowerCase = 0;
+    // variable to count digit characters in the password.
+    let countDigit = 0;
+    // variable to count special characters in the password.
+    let countSpecialCharacters = 0;
+
+    for (let i = 0; i < password.length; i++) {
+      const specialChars = [
+        "!",
+        "@",
+        "#",
+        "$",
+        "%",
+        "^",
+        "&",
+        "*",
+        "(",
+        ")",
+        "_",
+        "-",
+        "+",
+        "=",
+        "[",
+        "{",
+        "]",
+        "}",
+        ":",
+        ";",
+        "<",
+        ">",
+      ];
+
+      if (specialChars.includes(password[i])) {
+        // this means that the character is special, so increment countSpecialCharacters
+        countSpecialCharacters++;
+      } else if (!isNaN(password[i] * 1)) {
+        // this means that the character is a digit, so increment countDigit
+        countDigit++;
+      } else {
+        if (password[i] === password[i].toUpperCase()) {
+          // this means that the character is an upper case character, so increment countUpperCase
+          countUpperCase++;
+        }
+        if (password[i] === password[i].toLowerCase()) {
+          // this means that the character is lowercase, so increment countUpperCase
+          countLowerCase++;
+        }
+      }
+    }
+
+    if (countLowerCase === 0) {
+      // invalid form, 0 lowercase characters
+      setError("Invalid Form, 0 lower case characters in password");
+      return;
+    }
+
+    if (countUpperCase === 0) {
+      // invalid form, 0 upper case characters
+      setError("Invalid Form, 0 upper case characters in password");
+      return;
+    }
+
+    if (countDigit === 0) {
+      // invalid form, 0 digit characters
+      setError("Invalid Form, 0 digit characters in password");
+      return;
+    }
+
+    if (countSpecialCharacters === 0) {
+      // invalid form, 0 special characters characters
+      setError("Invalid Form, 0 special characters in password");
+      return;
+    }
+
+    // if all the conditions are valid, this means that the form is valid
+
+    setError("");
+
+    signupHandler();
+  }
+
   return (
     <section class="vh-100">
       <div class="container py-5 h-100">
@@ -32,12 +155,32 @@ export default function SignupForm() {
 
                       <h5
                         class="fw-normal mb-3 pb-3"
-                        style={{ letterSpacing: "1px" }}
+                        style={{
+                          letterSpacing: "1px",
+                          color:
+                            error || authState.signupError ? "red" : "black",
+                          fontSize:
+                            error || authState.signupError ? "16px" : "20px",
+                          fontWeight:
+                            error || authState.signupError ? "400" : "500",
+                        }}
                       >
-                        Sign into your account
+                        {!authState.signupError
+                          ? error
+                            ? error
+                            : "Sign into your account"
+                          : authState.signupError}
                       </h5>
                       <div class="form-outline mb-4">
                         <input
+                          onChange={(e) => {
+                            authDispatch({
+                              type: "SET_SIGNUP_CRED",
+                              field: "EMAIL",
+                              data: e.target.value,
+                            });
+                          }}
+                          autoComplete="off"
                           type="email"
                           id="form2Example17"
                           class="form-control form-control-lg"
@@ -49,6 +192,14 @@ export default function SignupForm() {
 
                       <div class="form-outline mb-4">
                         <input
+                          onChange={(e) => {
+                            authDispatch({
+                              type: "SET_SIGNUP_CRED",
+                              field: "FULL_NAME",
+                              data: e.target.value,
+                            });
+                          }}
+                          autoComplete="off"
                           type="text"
                           id="form2Example27"
                           class="form-control form-control-lg"
@@ -60,6 +211,14 @@ export default function SignupForm() {
 
                       <div class="form-outline mb-4">
                         <input
+                          onChange={(e) => {
+                            authDispatch({
+                              type: "SET_SIGNUP_CRED",
+                              field: "USERNAME",
+                              data: e.target.value,
+                            });
+                          }}
+                          autoComplete="off"
                           type="text"
                           id="form2Example17"
                           class="form-control form-control-lg"
@@ -71,6 +230,14 @@ export default function SignupForm() {
 
                       <div class="form-outline mb-4">
                         <input
+                          onChange={(e) => {
+                            authDispatch({
+                              type: "SET_SIGNUP_CRED",
+                              field: "PASSWORD",
+                              data: e.target.value,
+                            });
+                          }}
+                          autoComplete="off"
                           type="password"
                           id="form2Example27"
                           class="form-control form-control-lg"
@@ -82,6 +249,7 @@ export default function SignupForm() {
 
                       <div class="pt-1 mb-4">
                         <button
+                          onClick={(e) => validateForm(e)}
                           class="btn btn-dark btn-lg btn-block"
                           type="button"
                         >

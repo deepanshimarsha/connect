@@ -5,21 +5,49 @@ const authReducer = (state, action) => {
     }
 
     case "SET_LOGIN_CRED": {
-      return {
-        ...state,
-        loginCred: { username: action.username, password: action.password },
-      };
+      if (action.field === "USERNAME") {
+        return {
+          ...state,
+          loginCred: {
+            ...state.loginCred,
+            username: action.data,
+          },
+        };
+      }
+      if (action.field === "PASSWORD") {
+        return {
+          ...state,
+          loginCred: { ...state.loginCred, password: action.data },
+        };
+      }
     }
     case "SET_SIGNUP_CRED": {
-      return {
-        ...state,
-        signupCred: {
-          email: action.email,
-          name: action.name,
-          username: action.username,
-          password: action.password,
-        },
-      };
+      if (action.field === "EMAIL") {
+        return {
+          ...state,
+          signupCred: { ...state.signupCred, email: action.data },
+        };
+      }
+      if (action.field === "FULL_NAME") {
+        return {
+          ...state,
+          signupCred: { ...state.signupCred, fullName: action.data },
+        };
+      }
+
+      if (action.field === "USERNAME") {
+        return {
+          ...state,
+          signupCred: { ...state.signupCred, username: action.data },
+        };
+      }
+
+      if (action.field === "PASSWORD") {
+        return {
+          ...state,
+          signupCred: { ...state.signupCred, password: action.data },
+        };
+      }
     }
 
     case "SET_FOUND_USER": {
@@ -38,7 +66,7 @@ const authReducer = (state, action) => {
       return { ...state, token: action.token };
     }
     case "SET_LOGIN_ERROR": {
-      return { ...state, loginError: action.error };
+      return { ...state, loginError: action.loginError };
     }
     case "SET_SIGNUP_ERROR": {
       return { ...state, signupError: action.signupError };
