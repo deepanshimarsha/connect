@@ -1,0 +1,224 @@
+.instaPreviewArea {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    overflow-x: hidden;
+}
+.table-container {
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+}
+#instaCardArea {
+    width: 402px;
+    height: auto;
+    background-color: #FFFFFF;
+    background-size: cover;
+    display: flex;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    margin: 0 auto;
+}
+
+.instaPostCard{
+    color: #4a4a4a;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+
+}
+.columns.is-vcentered {
+    align-items: center;
+}
+.columns.is-mobile {
+    display: flex;
+}
+.mb-0 {
+    margin-bottom: 0!important;
+}
+.columns {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-top: -0.75rem;
+}
+.columns.is-mobile>.column.is-8 {
+    flex: none;
+    width: 66.66667%;
+}
+.pl-0 {
+    padding-left: 0!important;
+}
+.column{
+    display: block;
+    flex-basis: 0;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 0.75rem;
+}
+#profilePicture {
+    background-image: url("https://github.com/mdo.png");
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+.story-icon {
+    position: absolute;
+    margin-top: -37px;
+    margin-left: -5px;
+    width: 42px;
+    height: 42px;
+}
+.is-hidden {
+    display: none!important;
+}
+.label:not(:last-child) {
+    margin-bottom: 0.5em;
+}
+.username-text {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.mb-0 {
+    margin-bottom: 0!important;
+}
+.label {
+    color: #363636;
+    display: block;
+    font-size: 1rem;
+    font-weight: 650;
+}
+.username-text {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 650;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.description-text {
+    font-size: 12px;
+    line-height: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html, iframe, legend, li, ol, p, pre, textarea, ul {
+    margin: 0;
+    padding: 0;
+}
+.has-text-right {
+    text-align: right!important;
+}
+#postImage {
+    width: 400px;
+    height: 400px;
+    background-image: url("https://codebeautify.org/img/instagram-default-image.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.tag-icon {
+    position: absolute;
+    margin-left: 12px;
+    margin-top: -39px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    background: rgb(0, 0, 0);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+.has-text-white {
+    color: #fff!important;
+}
+#imageCountBubblesArea {
+    position: absolute;
+    left: 50%;
+    margin-top: 15px;
+    display: flex;
+    transform: translateX(-50%);
+}
+#likesCountTextArea {
+    color: #262626;
+    font-size: 14.5px;
+    line-height: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+#postTextArea {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 6px;
+   
+}
+
+#postTextUserName{
+    font-weight: 650;
+}
+
+
+#commentCountTextArea {
+    color: #8e8e8e;
+    font-size: 15px;
+    line-height: 18px;
+    margin-bottom: 4px;
+}
+.columns.is-mobile {
+    display: flex;
+}
+
+.columns:not(:last-child) {
+    margin-bottom: calc(1.5rem - 0.75rem);
+}
+.comment-area {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 4px;
+}
+.columns {
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    margin-top: -0.75rem;
+}
+.pb-0 {
+    padding-bottom: 0!important;
+}
+.comment-area {
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 4px;
+}
+.columns.is-mobile {
+    display: flex;
+}
+.columns:not(:last-child) {
+    margin-bottom: calc(1.5rem - 0.75rem);
+}
+#textPostTime {
+    color: rgb(142, 142, 142);
+    font-size: 16px;
+    line-height: 17px;
+    letter-spacing: px;
+    
+    margin: 8px 0px 4px;
+}
+.columns.is-mobile>.column.is-1 {
+    flex: none;
+    width: 8.33333%;
+}
