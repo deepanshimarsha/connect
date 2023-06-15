@@ -7,7 +7,7 @@ export default function UserFeed() {
       <Navbar />
       <div className="home-container">
         <div className="user-feed">
-          <div className="stories-container"></div>
+          {/* <div className="stories-container"></div> */}
           <div className="feed-container"></div>
         </div>
         <div className="suggestion-container">

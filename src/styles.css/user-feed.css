@@ -15,6 +15,7 @@
     justify-content: center;
     width: 100%;
     padding-top: 22px;
+    
 }
 .user-feed {
     max-width: 630px;
@@ -55,4 +56,15 @@
     align-items: stretch;
     overflow-x: visible;
     justify-content: flex-start;
+}
+
+@media (min-width: 200px) and (max-width: 749px) {
+    .suggestion-container{
+        display: none;
+    }
+}
+@media (min-width: 750px) and (max-width: 1260px) {
+    .suggestion-container{
+        display: none;
+    }
 }

@@ -50,18 +50,6 @@ const authReducer = (state, action) => {
       }
     }
 
-    case "SET_FOUND_USER": {
-      return {
-        ...state,
-        foundUser: action.foundUser,
-      };
-    }
-    case "SET_NEW_USER": {
-      return {
-        ...state,
-        newUser: action.newUser,
-      };
-    }
     case "SET_TOKEN": {
       return { ...state, token: action.token };
     }

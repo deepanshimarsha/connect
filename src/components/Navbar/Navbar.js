@@ -1,6 +1,9 @@
+import { NavLink } from "react-router-dom";
 import "./navbar.css";
+import { useAuthContext } from "../../context/authContext";
 
 export default function Navbar() {
+  const { logoutHandler } = useAuthContext();
   return (
     <div className="d-flex flex-column flex-shrink-0 bg-light side-navbar">
       <a
@@ -289,7 +292,7 @@ export default function Navbar() {
         >
           <li>
             <a className="dropdown-item" href="/">
-              New project...
+              New post...
             </a>
           </li>
           <li>
@@ -306,9 +309,13 @@ export default function Navbar() {
             <hr className="dropdown-divider" />
           </li>
           <li>
-            <a className="dropdown-item" href="/">
-              Sign out
-            </a>
+            <NavLink
+              className="dropdown-item"
+              to="/login"
+              onClick={() => logoutHandler()}
+            >
+              Log out
+            </NavLink>
           </li>
         </ul>
       </div>

@@ -1,6 +1,8 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
-import { authReducer } from "../reducer/authReducer";
 import { useNavigate } from "react-router-dom";
+
+import { authReducer } from "../reducer/authReducer";
+import { useUserContext } from "./userContext";
 
 const AuthContext = createContext(null);
 
@@ -19,9 +21,9 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
-  // console.log(authState);
-
+  //console.log(authState.foundUser);
   const navigate = useNavigate();
+  const { userDispatch } = useUserContext();
 
   //signup
   const signupHandler = async () => {
@@ -44,7 +46,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem("token", encodedToken);
         authDispatch({ type: "TOGGLE_IS_LOGGED_IN" });
         authDispatch({ type: "SET_TOKEN", token: encodedToken });
-        authDispatch({ type: "SET_NEW_USER", newUser: createdUser });
+        userDispatch({ type: "SET_NEW_USER", newUser: createdUser });
         authDispatch({
           type: "SET_SIGNUP_ERROR",
           signupError: "",
@@ -84,7 +86,7 @@ const AuthContextProvider = ({ children }) => {
         localStorage.setItem("token", encodedToken);
         authDispatch({ type: "TOGGLE_IS_LOGGED_IN" });
         authDispatch({ type: "SET_TOKEN", token: encodedToken });
-        authDispatch({ type: "SET_FOUND_USER", foundUser: foundUser });
+        userDispatch({ type: "SET_FOUND_USER", foundUser: foundUser });
         authDispatch({
           type: "SET_LOGIN_ERROR",
           loginError: "",
@@ -110,10 +112,20 @@ const AuthContextProvider = ({ children }) => {
       console.error(e);
     }
   };
+  const logoutHandler = () => {
+    authDispatch({ type: "TOGGLE_IS_LOGGED_IN" });
+    authDispatch({ type: "SET_TOKEN", token: "" });
+  };
 
   return (
     <AuthContext.Provider
-      value={{ authState, authDispatch, loginHandler, signupHandler }}
+      value={{
+        authState,
+        authDispatch,
+        loginHandler,
+        signupHandler,
+        logoutHandler,
+      }}
     >
       {children}
     </AuthContext.Provider>

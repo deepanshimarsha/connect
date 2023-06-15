@@ -7,15 +7,18 @@ import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import { AuthContextProvider } from "./context/authContext";
+import { UserContextProvider } from "./context/userContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <AuthContextProvider>
-        {" "}
-        <App />
-      </AuthContextProvider>
+      <UserContextProvider>
+        <AuthContextProvider>
+          {" "}
+          <App />
+        </AuthContextProvider>
+      </UserContextProvider>
     </Router>
   </React.StrictMode>
 );
