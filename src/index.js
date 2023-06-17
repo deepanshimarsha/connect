@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { AuthContextProvider } from "./context/authContext";
 import { UserContextProvider } from "./context/userContext";
-import { NavContextProvider } from "./context/NavContext";
+import { NavContextProvider } from "./context/navContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

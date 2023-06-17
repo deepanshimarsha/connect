@@ -7,7 +7,7 @@ import Signup from "./pages/Signup";
 
 import RequiresAuth from "./components/PrivateRoutesAuth/RequiresAuth";
 import PostCard from "./components/Posts/PostCard";
-import { useNavContext } from "./context/NavContext";
+import { useNavContext } from "./context/navContext";
 import ExloreFeed from "./pages/ExploreFeed";
 import Search from "./pages/SearchPage";
 import UserProfile from "./pages/UserProfile";

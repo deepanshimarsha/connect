@@ -21,7 +21,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
-  console.log(authState.isLoggedIn);
+
   const navigate = useNavigate();
   const { userDispatch } = useUserContext();
 

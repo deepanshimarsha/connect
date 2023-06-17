@@ -2,12 +2,12 @@ import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import { useAuthContext } from "../../context/authContext";
 
-import { useNavContext } from "../../context/NavContext";
+import { useNavContext } from "../../context/navContext";
 
 export default function Navbar() {
   const { logoutHandler } = useAuthContext();
   const { navState, setClickedIconAndHeading } = useNavContext();
-  console.log("nabar", navState);
+
   return (
     <div className="d-flex flex-column flex-shrink-0 bg-light side-navbar">
       <NavLink

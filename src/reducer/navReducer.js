@@ -28,7 +28,7 @@ const navReducer = (state, action) => {
       if (action.iconClicked === "create") {
         return {
           ...state,
-          topNavHeading: "Create",
+
           home: false,
           search: false,
           create: true,
@@ -64,7 +64,7 @@ const navReducer = (state, action) => {
       if (action.iconClicked === "setting") {
         return {
           ...state,
-          topNavHeading: "Setting",
+
           home: false,
           search: false,
           create: false,

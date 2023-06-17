@@ -14,7 +14,7 @@ const NavContextProvider = ({ children }) => {
   };
 
   const [navState, navDispatch] = useReducer(navReducer, navInitialState);
-  console.log(navState);
+
   const setClickedIconAndHeading = (iconName) => {
     navDispatch({ type: "SET_CLICKED_ICON", iconClicked: iconName });
   };

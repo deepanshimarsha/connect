@@ -1,4 +1,4 @@
-import { useNavContext } from "../../context/NavContext";
+import { useNavContext } from "../../context/navContext";
 
 export default function TopNav() {
   const { navState } = useNavContext();
