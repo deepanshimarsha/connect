@@ -5,6 +5,15 @@ const authReducer = (state, action) => {
     }
 
     case "SET_LOGIN_CRED": {
+      if (action.method === "GUEST_MODE") {
+        return {
+          ...state,
+          loginCred: {
+            username: "adarshbalika",
+            password: "adarshBalika123#",
+          },
+        };
+      }
       if (action.field === "USERNAME") {
         return {
           ...state,

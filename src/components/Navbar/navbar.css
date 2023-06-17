@@ -23,6 +23,19 @@
   .brand-logo  {
     display: none;
   }
+  .brand-logo img{
+    max-width: 37px !important;
+  }
+.nav-pills .nav-link.active {
+    background-color: none !important
+}
+.nav.nav-tabs .nav-link.active {
+  background-color: none !important
+}
+.text-center{
+  text-align: center !important;
+  justify-content: center !important;
+}
   /* Extra small devices (phones, 600px and down) */
   @media (min-width: 750px) and (max-width: 1260px) {
   
@@ -38,6 +51,7 @@
     .brand-logo {
       display: block;
     }
+    
     
   }
   @media (min-width: 200px) and (max-width: 749px) {

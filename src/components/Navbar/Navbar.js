@@ -2,12 +2,16 @@ import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import { useAuthContext } from "../../context/authContext";
 
+import { useNavContext } from "../../context/NavContext";
+
 export default function Navbar() {
   const { logoutHandler } = useAuthContext();
+  const { navState, setClickedIconAndHeading } = useNavContext();
+  console.log("nabar", navState);
   return (
     <div className="d-flex flex-column flex-shrink-0 bg-light side-navbar">
-      <a
-        href="/"
+      <NavLink
+        to="/"
         className="d-block p-3 link-dark text-decoration-none brand-link"
         title=""
         data-bs-toggle="tooltip"
@@ -17,25 +21,26 @@ export default function Navbar() {
         <div className="brand">
           <span className="brand-logo">
             <img
-              width="40"
-              height="40"
+              width="50"
+              height="50"
               src="https://img.icons8.com/glyph-neue/64/share-2--v1.png"
               alt="share-2--v1"
             />
           </span>{" "}
           <span className="brand-name">Connect</span>
         </div>
-      </a>
-      <ul className="nav nav-pills nav-flush flex-column mb-auto text-center nav-links">
+      </NavLink>
+      <ul className="nav  nav-flush flex-column mb-auto text-center nav-links">
         <li className="nav-item">
-          <a
-            href="/"
+          <NavLink
+            to="/"
             className="nav-link py-3 border-bottom"
             aria-current="page"
             title=""
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Home"
+            onClick={() => setClickedIconAndHeading("home")}
           >
             <div className="nav-icon">
               <svg
@@ -50,7 +55,7 @@ export default function Navbar() {
               >
                 <path
                   d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z"
-                  fill="none"
+                  fill={navState.home ? "black" : "none"}
                   stroke="currentColor"
                   stroke-linejoin="round"
                   stroke-width="2"
@@ -59,16 +64,17 @@ export default function Navbar() {
             </div>
             <div className="nav-item-heading">Home</div>
             {/* </svg> */}
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            href="/"
+          <NavLink
+            to="/search"
             className="nav-link py-3 border-bottom"
             title=""
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Dashboard"
+            onClick={() => setClickedIconAndHeading("search")}
           >
             <div className="nav-icon">
               <svg
@@ -87,14 +93,14 @@ export default function Navbar() {
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width={navState.search ? "4" : "2"}
                 ></path>
                 <line
                   fill="none"
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width={navState.search ? "4" : "2"}
                   x1="16.511"
                   x2="22"
                   y1="16.511"
@@ -103,16 +109,17 @@ export default function Navbar() {
               </svg>
             </div>
             <div className="nav-item-heading">Search</div>
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            href="/"
+          <NavLink
+            // to="/create"
             className="nav-link py-3 border-bottom"
             title=""
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Orders"
+            onClick={() => setClickedIconAndHeading("create")}
           >
             <div className="nav-icon">
               <svg
@@ -131,14 +138,14 @@ export default function Navbar() {
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width={navState.create ? "3" : "2"}
                 ></path>
                 <line
                   fill="none"
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width={navState.create ? "3" : "2"}
                   x1="6.545"
                   x2="17.455"
                   y1="12.001"
@@ -149,7 +156,7 @@ export default function Navbar() {
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width={navState.create ? "3" : "2"}
                   x1="12.003"
                   x2="12.003"
                   y1="6.545"
@@ -158,16 +165,17 @@ export default function Navbar() {
               </svg>
             </div>
             <div className="nav-item-heading">Create</div>
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            href="/"
+          <NavLink
+            to="/explore"
             className="nav-link py-3 border-bottom"
             title=""
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Products"
+            onClick={() => setClickedIconAndHeading("explore")}
           >
             <div className="nav-icon">
               <svg
@@ -181,7 +189,7 @@ export default function Navbar() {
                 width="24"
               >
                 <polygon
-                  fill="none"
+                  fill={navState.explore ? "black" : "none"}
                   points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953"
                   stroke="currentColor"
                   stroke-linecap="round"
@@ -200,38 +208,43 @@ export default function Navbar() {
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width={navState.explore ? "3" : "2"}
                 ></circle>
               </svg>
             </div>
             <div className="nav-item-heading">Explore</div>
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            href="/"
+          <NavLink
+            to="/profile"
             className="nav-link py-3 border-bottom"
             title=""
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Customers"
+            onClick={() => setClickedIconAndHeading("profile")}
           >
             <div className="nav-icon">
               <img
                 src="https://github.com/mdo.png"
                 alt="mdo"
-                width="24"
-                height="24"
+                width={navState.profile ? "26" : "24"}
+                height={navState.profile ? "26" : "24"}
                 className="rounded-circle"
+                style={{
+                  border: navState.profile ? "black solid 3px" : "",
+                  borderRadius: navState.profile ? "50%" : "",
+                }}
               />
             </div>
             <div className="nav-item-heading">Profile</div>
-          </a>
+          </NavLink>
         </li>
       </ul>
       <div className="dropdown border-top nav-item">
-        <a
-          href="/"
+        <NavLink
+          to="/more"
           className="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
           id="dropdownUser3"
           data-bs-toggle="dropdown"
@@ -247,9 +260,10 @@ export default function Navbar() {
               role="img"
               viewBox="0 0 24 24"
               width="24"
+              onClick={() => setClickedIconAndHeading("setting")}
             >
               <line
-                fill="none"
+                fill={navState.setting ? "black" : "none"}
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -260,7 +274,7 @@ export default function Navbar() {
                 y2="4"
               ></line>
               <line
-                fill="none"
+                fill={navState.setting ? "black" : "none"}
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -271,7 +285,7 @@ export default function Navbar() {
                 y2="12"
               ></line>
               <line
-                fill="none"
+                fill={navState.setting ? "black" : "none"}
                 stroke="currentColor"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -284,24 +298,24 @@ export default function Navbar() {
             </svg>
           </div>
           <div className="nav-item-heading">More</div>
-        </a>
+        </NavLink>
 
         <ul
           className="dropdown-menu text-small shadow"
           aria-labelledby="dropdownUser3"
         >
           <li>
-            <a className="dropdown-item" href="/">
+            <a className="dropdown-item" href="/mockman">
               New post...
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="/">
+            <a className="dropdown-item" href="/mockman">
               Settings
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="/">
+            <a className="dropdown-item" href="/mockman">
               Profile
             </a>
           </li>

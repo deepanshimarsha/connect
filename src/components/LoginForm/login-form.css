@@ -1,3 +1,11 @@
 .formFooter{
     margin-bottom: 40px !important;
 }
+.btn-container {
+    display: flex;
+    gap: 0.5rem;
+}
+.btn-container button {
+    background-color: #0095f6;
+    border: none;
+}

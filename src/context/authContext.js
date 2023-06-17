@@ -10,7 +10,7 @@ const AuthContextProvider = ({ children }) => {
   // const token = localStorage.getItem("token");
 
   const initialAuthState = {
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem("token") ? true : false,
     loginCred: {},
     signupCred: {},
     token: "",
@@ -21,7 +21,7 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
-  //console.log(authState.foundUser);
+  console.log(authState.isLoggedIn);
   const navigate = useNavigate();
   const { userDispatch } = useUserContext();
 
@@ -79,6 +79,7 @@ const AuthContextProvider = ({ children }) => {
         method: "POST",
         body: JSON.stringify(requestData),
       });
+      console.log(JSON.stringify(requestData));
 
       if (responseData.status === 200) {
         const { encodedToken, foundUser } = await responseData.json();

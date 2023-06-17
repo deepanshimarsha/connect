@@ -94,6 +94,13 @@ export default function LoginForm() {
 
     loginHandler();
   }
+
+  const guestModeLogin = () => {
+    authDispatch({
+      type: "SET_LOGIN_CRED",
+      method: "GUEST_MODE",
+    });
+  };
   return (
     <section class="vh-100">
       <div class="container py-5 h-100">
@@ -152,6 +159,7 @@ export default function LoginForm() {
                               data: e.target.value,
                             });
                           }}
+                          value={authState.loginCred.username}
                           autoComplete="off"
                           type="text"
                           id="form2Example17"
@@ -171,6 +179,7 @@ export default function LoginForm() {
                               data: e.target.value,
                             });
                           }}
+                          value={authState.loginCred.password}
                           autoComplete="off"
                           type="password"
                           id="form2Example27"
@@ -181,11 +190,19 @@ export default function LoginForm() {
                         </label>
                       </div>
 
-                      <div class="pt-1 mb-4">
+                      <div class="pt-1 mb-4 btn-container">
+                        <button
+                          onClick={() => guestModeLogin()}
+                          class="btn btn-dark btn-lg btn-block"
+                          type="button"
+                        >
+                          Guest mode
+                        </button>
+
                         <button
                           onClick={(e) => validateForm(e)}
                           class="btn btn-dark btn-lg btn-block"
-                          type="button"
+                          type="submit"
                         >
                           Log in
                         </button>
@@ -199,7 +216,7 @@ export default function LoginForm() {
                         style={{ color: "#393f81" }}
                       >
                         Don't have an account?{" "}
-                        <NavLink style={{ color: "#393f81" }} to="/signup">
+                        <NavLink style={{ color: "#0095f6" }} to="/signup">
                           {" "}
                           Register here
                         </NavLink>
