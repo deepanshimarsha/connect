@@ -1,0 +1,72 @@
+.final-form-body{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    }
+.preview-pic{
+    width: 70%;
+}
+.preview-pic img{
+    width: 100%;
+}
+.caption-input{
+    width: 100%;
+    flex-grow: 1;
+    position: relative;
+   
+}
+.caption-input textarea{
+    
+    min-height: 100%;
+}
+
+.emoji-icon {
+    height: 20px;
+    width: 20px;
+    border: none;
+    background: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 5px;
+  }
+  
+  .emoji-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: transparent;
+    outline: none;
+    border: none;
+    
+
+  }
+
+.modal-main{
+    overflow-y: scroll !important;
+}
+
+aside.EmojiPickerReact{
+    width: 300px !important;
+    height: 350px !important;
+}
+aside.EmojiPickerReact.epr-header .epr-header-overlay{
+    padding: 1px !important;
+}
+.text-area{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.picker-float{
+    position: fixed;
+    left: 500px;
+    bottom: 0px;
+}
+.modal-body{
+    /* height: 50vh; */
+    width: 100%;
+}
+.final-form-body{
+    
+}

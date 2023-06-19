@@ -41,7 +41,11 @@ export default function PostCard() {
                   </div>
                 </div>
               </div>
-              <img id="postImage" alt="" />
+              <img
+                id="postImage"
+                src="https://pbs.twimg.com/media/Ekzemj2WAAAyDcf.jpg"
+                alt=""
+              />
               <div class="tag-icon is-hidden" id="tagIconArea">
                 {" "}
                 <span class="material-icons has-text-white">

@@ -1,0 +1,81 @@
+.suggestion-card {
+    padding: 0px 16px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0px;
+    align-items: stretch;
+    align-self: auto;
+}
+.suggested-user{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    align-items: center;
+    flex-shrink: 0;
+    justify-content: space-between;
+}
+.profile-img{
+    display: flex;
+    margin-right: 12px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+.user-link{
+    text-decoration: none;
+    border-bottom-left-radius: 50%;
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-width: 0px;
+    align-items: stretch;
+    overflow-x: hidden;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-top-width: 0px;
+}
+.user-link img{
+    height: 100%;
+    width: 100%;
+}
+.profile-name{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 1;
+    min-width: 0;
+    flex-basis: auto;
+    box-sizing: border-box;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+.profile-content{
+    min-width: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: auto;
+    align-items: flex-start;
+}
+.action-btn{
+    margin-left: 12px;
+    display: flex;
+    flex-shrink: 1;
+    align-items: stretch;
+    flex-direction: row;
+
+}
+.action-btn button {
+    border: 0;
+    color: #45b2f8;
+    display: inline-block;
+    padding: 0!important;
+    position: relative;
+    background-color: white;
+}
+.action {
+    font-weight: 600;
+}

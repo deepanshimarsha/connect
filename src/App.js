@@ -11,10 +11,13 @@ import { useNavContext } from "./context/navContext";
 import ExloreFeed from "./pages/ExploreFeed";
 import Search from "./pages/SearchPage";
 import UserProfile from "./pages/UserProfile";
+import ModalDetail from "./components/PostDetail/ModalDetail";
+import CreateModalForm from "./components/CreateModalForm.js/CreateModalForm";
 
 function App() {
   return (
     <div className="App">
+      {/* <CreateModalForm /> */}
       <Routes>
         <Route
           path="/"

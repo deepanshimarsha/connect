@@ -9,19 +9,22 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContextProvider } from "./context/authContext";
 import { UserContextProvider } from "./context/userContext";
 import { NavContextProvider } from "./context/navContext";
+import { PostContextProvider } from "./context/postContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <NavContextProvider>
-        <UserContextProvider>
-          <AuthContextProvider>
-            {" "}
-            <App />
-          </AuthContextProvider>
-        </UserContextProvider>
-      </NavContextProvider>
+      <PostContextProvider>
+        <NavContextProvider>
+          <UserContextProvider>
+            <AuthContextProvider>
+              {" "}
+              <App />
+            </AuthContextProvider>
+          </UserContextProvider>
+        </NavContextProvider>
+      </PostContextProvider>
     </Router>
   </React.StrictMode>
 );

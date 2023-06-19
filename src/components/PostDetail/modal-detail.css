@@ -1,0 +1,81 @@
+.modal-content{
+    flex-direction: row ;
+    height: 90vh;
+    width: 1000px;
+    right: 250px;
+    top: 10px;
+    
+}
+.post-image{
+    width: 50%;
+   
+}
+.post-image img{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.post-detail {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.modal-body-img{
+    display: none;
+}
+.not-show{
+    display: none;
+}
+@media (min-width: 750px) and (max-width: 1260px) {
+    .modal-content{
+       width: 750px;
+       height: 70vh;
+       right: 125px;
+       top: 60px;
+    }
+}
+@media (min-width: 200px) and (max-width: 749px) {
+    .modal-body-img{
+        display: block;
+    }
+    .post-image{
+        display: none;
+    }
+    .modal-content{
+        flex-direction: column;
+        width: 100%;
+        right: 0px;
+        /* overflow-y: scroll; */
+        border-radius: 0px;
+        top: 30px;
+        height: 82vh;
+        flex-grow: 0;
+        
+        
+    }
+    .table-container{
+        overflow: unset;
+        overflow-y: unset;
+    }
+    .post-detail{
+        display: none;
+        width: 100%;
+    }
+    .not-show{
+        display: block;
+        width: 100%;
+        overflow-y: scroll;
+        
+    }
+    .modal-body{
+        padding: 0px;
+    }
+    #instaCardArea{
+        width: 100%;
+        margin: 0px;
+    }
+    .column{
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+}

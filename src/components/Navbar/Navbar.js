@@ -3,6 +3,7 @@ import "./navbar.css";
 import { useAuthContext } from "../../context/authContext";
 
 import { useNavContext } from "../../context/navContext";
+import CreateModalForm from "../CreateModalForm.js/CreateModalForm";
 
 export default function Navbar() {
   const { logoutHandler } = useAuthContext();
@@ -112,7 +113,8 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
+          <CreateModalForm />
+          {/* <NavLink
             // to="/create"
             className="nav-link py-3 border-bottom"
             title=""
@@ -165,7 +167,7 @@ export default function Navbar() {
               </svg>
             </div>
             <div className="nav-item-heading">Create</div>
-          </NavLink>
+          </NavLink> */}
         </li>
         <li className="nav-item">
           <NavLink
