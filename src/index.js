@@ -10,6 +10,7 @@ import { AuthContextProvider } from "./context/authContext";
 import { UserContextProvider } from "./context/userContext";
 import { NavContextProvider } from "./context/navContext";
 import { PostContextProvider } from "./context/postContext";
+import { SearchContextProvider } from "./context/searchContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,8 +20,10 @@ root.render(
         <NavContextProvider>
           <UserContextProvider>
             <AuthContextProvider>
-              {" "}
-              <App />
+              <SearchContextProvider>
+                {" "}
+                <App />
+              </SearchContextProvider>
             </AuthContextProvider>
           </UserContextProvider>
         </NavContextProvider>

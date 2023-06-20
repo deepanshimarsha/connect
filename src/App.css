@@ -37,4 +37,11 @@
     transform: rotate(360deg);
   }
 }
-
+.top-nav{
+  display: none;
+}
+@media (min-width: 750px) and (max-width: 1260px){
+  .top-nav{
+    display: none !important;
+  }
+}

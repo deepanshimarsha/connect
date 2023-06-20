@@ -196,6 +196,12 @@
 .see-all-btn span{
     font-weight: 600;
 }
+.nav-and-search{
+    position: relative;
+}
+.instaPreviewArea{
+    position: static !important;
+}
 
 @media (min-width: 200px) and (max-width: 749px) {
     .suggestion-container{

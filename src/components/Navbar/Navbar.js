@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
 import "./navbar.css";
 import { useAuthContext } from "../../context/authContext";
-
+import { useSearchContext } from "../../context/searchContext";
 import { useNavContext } from "../../context/navContext";
 import CreateModalForm from "../CreateModalForm.js/CreateModalForm";
 
 export default function Navbar() {
   const { logoutHandler } = useAuthContext();
   const { navState, setClickedIconAndHeading } = useNavContext();
+  const { searchDispatch } = useSearchContext();
 
   return (
     <div className="d-flex flex-column flex-shrink-0 bg-light side-navbar">
@@ -41,7 +42,10 @@ export default function Navbar() {
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Home"
-            onClick={() => setClickedIconAndHeading("home")}
+            onClick={() => {
+              setClickedIconAndHeading("home");
+              searchDispatch({ type: "DO_NOT_SHOW_SEARCH_BAR" });
+            }}
           >
             <div className="nav-icon">
               <svg
@@ -69,13 +73,15 @@ export default function Navbar() {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/search"
             className="nav-link py-3 border-bottom"
             title=""
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Dashboard"
-            onClick={() => setClickedIconAndHeading("search")}
+            onClick={() => {
+              setClickedIconAndHeading("search");
+              searchDispatch({ type: "TOGGLE_SHOW_SEARCH_BAR" });
+            }}
           >
             <div className="nav-icon">
               <svg
@@ -177,7 +183,10 @@ export default function Navbar() {
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Products"
-            onClick={() => setClickedIconAndHeading("explore")}
+            onClick={() => {
+              setClickedIconAndHeading("explore");
+              searchDispatch({ type: "DO_NOT_SHOW_SEARCH_BAR" });
+            }}
           >
             <div className="nav-icon">
               <svg
@@ -225,7 +234,10 @@ export default function Navbar() {
             data-bs-toggle="tooltip"
             data-bs-placement="right"
             data-bs-original-title="Customers"
-            onClick={() => setClickedIconAndHeading("profile")}
+            onClick={() => {
+              setClickedIconAndHeading("profile");
+              searchDispatch({ type: "DO_NOT_SHOW_SEARCH_BAR" });
+            }}
           >
             <div className="nav-icon">
               <img
@@ -306,11 +318,6 @@ export default function Navbar() {
           className="dropdown-menu text-small shadow"
           aria-labelledby="dropdownUser3"
         >
-          <li>
-            <a className="dropdown-item" href="/mockman">
-              New post...
-            </a>
-          </li>
           <li>
             <a className="dropdown-item" href="/mockman">
               Settings

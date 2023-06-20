@@ -4,17 +4,22 @@ import "../styles.css/user-feed.css";
 import PostCard from "../components/Posts/PostCard";
 import SuggestionCard from "../components/Suggestion.js/SuggestionCard";
 import { NavLink } from "react-router-dom";
+import SearchPopup from "../components/SearchPopup/SearchPopup";
 
 export default function UserFeed() {
   return (
     // <div className="main">
     <div>
-      <Navbar />
+      <div>
+        <Navbar />
+      </div>
+
       <div className="feed-section">
         <div className="top-nav">
           <TopNav />
         </div>
         <div className="main">
+          <SearchPopup />
           <div className="home-container">
             <div className="user-feed">
               {/* <div className="stories-container"></div> */}

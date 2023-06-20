@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar/Navbar";
 import TopNav from "../components/Navbar/TopNav";
 import ModalDetail from "../components/PostDetail/ModalDetail";
 import ExplorePostCard from "../components/Posts/ExplorePostCard";
+import SearchPopup from "../components/SearchPopup/SearchPopup";
 import "../styles.css/explore-feed.css";
 
 export default function ExloreFeed() {
@@ -15,6 +16,7 @@ export default function ExloreFeed() {
           <TopNav />
         </div>
         <div className="explore-content">
+          <SearchPopup />
           <div className="thumbnail-collection">
             <ModalDetail />
             <ModalDetail />

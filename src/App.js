@@ -13,11 +13,11 @@ import Search from "./pages/SearchPage";
 import UserProfile from "./pages/UserProfile";
 import ModalDetail from "./components/PostDetail/ModalDetail";
 import CreateModalForm from "./components/CreateModalForm.js/CreateModalForm";
+import SearchPopup from "./components/SearchPopup/SearchPopup";
 
 function App() {
   return (
     <div className="App">
-      {/* <CreateModalForm /> */}
       <Routes>
         <Route
           path="/"
