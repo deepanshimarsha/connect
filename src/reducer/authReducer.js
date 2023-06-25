@@ -1,10 +1,34 @@
 const authReducer = (state, action) => {
   switch (action.type) {
+    case "SET_MODE": {
+      return {
+        ...state,
+        mode: action.mode,
+      };
+    }
     case "TOGGLE_IS_LOGGED_IN": {
       return { ...state, isLoggedIn: !state.isLoggedIn };
     }
+    case "LOGIN": {
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    }
+    case "LOGOUT": {
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    }
 
     case "SET_LOGIN_CRED": {
+      if (action.case === "LOGOUT") {
+        return {
+          ...state,
+          loginCred: {},
+        };
+      }
       if (action.method === "GUEST_MODE") {
         return {
           ...state,

@@ -4,12 +4,13 @@ import { useAuthContext } from "../../context/authContext";
 import { useSearchContext } from "../../context/searchContext";
 import { useNavContext } from "../../context/navContext";
 import CreateModalForm from "../CreateModalForm.js/CreateModalForm";
+import { useUserContext } from "../../context/userContext";
 
 export default function Navbar() {
-  const { logoutHandler } = useAuthContext();
+  const { logoutHandler, authDispatch } = useAuthContext();
   const { navState, setClickedIconAndHeading } = useNavContext();
   const { searchDispatch } = useSearchContext();
-
+  const { userState } = useUserContext();
   return (
     <div className="d-flex flex-column flex-shrink-0 bg-light side-navbar">
       <NavLink
@@ -241,10 +242,14 @@ export default function Navbar() {
           >
             <div className="nav-icon">
               <img
-                src="https://github.com/mdo.png"
+                src={
+                  userState.currentUser
+                    ? userState.currentUser.img
+                    : userState.newUser.img
+                }
                 alt="mdo"
                 width={navState.profile ? "26" : "24"}
-                height={navState.profile ? "26" : "24"}
+                height={navState.profile ? "36" : "24"}
                 className="rounded-circle"
                 style={{
                   border: navState.profile ? "black solid 3px" : "",
@@ -324,9 +329,9 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="/mockman">
+            <NavLink className="dropdown-item" to="/profile">
               Profile
-            </a>
+            </NavLink>
           </li>
           <li>
             <hr className="dropdown-divider" />
@@ -335,7 +340,10 @@ export default function Navbar() {
             <NavLink
               className="dropdown-item"
               to="/login"
-              onClick={() => logoutHandler()}
+              onClick={() => {
+                logoutHandler();
+                authDispatch({ type: "SET_LOGIN_CRED", case: "LOGOUT" });
+              }}
             >
               Log out
             </NavLink>

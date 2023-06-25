@@ -6,16 +6,25 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import RequiresAuth from "./components/PrivateRoutesAuth/RequiresAuth";
-import PostCard from "./components/Posts/PostCard";
-import { useNavContext } from "./context/navContext";
+
 import ExloreFeed from "./pages/ExploreFeed";
 import Search from "./pages/SearchPage";
 import UserProfile from "./pages/UserProfile";
-import ModalDetail from "./components/PostDetail/ModalDetail";
-import CreateModalForm from "./components/CreateModalForm.js/CreateModalForm";
-import SearchPopup from "./components/SearchPopup/SearchPopup";
+import { useEffect } from "react";
+import { useUserContext } from "./context/userContext";
+import { useAuthContext } from "./context/authContext";
+import { usePostContext } from "./context/postContext";
+import NewPostAlert from "./components/Alert/newPostAlert";
 
 function App() {
+  const { getCurrentUser, userState } = useUserContext();
+  const { logoutSignedInUserOnRefresh, authState } = useAuthContext();
+  const { postState } = usePostContext();
+  console.log(userState, authState, postState);
+  useEffect(() => {
+    getCurrentUser();
+    logoutSignedInUserOnRefresh();
+  }, []);
   return (
     <div className="App">
       <Routes>
@@ -27,12 +36,26 @@ function App() {
             </RequiresAuth>
           }
         />
-        <Route path="/explore" element={<ExloreFeed />} />
+        <Route
+          path="/explore"
+          element={
+            <RequiresAuth>
+              <ExloreFeed />
+            </RequiresAuth>
+          }
+        />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<UserProfile />} />
+        <Route
+          path="/profile"
+          element={
+            <RequiresAuth>
+              <UserProfile />
+            </RequiresAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/post-card" element={<PostCard />} />
+
         <Route path="/mockman" element={<Mockman />} />
       </Routes>
     </div>

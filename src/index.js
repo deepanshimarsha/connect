@@ -16,18 +16,18 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <PostContextProvider>
-        <NavContextProvider>
-          <UserContextProvider>
-            <AuthContextProvider>
+      <UserContextProvider>
+        <AuthContextProvider>
+          <PostContextProvider>
+            <NavContextProvider>
               <SearchContextProvider>
                 {" "}
                 <App />
               </SearchContextProvider>
-            </AuthContextProvider>
-          </UserContextProvider>
-        </NavContextProvider>
-      </PostContextProvider>
+            </NavContextProvider>
+          </PostContextProvider>
+        </AuthContextProvider>
+      </UserContextProvider>
     </Router>
   </React.StrictMode>
 );

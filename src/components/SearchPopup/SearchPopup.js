@@ -2,8 +2,10 @@ import { useState } from "react";
 import "./search-popup.css";
 import SuggestionCard from "../Suggestion.js/SuggestionCard";
 import { useSearchContext } from "../../context/searchContext";
+import { useUserContext } from "../../context/userContext";
 export default function SearchPopup() {
   const { searchState } = useSearchContext();
+  const { userState } = useUserContext();
   return (
     <>
       <div
@@ -30,12 +32,14 @@ export default function SearchPopup() {
             </div>
             <div className="search-result">
               <div className="result-container">
-                <SuggestionCard />
-                <SuggestionCard />
-                <SuggestionCard />
-                <SuggestionCard />
-                <SuggestionCard />
-                <SuggestionCard />
+                {userState.allUsers
+                  .filter(
+                    ({ username }) =>
+                      username !== localStorage.getItem("username")
+                  )
+                  .map((user) => {
+                    return <SuggestionCard {...user} />;
+                  })}
               </div>
             </div>
           </div>

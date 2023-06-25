@@ -4,8 +4,23 @@ import SearchPopup from "../components/SearchPopup/SearchPopup";
 import ModalDetail from "../components/PostDetail/ModalDetail";
 import { NavLink } from "react-router-dom";
 import "../styles.css/user-profile.css";
+import { usePostContext } from "../context/postContext";
+import { useUserContext } from "../context/userContext";
+import { useEffect } from "react";
 
 export default function UserProfile() {
+  const { postState, getProfilePost } = usePostContext();
+  const { userState } = useUserContext();
+  const followers = userState.currentUser.followers;
+  const following = userState.currentUser.following;
+
+  useEffect(() => {
+    getProfilePost();
+  }, []);
+  if (!postState.profilePosts) {
+    return <h1>No Posts</h1>;
+  }
+
   return (
     <div>
       <div>
@@ -22,7 +37,7 @@ export default function UserProfile() {
               <span className="user-avatar">
                 <img
                   className="user-image"
-                  src="https://github.com/mdo.png"
+                  src={userState.currentUser.img}
                   alt="profile-pic"
                 />
               </span>
@@ -30,7 +45,7 @@ export default function UserProfile() {
             <section className="profile-page-header">
               <div className="section-header">
                 <NavLink>
-                  <h2>deepee_e</h2>
+                  <h2>{userState.currentUser.username}</h2>
                 </NavLink>
                 <div className="edit-btn">
                   <NavLink>Edit Profile</NavLink>
@@ -41,18 +56,21 @@ export default function UserProfile() {
               </div>
               <ul className="sub-header">
                 <li className="list-item">
-                  <span>93 posts</span>
+                  <span>{postState.profilePosts.length} posts</span>
                 </li>
                 <li className="list-item">
-                  <span>362 followers</span>
+                  <span>{followers ? followers.length : "0"} followers</span>
                 </li>
                 <li className="list-item">
-                  <span>711 following</span>
+                  <span>{following ? following.length : "0"} following</span>
                 </li>
               </ul>
               <div className="section-footer">
                 <div>
-                  <span style={{ fontWeight: "600" }}>Deepanshi Sharma</span>
+                  <span style={{ fontWeight: "600" }}>
+                    {userState.currentUser.firstName}{" "}
+                    {userState.currentUser.lastName}
+                  </span>
                 </div>
               </div>
               <div>
@@ -75,9 +93,12 @@ export default function UserProfile() {
             </ul>
           </div>
           <div className="thumbnail-collection">
+            {postState.profilePosts.map((post) => {
+              return <ModalDetail {...post} />;
+            })}
+            {/* <ModalDetail />
             <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
+            <ModalDetail /> */}
           </div>
         </div>
       </div>

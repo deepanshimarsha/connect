@@ -5,8 +5,24 @@ import PostCard from "../components/Posts/PostCard";
 import SuggestionCard from "../components/Suggestion.js/SuggestionCard";
 import { NavLink } from "react-router-dom";
 import SearchPopup from "../components/SearchPopup/SearchPopup";
+import { usePostContext } from "../context/postContext";
+import { useUserContext } from "../context/userContext";
+import { useEffect } from "react";
 
 export default function UserFeed() {
+  const { postState } = usePostContext();
+  const { userState } = useUserContext();
+
+  const userFeed = postState.explorePosts.filter((post) => {
+    if (userState.currentUser.following) {
+      return userState.currentUser.following
+        .map(({ username }) => username)
+        .includes(post.username);
+    } else {
+      return false;
+    }
+  });
+
   return (
     // <div className="main">
     <div>
@@ -22,18 +38,25 @@ export default function UserFeed() {
           <SearchPopup />
           <div className="home-container">
             <div className="user-feed">
-              {/* <div className="stories-container"></div> */}
               <div className="feed-container">
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
+                {!userFeed.length
+                  ? "User feed is empty!"
+                  : userFeed.map((post) => {
+                      return <PostCard {...post} />;
+                    })}
               </div>
             </div>
             <div className="suggestion-container">
               <div className="suggestion-main">
                 <div className="suggestion-header">
-                  <SuggestionCard />
+                  {userState.allUsers
+                    .filter(
+                      ({ username }) =>
+                        username === localStorage.getItem("username")
+                    )
+                    .map((user) => {
+                      return <SuggestionCard {...user} />;
+                    })}
                 </div>
                 <div className="suggestion-list">
                   <div className="users-list">
@@ -46,9 +69,14 @@ export default function UserFeed() {
                       </NavLink>
                     </div>
                     <div className="list">
-                      <SuggestionCard />
-                      <SuggestionCard />
-                      <SuggestionCard />
+                      {userState.allUsers
+                        .filter(
+                          ({ username }) =>
+                            username !== localStorage.getItem("username")
+                        )
+                        .map((user) => {
+                          return <SuggestionCard {...user} />;
+                        })}
                     </div>
                   </div>
                 </div>

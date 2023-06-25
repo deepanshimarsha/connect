@@ -4,8 +4,11 @@ import ModalDetail from "../components/PostDetail/ModalDetail";
 import ExplorePostCard from "../components/Posts/ExplorePostCard";
 import SearchPopup from "../components/SearchPopup/SearchPopup";
 import "../styles.css/explore-feed.css";
+import { usePostContext } from "../context/postContext";
 
 export default function ExloreFeed() {
+  const { postState } = usePostContext();
+
   return (
     <div>
       <div>
@@ -18,6 +21,10 @@ export default function ExloreFeed() {
         <div className="explore-content">
           <SearchPopup />
           <div className="thumbnail-collection">
+            {postState.explorePosts.map((post) => {
+              return <ModalDetail {...post} />;
+            })}
+            {/* <ModalDetail />
             <ModalDetail />
             <ModalDetail />
             <ModalDetail />
@@ -40,8 +47,7 @@ export default function ExloreFeed() {
             <ModalDetail />
             <ModalDetail />
             <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
+            <ModalDetail /> */}
             {/* <ExplorePostCard />
             <ExplorePostCard />
             <ExplorePostCard />

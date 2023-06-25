@@ -3,10 +3,14 @@ import { Modal, Button } from "react-bootstrap";
 import ExplorePostCard from "../Posts/ExplorePostCard";
 import "./modal-detail.css";
 import PostCard from "../Posts/PostCard";
+import SuggestionCard from "../Suggestion.js/SuggestionCard";
+import { useUserContext } from "../../context/userContext";
 
-export default function ModalDetail() {
-  const [fullscreen, setFullscreen] = useState(true);
+export default function ModalDetail(post) {
   const [show, setShow] = useState(false);
+  const { userState } = useUserContext();
+  const { content, img, likes, username } = post;
+  const user = userState.allUsers.find((user) => user.username === username);
 
   function handleShow() {
     setShow(true);
@@ -18,7 +22,7 @@ export default function ModalDetail() {
   return (
     <>
       <div onClick={handleShow}>
-        <ExplorePostCard />
+        <ExplorePostCard {...post} />
       </div>
 
       <Modal
@@ -29,18 +33,15 @@ export default function ModalDetail() {
         dialogClassName="modal-20w"
       >
         <div className="post-image">
-          <img
-            src="https://pbs.twimg.com/media/Ekzemj2WAAAyDcf.jpg"
-            alt="post-cover"
-            className="post-cover"
-          />
+          <img src={post.img} alt="post-cover" className="post-cover" />
         </div>
         <div className="not-show">
-          <PostCard />
+          <PostCard {...post} />
         </div>
         <div className="post-detail">
           <Modal.Header closeButton>
-            <Modal.Title>Modal</Modal.Title>
+            <Modal.Title></Modal.Title>
+            <SuggestionCard {...user} noShow />
           </Modal.Header>
           <Modal.Body>
             {/* <div className="not-show">

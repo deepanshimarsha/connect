@@ -1,5 +1,26 @@
 import "./post-card.css";
-export default function PostCard() {
+import { useUserContext } from "../../context/userContext";
+import { usePostContext } from "../../context/postContext";
+import { useState } from "react";
+export default function PostCard(post) {
+  const { img, content, likes, username, _id } = post;
+
+  const { likePost, disLikePost } = usePostContext();
+
+  const { userState } = useUserContext();
+  const [showLike, setShowLike] = useState(false);
+  const postAuthor = userState.allUsers.find(
+    (user) => user.username === username
+  );
+
+  const handlePostLike = () => {
+    if (showLike) {
+      disLikePost(post);
+    } else {
+      likePost(post);
+    }
+    setShowLike(!showLike);
+  };
   return (
     <div className="column is-5">
       <div className="instaPreviewArea">
@@ -11,17 +32,21 @@ export default function PostCard() {
                 style={{ padding: "14px 16px 0px 16px" }}
               >
                 <div class="column is-1 pr-0" style={{ width: "55px" }}>
-                  <img id="profilePicture" alt="" />
+                  <img
+                    id="profilePicture"
+                    alt=""
+                    style={{ backgroundImage: `url(${postAuthor.img})` }}
+                  />
                   <img
                     class="story-icon is-hidden"
                     id="storyIcon"
-                    src="https://github.com/mdo.png"
+                    src={postAuthor.img}
                   />
                 </div>
                 <div class="column is-8 pl-0">
                   {" "}
                   <span class="label username-text mb-0">
-                    <span id="textUserName">samwilson</span>
+                    <span id="textUserName">{username}</span>
                     <span id="verifiedIcon" style={{ color: "#1b95e0" }}>
                       <svg width="14" height="14">
                         <use href="/"></use>
@@ -35,17 +60,28 @@ export default function PostCard() {
                 <div class="column">
                   <div class="has-text-right">
                     {" "}
-                    <svg id="trippleDots" fill="#262626" width="24" height="24">
+                    {username === localStorage.getItem("username") ? (
+                      <div class="dropdown habit-dropdown">
+                        <i
+                          class="fa fa-ellipsis-v"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        ></i>
+                        <ul class="dropdown-menu">
+                          <li>edit</li>
+                          <li>delete</li>
+                        </ul>{" "}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {/* <svg id="trippleDots" fill="#262626" width="24" height="24">
                       <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                    </svg>
+                    </svg> */}
                   </div>
                 </div>
               </div>
-              <img
-                id="postImage"
-                src="https://pbs.twimg.com/media/Ekzemj2WAAAyDcf.jpg"
-                alt=""
-              />
+              <img id="postImage" src={img} alt="post" />
               <div class="tag-icon is-hidden" id="tagIconArea">
                 {" "}
                 <span class="material-icons has-text-white">
@@ -61,6 +97,7 @@ export default function PostCard() {
               >
                 <div style={{ marginBottom: "12px" }}>
                   <span
+                    onClick={handlePostLike}
                     id="likeBtnArea"
                     style={{ marginRight: "12px", cursor: "pointer" }}
                   >
@@ -70,16 +107,17 @@ export default function PostCard() {
                       height="24"
                       viewBox="0 0 24 24"
                       width="24"
+                      class={showLike ? "is-hidden" : ""}
                     >
                       <path d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z"></path>
                     </svg>{" "}
                     <svg
                       id="liked"
-                      class="is-hidden"
                       fill="#ed4956"
                       height="24"
                       viewBox="0 0 48 48"
                       width="24"
+                      class={showLike ? "" : "is-hidden"}
                     >
                       <path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
                     </svg>
@@ -149,16 +187,13 @@ export default function PostCard() {
                 </div>{" "}
                 <div id="likesCountTextArea">
                   {" "}
-                  <span id="countLikes">1,178</span> <span>likes</span>{" "}
+                  <span id="countLikes">{/*{post.likes.likeCount}*/}</span>{" "}
+                  <span>{likes.likeCount} likes</span>{" "}
                 </div>{" "}
                 <div id="postTextArea">
                   {" "}
-                  <b id="postTextUserName">samwilson</b>&nbsp;
-                  <span id="instaPostText">
-                    This is a sample text. <a href="/">@mention</a> friends and
-                    add <a href="/">#hastags</a> with the links
-                    <a href="/"> https://products.com</a>.
-                  </span>{" "}
+                  <b id="postTextUserName">{username}</b>&nbsp;
+                  <span id="instaPostText">{content}</span>{" "}
                 </div>{" "}
                 <div id="commentCountTextArea">
                   {" "}

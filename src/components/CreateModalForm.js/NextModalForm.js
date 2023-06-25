@@ -1,27 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import "./next-modal-form.css";
 import EmojiPicker from "emoji-picker-react";
+import { usePostContext } from "../../context/postContext";
 
-// import "emoji-mart/css/emoji-mart.css";
-export default function NextModalForm({ image, video, closePrev }) {
+export default function NextModalForm({ image, video }) {
   const [show, setShow] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
   const [input, setInput] = useState("");
-  console.log(input);
+  const { postState, postDispatch, createNewPost } = usePostContext();
 
   function handleShow() {
     setShow(true);
   }
   const handleClose = () => {
+    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
+    clearFiles();
     setShowEmojis(false);
-    closePrev();
     setShow(false);
   };
-  const onEmojiClick = (event, emojiData) => {
-    console.log("emojiObject", emojiData.emoji);
+  const onEmojiClick = (emojiData) => {
+    postDispatch({
+      type: "CREATE_POST",
+      field: "CONTENT",
+      data: postState.createPost.content + emojiData.emoji,
+    });
     setInput((prevInput) => prevInput + emojiData.emoji);
+  };
+  function clearFiles() {
+    postDispatch({ type: "CREATE_POST", field: "IMAGE", data: null });
+    postDispatch({ type: "CREATE_POST", field: "VIDEO", data: null });
+  }
+
+  const handlePost = () => {
+    setShowEmojis(false);
+    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
+    setShow(false);
+    createNewPost();
   };
 
   return (
@@ -34,6 +50,8 @@ export default function NextModalForm({ image, video, closePrev }) {
         show={show}
         fullscreen="true"
         onHide={() => {
+          clearFiles();
+          postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
           setShowEmojis(false);
           setShow(false);
         }}
@@ -55,7 +73,9 @@ export default function NextModalForm({ image, video, closePrev }) {
                   </div>
                   <div className="profile-name">
                     <div className="profile-content">
-                      <span className="username">deepee_e</span>
+                      <span className="username">
+                        {localStorage.getItem("username")}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -77,8 +97,19 @@ export default function NextModalForm({ image, video, closePrev }) {
             <div className="text-area">
               <div className="caption-input">
                 <textarea
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  value={
+                    postState.createPost.content !== null
+                      ? postState.createPost.content
+                      : ""
+                  }
+                  onChange={(e) => {
+                    postDispatch({
+                      type: "CREATE_POST",
+                      field: "CONTENT",
+                      data: e.target.value,
+                    });
+                    // setInput(e.target.value);
+                  }}
                   placeholder="Write a caption"
                   class="form-control"
                   id="exampleFormControlTextarea1 mytextarea"
@@ -111,7 +142,7 @@ export default function NextModalForm({ image, video, closePrev }) {
               )}
             </div>
             <div className="cursor-pointer">
-              <h5>Post</h5>
+              <h5 onClick={handlePost}>Post</h5>
             </div>
           </Modal.Footer>
         </div>

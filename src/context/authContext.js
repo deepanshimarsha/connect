@@ -7,27 +7,28 @@ import { useUserContext } from "./userContext";
 const AuthContext = createContext(null);
 
 const AuthContextProvider = ({ children }) => {
-  // const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token")
+  const signupToken = localStorage.getItem("signupToken");
+  const loginToken = localStorage.getItem("token");
+  const token = loginToken ? loginToken : signupToken;
 
   const initialAuthState = {
-    isLoggedIn: localStorage.getItem("token") ? true : false,
+    isLoggedIn: token ? true : false,
     loginCred: {},
     signupCred: {},
-    token: "",
     loginError: "",
     signupError: "",
-    foundUser: {},
-    newUser: {},
   };
 
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
 
   const navigate = useNavigate();
-  const { userDispatch } = useUserContext();
+  const { getCurrentUser } = useUserContext();
 
   //signup
   const signupHandler = async () => {
     try {
+      localStorage.clear();
       const requestData = {
         email: authState.signupCred.email,
         name: authState.signupCred.name,
@@ -39,18 +40,21 @@ const AuthContextProvider = ({ children }) => {
         method: "POST",
         body: JSON.stringify(requestData),
       });
-      console.log(await responseData.json());
+      // console.log(await responseData.json());
       if (responseData.status === 201) {
         const { encodedToken, createdUser } = await responseData.json();
-
+        // console.log(encodedToken);
         localStorage.setItem("token", encodedToken);
-        authDispatch({ type: "TOGGLE_IS_LOGGED_IN" });
-        authDispatch({ type: "SET_TOKEN", token: encodedToken });
-        userDispatch({ type: "SET_NEW_USER", newUser: createdUser });
+        localStorage.setItem("userId", createdUser._id);
+        localStorage.setItem("username", createdUser.username);
+        localStorage.setItem("mode", "signup");
+        authDispatch({ type: "LOGIN" });
+        // userDispatch({ type: "SET_NEW_USER", newUser: createdUser });
         authDispatch({
           type: "SET_SIGNUP_ERROR",
           signupError: "",
         });
+        getCurrentUser();
         navigate("/");
       }
       if (responseData.status === 422) {
@@ -68,6 +72,7 @@ const AuthContextProvider = ({ children }) => {
   //login
   const loginHandler = async () => {
     try {
+      localStorage.clear();
       const requestData = {
         username: authState.loginCred.username,
         password: authState.loginCred.password,
@@ -79,19 +84,22 @@ const AuthContextProvider = ({ children }) => {
         method: "POST",
         body: JSON.stringify(requestData),
       });
-      console.log(JSON.stringify(requestData));
 
       if (responseData.status === 200) {
         const { encodedToken, foundUser } = await responseData.json();
 
         localStorage.setItem("token", encodedToken);
-        authDispatch({ type: "TOGGLE_IS_LOGGED_IN" });
-        authDispatch({ type: "SET_TOKEN", token: encodedToken });
-        userDispatch({ type: "SET_FOUND_USER", foundUser: foundUser });
+        localStorage.setItem("userId", foundUser._id);
+        localStorage.setItem("username", foundUser.username);
+        localStorage.setItem("mode", "login");
+        authDispatch({ type: "LOGIN" });
+
         authDispatch({
           type: "SET_LOGIN_ERROR",
           loginError: "",
         });
+        getCurrentUser();
+
         navigate("/");
       }
       if (responseData.status === 404) {
@@ -114,8 +122,16 @@ const AuthContextProvider = ({ children }) => {
     }
   };
   const logoutHandler = () => {
-    authDispatch({ type: "TOGGLE_IS_LOGGED_IN" });
-    authDispatch({ type: "SET_TOKEN", token: "" });
+    authDispatch({ type: "LOGOUT" });
+    localStorage.clear();
+    //   authDispatch({ type: "SET_TOKEN", token: "" });
+  };
+
+  const logoutSignedInUserOnRefresh = () => {
+    if (localStorage.getItem("mode") === "signup") {
+      localStorage.clear();
+      authDispatch({ type: "LOGOUT" });
+    }
   };
 
   return (
@@ -126,6 +142,8 @@ const AuthContextProvider = ({ children }) => {
         loginHandler,
         signupHandler,
         logoutHandler,
+        token,
+        logoutSignedInUserOnRefresh,
       }}
     >
       {children}

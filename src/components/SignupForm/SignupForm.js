@@ -120,7 +120,7 @@ export default function SignupForm() {
     // if all the conditions are valid, this means that the form is valid
 
     setError("");
-
+    console.log("...");
     signupHandler();
   }
 

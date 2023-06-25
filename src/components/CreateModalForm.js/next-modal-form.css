@@ -26,7 +26,7 @@
     border: none;
     background: none;
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
     margin: 5px;
   }
@@ -60,8 +60,8 @@ aside.EmojiPickerReact.epr-header .epr-header-overlay{
 }
 .picker-float{
     position: fixed;
-    left: 500px;
-    bottom: 0px;
+    right: 200px;
+    top: 150px;
 }
 .modal-body{
     /* height: 50vh; */

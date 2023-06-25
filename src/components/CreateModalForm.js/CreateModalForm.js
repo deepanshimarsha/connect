@@ -4,23 +4,31 @@ import Modal from "react-bootstrap/Modal";
 import "./create-modal-form.css";
 import NextModalForm from "./NextModalForm";
 import CreateButton from "../CreateButton/CreateButton";
+import { usePostContext } from "../../context/postContext";
 
 export default function CreateModalForm() {
-  const [fullscreen, setFullscreen] = useState(true);
-  const [show, setShow] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [videoPreview, setVideoPreview] = useState(null);
+  const { postState, postDispatch } = usePostContext();
+  // const [show, setShow] = useState(false);
+  // const [imagePreview, setImagePreview] = useState(null);
+  // const [videoPreview, setVideoPreview] = useState(null);
   const filePicekerRef = useRef(null);
+
+  const imagePreview = postState.createPost.img;
+  const videoPreview = postState.createPost.video;
+  const show = postState.showCreateModal;
   function handleShow() {
-    setShow(true);
+    postDispatch({ type: "CREATE_POST", mode: "CLEAR_DATA" });
+    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "SHOW" });
+    // setShow(true);
   }
   function handleClose() {
     clearFiles();
-    setShow(false);
+    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
+    // setShow(false);
   }
 
   function handleNext() {
-    setShow(false);
+    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
   }
 
   function previewFile(e) {
@@ -34,15 +42,37 @@ export default function CreateModalForm() {
     // As the File loaded then set the stage as per the file type
     reader.onload = (readerEvent) => {
       if (selectedFile.type.includes("image")) {
-        setImagePreview(readerEvent.target.result);
+        const imgUrl = URL.createObjectURL(selectedFile);
+        postDispatch({
+          type: "CREATE_POST",
+          field: "IMAGE",
+          data: readerEvent.target.result,
+        });
+        postDispatch({
+          type: "CREATE_POST",
+          field: "IMAGE_URL",
+          data: imgUrl,
+        });
+        // setImagePreview(readerEvent.target.result);
       } else if (selectedFile.type.includes("video")) {
-        setVideoPreview(readerEvent.target.result);
+        const vidUrl = URL.createObjectURL(selectedFile);
+        postDispatch({
+          type: "CREATE_POST",
+          field: "VIDEO",
+          data: readerEvent.target.result,
+        });
+        postDispatch({
+          type: "CREATE_POST",
+          field: "VIDEO_URL",
+          data: vidUrl,
+        });
+        // setVideoPreview(readerEvent.target.result);
       }
     };
   }
   function clearFiles() {
-    setImagePreview(null);
-    setVideoPreview(null);
+    postDispatch({ type: "CREATE_POST", field: "IMAGE", data: null });
+    postDispatch({ type: "CREATE_POST", field: "VIDEO", data: null });
   }
   return (
     <>
@@ -56,7 +86,10 @@ export default function CreateModalForm() {
 
       <Modal
         show={show}
-        onHide={() => setShow(false)}
+        onHide={() => {
+          clearFiles();
+          postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
+        }}
         style={{ flexDirection: "column" }}
       >
         <div className="form-container">

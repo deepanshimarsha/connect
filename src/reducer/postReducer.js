@@ -1,7 +1,63 @@
 export const postReducer = (state, action) => {
   switch (action.type) {
-    case "SET_POSTS": {
-      return { ...state, posts: action.posts };
+    case "SET_EXPLORE_POSTS": {
+      return { ...state, explorePosts: action.posts };
+    }
+    case "SET_PROFILE_POSTS": {
+      return { ...state, profilePosts: action.posts };
+    }
+
+    case "CREATE_POST": {
+      if (action.field === "IMAGE") {
+        return {
+          ...state,
+          createPost: { ...state.createPost, image: action.data },
+        };
+      }
+      if (action.field === "VIDEO") {
+        return {
+          ...state,
+          createPost: { ...state.createPost, video: action.data },
+        };
+      }
+      if (action.field === "CONTENT") {
+        return {
+          ...state,
+          createPost: { ...state.createPost, content: action.data },
+        };
+      }
+      if (action.mode === "CLEAR_DATA") {
+        return {
+          ...state,
+          createPost: { image: null, video: null, content: null },
+        };
+      }
+      if (action.field === "IMAGE_URL") {
+        return {
+          ...state,
+          createPost: { ...state.createPost, img: action.data },
+        };
+      }
+      if (action.field === "VIDEO_URL") {
+        return {
+          ...state,
+          createPost: { ...state.createPost, vid: action.data },
+        };
+      }
+    }
+    case "SHOW_CREATE_MODAL": {
+      if (action.mode === "SHOW") {
+        return { ...state, showCreateModal: true };
+      }
+      if (action.mode === "DO_NOT_SHOW") {
+        return { ...state, showCreateModal: false };
+      }
+    }
+    case "ADD_NEW_POST": {
+      return {
+        ...state,
+        newPost: action.post,
+      };
     }
   }
 };
