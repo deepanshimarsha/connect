@@ -2,10 +2,11 @@ import "./login-form.css";
 import { useAuthContext } from "../../context/authContext";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { usePostContext } from "../../context/postContext";
 
 export default function LoginForm() {
   const { authState, authDispatch, loginHandler } = useAuthContext();
-
+  const { getUserFeed } = usePostContext();
   const [error, setError] = useState();
 
   function validateForm(e) {
@@ -93,6 +94,7 @@ export default function LoginForm() {
     setError("");
 
     loginHandler();
+    getUserFeed();
   }
 
   const guestModeLogin = () => {

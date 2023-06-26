@@ -1,11 +1,14 @@
 import { useContext, createContext, useEffect, useReducer } from "react";
 import { postReducer } from "../reducer/postReducer";
+import { useUserContext } from "./userContext";
 
 const PostContext = createContext(null);
 const PostContextProvider = ({ children }) => {
   const initialPostState = {
     explorePosts: [],
     profilePosts: [],
+    userFeed: [],
+    bookmark: [],
     createPost: {
       image: null,
       video: null,
@@ -15,9 +18,31 @@ const PostContextProvider = ({ children }) => {
     },
     newPost: {},
     showCreateModal: false,
+    sort: "",
   };
 
   const [postState, postDispatch] = useReducer(postReducer, initialPostState);
+  console.log(postState);
+  const { userState } = useUserContext();
+
+  const getUserFeed = () => {
+    const userFeed = [
+      ...postState.explorePosts.filter(
+        (post) => post.username === localStorage.getItem("username")
+      ),
+      ...postState.explorePosts.filter((post) => {
+        if (userState.currentUser.following) {
+          return userState.currentUser.following
+            .map(({ username }) => username)
+            .includes(post.username);
+        } else {
+          return false;
+        }
+      }),
+    ];
+
+    postDispatch({ type: "SET_USER_FEED", data: userFeed });
+  };
 
   const getExplorePosts = async () => {
     try {
@@ -99,9 +124,25 @@ const PostContextProvider = ({ children }) => {
     }
   };
 
+  const getBookmarkPosts = async () => {
+    try {
+      const response = await fetch("/api/users/bookmark", {
+        method: "GET",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      });
+      const jsonData = await response.json();
+      postDispatch({ type: "SET_BOOKMARK", data: jsonData.bookmarks });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     getExplorePosts();
   }, []);
+
   return (
     <PostContext.Provider
       value={{
@@ -111,6 +152,9 @@ const PostContextProvider = ({ children }) => {
         disLikePost,
         postDispatch,
         createNewPost,
+        getUserFeed,
+        getExplorePosts,
+        getBookmarkPosts,
       }}
     >
       {children}

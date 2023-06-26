@@ -7,6 +7,16 @@ export const postReducer = (state, action) => {
       return { ...state, profilePosts: action.posts };
     }
 
+    case "SET_USER_FEED": {
+      return { ...state, userFeed: action.data };
+    }
+
+    case "SET_BOOKMARK": {
+      return {
+        ...state,
+        bookmark: action.data,
+      };
+    }
     case "CREATE_POST": {
       if (action.field === "IMAGE") {
         return {
@@ -58,6 +68,28 @@ export const postReducer = (state, action) => {
         ...state,
         newPost: action.post,
       };
+    }
+
+    // case "SET_SORT": {
+    //   return { ...state, sort: action.value };
+    // }
+    case "SORT_EXPLORE_POSTS": {
+      let sortedPosts = state.explorePosts.slice();
+      if (action.sort === "latest") {
+        sortedPosts = [...sortedPosts].sort(
+          (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+        );
+      }
+      if (action.sort === "oldest") {
+        sortedPosts = [...sortedPosts].sort(
+          (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
+        );
+      }
+      if (action.sort === "trending") {
+        sortedPosts = [...sortedPosts].sort(
+          (a, b) => b.likes.likeCount - a.likes.likeCount
+        );
+      }
     }
   }
 };

@@ -6,20 +6,26 @@ import { NavLink } from "react-router-dom";
 import "../styles.css/user-profile.css";
 import { usePostContext } from "../context/postContext";
 import { useUserContext } from "../context/userContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserProfile() {
-  const { postState, getProfilePost } = usePostContext();
+  const { postState, getProfilePost, getBookmarkPosts } = usePostContext();
   const { userState } = useUserContext();
+  const [show, setShow] = useState("post");
   const followers = userState.currentUser.followers;
   const following = userState.currentUser.following;
 
   useEffect(() => {
     getProfilePost();
+    getBookmarkPosts();
   }, []);
   if (!postState.profilePosts) {
     return <h1>No Posts</h1>;
   }
+
+  const handleClick = (value) => {
+    setShow(value);
+  };
 
   return (
     <div>
@@ -88,18 +94,62 @@ export default function UserProfile() {
           </div>
           <div className="posts-top-header">
             <ul>
-              <li className="padding-left">POSTS</li>
-              <li className="padding-right">BOOKMARK</li>
+              <li className="padding-left" onClick={() => handleClick("post")}>
+                POSTS
+              </li>
+              <li
+                className="padding-right"
+                onClick={() => handleClick("bookmark")}
+              >
+                BOOKMARK
+              </li>
             </ul>
           </div>
-          <div className="thumbnail-collection">
-            {postState.profilePosts.map((post) => {
-              return <ModalDetail {...post} />;
-            })}
-            {/* <ModalDetail />
-            <ModalDetail />
-            <ModalDetail /> */}
-          </div>
+          {show === "post" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "20px",
+              }}
+            >
+              {" "}
+              {postState.profilePosts.length === 0 ? (
+                <span style={{ fontWeight: "500", fontSize: "18px" }}>
+                  No bookmarks
+                </span>
+              ) : (
+                <div className="thumbnail-collection">
+                  {postState.profilePosts.map((post) => {
+                    return <ModalDetail {...post} />;
+                  })}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: "20px",
+              }}
+            >
+              {" "}
+              {postState.bookmark.length === 0 ? (
+                <span style={{ fontWeight: "500", fontSize: "18px" }}>
+                  No bookmarks
+                </span>
+              ) : (
+                <div className="thumbnail-collection">
+                  {postState.bookmark.map((post) => {
+                    return <ModalDetail {...post} />;
+                  })}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

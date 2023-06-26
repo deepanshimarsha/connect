@@ -19,12 +19,13 @@ import NewPostAlert from "./components/Alert/newPostAlert";
 function App() {
   const { getCurrentUser, userState } = useUserContext();
   const { logoutSignedInUserOnRefresh, authState } = useAuthContext();
-  const { postState } = usePostContext();
+  const { postState, getExplorePosts } = usePostContext();
   console.log(userState, authState, postState);
   useEffect(() => {
     getCurrentUser();
     logoutSignedInUserOnRefresh();
   }, []);
+
   return (
     <div className="App">
       <Routes>
