@@ -206,9 +206,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 402px;
 }
 .sort-user-feed{
-    width: 70%;
+    width: 100%;
     padding: 10px;
     background-color: rgb(239 239 239);
     display: flex;
@@ -305,7 +306,9 @@
     .feed-container {
         width: 100%;
     }
-   
+   .home-container{
+    width: auto;
+   }
    
     .top-nav{
         width: calc(100%-200px);

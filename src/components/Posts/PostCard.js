@@ -5,10 +5,18 @@ import { useState } from "react";
 export default function PostCard(post) {
   const { img, content, likes, username, _id } = post;
 
-  const { likePost, disLikePost } = usePostContext();
+  const {
+    likePost,
+    disLikePost,
+    addToBookmark,
+    postState,
+    removeBookmark,
+    deletePost,
+  } = usePostContext();
 
   const { userState } = useUserContext();
   const [showLike, setShowLike] = useState(false);
+
   const postAuthor = userState.allUsers.find(
     (user) => user.username === username
   );
@@ -20,6 +28,19 @@ export default function PostCard(post) {
       likePost(post);
     }
     setShowLike(!showLike);
+  };
+
+  const handleBookmark = () => {
+    const isBookmark = postState.bookmark.map(({ _id }) => _id).includes(_id);
+    if (isBookmark) {
+      removeBookmark(_id);
+    } else {
+      addToBookmark(_id);
+    }
+  };
+
+  const handleDelete = () => {
+    deletePost(_id);
   };
   return (
     <div className="column is-5">
@@ -61,19 +82,47 @@ export default function PostCard(post) {
                   <div class="has-text-right">
                     {" "}
                     {username === localStorage.getItem("username") ? (
-                      <div class="dropdown habit-dropdown">
-                        <i
-                          class="fa fa-ellipsis-v"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        ></i>
-                        <ul class="dropdown-menu">
-                          <li>edit</li>
-                          <li>delete</li>
-                        </ul>{" "}
+                      // <div class="dropdown habit-dropdown">
+                      //   <i
+                      //     class="fa fa-ellipsis-v"
+                      //     data-bs-toggle="dropdown"
+                      //     aria-expanded="false"
+                      //   ></i>
+                      //   <ul class="dropdown-menu">
+                      //     <li>edit</li>
+                      //     <li>delete</li>
+                      //   </ul>{" "}
+                      // </div>
+                      <div class="menu-nav">
+                        <div class="dropdown-container" tabindex="-1">
+                          <div class="three-dots"></div>
+                          <div class="dropdown2" style={{ textAlign: "left" }}>
+                            <div> Edit</div>
+
+                            <div
+                              onClick={() => {
+                                handleDelete();
+                              }}
+                            >
+                              Delete
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     ) : (
-                      ""
+                      <div class="menu-nav">
+                        <div class="dropdown-container" tabindex="-1">
+                          <div class="three-dots"></div>
+                          <div class="dropdown2" style={{ textAlign: "left" }}>
+                            <div
+                            // onClick={() => handleClick("latest")}
+                            >
+                              {" "}
+                              follow // unfollow
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     )}
                     {/* <svg id="trippleDots" fill="#262626" width="24" height="24">
                       <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
@@ -168,6 +217,7 @@ export default function PostCard(post) {
                   </span>
                   <span style={{ marginLeft: "232px" }}>
                     <svg
+                      onClick={handleBookmark}
                       id="savePostIcon"
                       color="#262626"
                       height="24"
@@ -175,7 +225,11 @@ export default function PostCard(post) {
                       width="24"
                     >
                       <polygon
-                        fill="none"
+                        fill={
+                          postState.bookmark.map(({ _id }) => _id).includes(_id)
+                            ? "black"
+                            : "none"
+                        }
                         points="20 21 12 13.44 4 21 4 3 20 3 20 21"
                         stroke="currentColor"
                         stroke-linecap="round"

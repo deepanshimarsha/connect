@@ -94,10 +94,21 @@ export default function UserProfile() {
           </div>
           <div className="posts-top-header">
             <ul>
-              <li className="padding-left" onClick={() => handleClick("post")}>
+              <li
+                className="padding-left"
+                style={{
+                  fontWeight: show === "post" ? "600" : "400",
+                  color: show === "post" ? "rgb(84 158 246)" : "black",
+                }}
+                onClick={() => handleClick("post")}
+              >
                 POSTS
               </li>
               <li
+                style={{
+                  fontWeight: show === "bookmark" ? "600" : "400",
+                  color: show === "bookmark" ? "rgb(84 158 246)" : "black",
+                }}
                 className="padding-right"
                 onClick={() => handleClick("bookmark")}
               >

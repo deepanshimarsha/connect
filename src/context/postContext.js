@@ -133,12 +133,70 @@ const PostContextProvider = ({ children }) => {
         },
       });
       const jsonData = await response.json();
-      postDispatch({ type: "SET_BOOKMARK", data: jsonData.bookmarks });
+      const bookmarkPostIds = jsonData.bookmarks.map(({ _id }) => _id);
+      const bookmarkPosts = postState.explorePosts.filter(({ _id }) =>
+        bookmarkPostIds.includes(_id)
+      );
+      postDispatch({ type: "SET_BOOKMARK", data: bookmarkPosts });
     } catch (e) {
       console.error(e);
     }
   };
 
+  const addToBookmark = async (postId) => {
+    try {
+      const response = await fetch(`/api/users/bookmark/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      });
+      const jsonData = await response.json();
+      const bookmarkPostIds = jsonData.bookmarks.map(({ _id }) => _id);
+      const bookmarkPosts = postState.explorePosts.filter(({ _id }) =>
+        bookmarkPostIds.includes(_id)
+      );
+
+      postDispatch({ type: "SET_BOOKMARK", data: bookmarkPosts });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const removeBookmark = async (postId) => {
+    try {
+      const response = await fetch(`/api/users/remove-bookmark/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      });
+      const jsonData = await response.json();
+      const bookmarkPostIds = jsonData.bookmarks.map(({ _id }) => _id);
+      const bookmarkPosts = postState.explorePosts.filter(({ _id }) =>
+        bookmarkPostIds.includes(_id)
+      );
+
+      postDispatch({ type: "SET_BOOKMARK", data: bookmarkPosts });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const deletePost = async (postId) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      });
+      const jsonData = await response.json();
+      postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
+    } catch (e) {
+      console.error(e);
+    }
+  };
   useEffect(() => {
     getExplorePosts();
   }, []);
@@ -155,6 +213,9 @@ const PostContextProvider = ({ children }) => {
         getUserFeed,
         getExplorePosts,
         getBookmarkPosts,
+        addToBookmark,
+        removeBookmark,
+        deletePost,
       }}
     >
       {children}

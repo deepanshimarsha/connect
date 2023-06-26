@@ -68,28 +68,57 @@ export default function UserFeed() {
           <div className="home-container">
             <div className="user-feed">
               <div className="feed-container">
-                <div className="sort-container">
-                  <div className="sort-user-feed">
-                    <span>
-                      {sort.slice(0, 1).toUpperCase()}
-                      {sort.slice(1)} Posts
-                    </span>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <div className="sort-container">
+                    <div className="sort-user-feed">
+                      <span>
+                        {sort.slice(0, 1).toUpperCase()}
+                        {sort.slice(1)} Posts
+                      </span>
 
-                    <div class="menu-nav">
-                      <div class="dropdown-container" tabindex="-1">
-                        <div class="three-dots"></div>
-                        <div class="dropdown2">
-                          <div onClick={() => handleClick("latest")}>
-                            {" "}
-                            Latest Posts
-                          </div>
+                      <div class="menu-nav">
+                        <div class="dropdown-container" tabindex="-1">
+                          <div class="three-dots"></div>
+                          <div class="dropdown2">
+                            <div
+                              onClick={() => handleClick("latest")}
+                              style={{
+                                fontWeight: sort === "latest" ? "600" : "400",
+                                color:
+                                  sort === "latest"
+                                    ? "rgb(84 158 246)"
+                                    : "black",
+                              }}
+                            >
+                              {" "}
+                              Latest Posts
+                            </div>
 
-                          <div onClick={() => handleClick("oldest")}>
-                            Oldest Posts
-                          </div>
+                            <div
+                              onClick={() => handleClick("oldest")}
+                              style={{
+                                fontWeight: sort === "oldest" ? "600" : "400",
+                                color:
+                                  sort === "oldest"
+                                    ? "rgb(84 158 246)"
+                                    : "black",
+                              }}
+                            >
+                              Oldest Posts
+                            </div>
 
-                          <div onClick={() => handleClick("trending")}>
-                            Trending Posts
+                            <div
+                              onClick={() => handleClick("trending")}
+                              style={{
+                                fontWeight: sort === "trending" ? "600" : "400",
+                                color:
+                                  sort === "trending"
+                                    ? "rgb(84 158 246)"
+                                    : "black",
+                              }}
+                            >
+                              Trending Posts
+                            </div>
                           </div>
                         </div>
                       </div>
