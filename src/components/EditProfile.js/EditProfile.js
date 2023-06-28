@@ -60,7 +60,7 @@ export default function EditProfile() {
                           height="40px"
                           width="40px"
                           src={userState.currentUser.img}
-                          alt="change-photo"
+                          alt="profile"
                         />
                       </div>
                       <label>

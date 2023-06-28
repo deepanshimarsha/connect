@@ -28,9 +28,6 @@ export default function ChangeAvatarModal() {
   function handleClose() {
     setShow(false);
   }
-  function clearFile() {
-    setImgUrl(null);
-  }
 
   const handleSubmit = () => {
     if (imgUrl === null) {
