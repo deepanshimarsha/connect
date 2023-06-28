@@ -13,6 +13,7 @@ export default function ModalDetail(post) {
   const [show, setShow] = useState(false);
   const [showLike, setShowLike] = useState(false);
   const { userState } = useUserContext();
+  const [edit, setEdit] = useState();
   const {
     deletePost,
     disLikePost,
@@ -71,6 +72,7 @@ export default function ModalDetail(post) {
           <Modal.Header>
             <div className="detail-card-header">
               <SuggestionCard {...user} noShow />
+
               <div class="has-text-right">
                 {" "}
                 {username === localStorage.getItem("username") ? (
@@ -84,7 +86,14 @@ export default function ModalDetail(post) {
                     <div class="dropdown-container" tabindex="-1">
                       <div class="three-dots"></div>
                       <div class="dropdown2" style={{ textAlign: "left" }}>
-                        <div> Edit</div>
+                        <div
+                          onClick={() => {
+                            setEdit(true);
+                          }}
+                        >
+                          {" "}
+                          Edit
+                        </div>
 
                         <div
                           onClick={() => {
@@ -103,7 +112,7 @@ export default function ModalDetail(post) {
             </div>
           </Modal.Header>
           <Modal.Body>
-            <Comment {...post} />
+            <Comment post={post} edit={edit} setEdit={setEdit} />
             {/* <div className="not-show">
               <PostCard />
             </div> */}

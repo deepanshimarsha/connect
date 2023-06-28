@@ -39,3 +39,15 @@
     padding: 10px;
     gap: 2rem;
 }
+.edit-caption{
+    border-width: 0.5px;
+   border-left: grey;
+   border-right: grey;
+    border-top: grey;
+    padding: 5px;
+    
+}
+.edit-caption:focus{
+    outline: none;
+    border-top:black ;
+}

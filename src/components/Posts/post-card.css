@@ -222,3 +222,22 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
     flex: none;
     width: 8.33333%;
 }
+.edit-caption{
+    border-width: 0.5px;
+   border-left: grey;
+   border-right: grey;
+    border-top: grey;
+    padding: 5px;
+    
+    
+}
+.edit-caption:focus{
+    outline: none;
+    border-top:black ;
+}
+.content-input{
+    width: 100% !important;
+}
+.content-input input{
+    width: 70%;
+}

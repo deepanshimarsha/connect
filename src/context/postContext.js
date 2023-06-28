@@ -16,6 +16,7 @@ const PostContextProvider = ({ children }) => {
       img: null,
       vid: null,
     },
+    editPost: { caption: "" },
     newPost: {},
     showCreateModal: false,
     sort: "",
@@ -197,6 +198,29 @@ const PostContextProvider = ({ children }) => {
       console.error(e);
     }
   };
+
+  const editPost = async (postId) => {
+    try {
+      const caption = postState.editPost.caption;
+      const post = postState.explorePosts.find((post) => post._id === postId);
+      const editedPost = { postData: { ...post, content: caption } };
+      console.log("editedpost", editedPost);
+      const response = await fetch(`/api/posts/edit/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(editedPost),
+      });
+
+      const jsonData = await response.json();
+      console.log("response", jsonData);
+      postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
+      getProfilePost();
+    } catch (e) {
+      console.error(e);
+    }
+  };
   useEffect(() => {
     getExplorePosts();
   }, []);
@@ -216,6 +240,7 @@ const PostContextProvider = ({ children }) => {
         addToBookmark,
         removeBookmark,
         deletePost,
+        editPost,
       }}
     >
       {children}

@@ -30,7 +30,7 @@ export default function UserFeed() {
 
   if (sort === "latest") {
     userFeed = [...userFeed].sort(
-      (a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt)
+      (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
     );
   }
   if (sort === "trending") {

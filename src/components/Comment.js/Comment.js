@@ -1,9 +1,11 @@
 import "./comment.css";
 import { useUserContext } from "../../context/userContext";
 import { useEffect } from "react";
-export default function Comment(post) {
+import { usePostContext } from "../../context/postContext";
+export default function Comment({ post, edit, setEdit }) {
   const { userState, getAllUsers } = useUserContext();
-  const { comments, username, likes, content } = post;
+  const { editPost, postState, postDispatch } = usePostContext();
+  const { comments, username, likes, content, _id } = post;
 
   const getAuthorImg = (username) => {
     const author = userState.allUsers.find(
@@ -11,9 +13,17 @@ export default function Comment(post) {
     );
     return author.img;
   };
-
+  const handleEditPost = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      editPost(_id);
+      postDispatch({ type: "EDIT_POST", data: "" });
+      setEdit(false);
+    }
+  };
   useEffect(() => {
     getAllUsers();
+    postDispatch({ type: "EDIT_POST", data: content });
   }, []);
 
   if (comments === undefined) {
@@ -28,7 +38,21 @@ export default function Comment(post) {
         <div className="post-content">
           <div>
             <b id="username">{username}</b>&nbsp;
-            <span id="post-caption">{content}</span>{" "}
+            <span id="post-caption">
+              {edit ? (
+                <input
+                  className="edit-caption"
+                  type="text"
+                  value={postState.editPost.caption}
+                  onChange={(e) => {
+                    postDispatch({ type: "EDIT_POST", data: e.target.value });
+                  }}
+                  onKeyDown={(e) => handleEditPost(e)}
+                />
+              ) : (
+                content
+              )}
+            </span>{" "}
           </div>
         </div>
       </div>

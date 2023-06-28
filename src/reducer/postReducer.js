@@ -91,5 +91,11 @@ export const postReducer = (state, action) => {
         );
       }
     }
+    case "EDIT_POST": {
+      return {
+        ...state,
+        editPost: { ...state.editPost, caption: action.data },
+      };
+    }
   }
 };
