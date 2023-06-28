@@ -78,7 +78,7 @@ export default function PostCard(post) {
                     <span id="idText">New Jersey, USA</span>
                   </p>
                 </div>
-                <div class="column">
+                <div class="column" style={{ width: "50%", padding: "0px" }}>
                   <div class="has-text-right">
                     {" "}
                     {username === localStorage.getItem("username") ? (
@@ -93,7 +93,13 @@ export default function PostCard(post) {
                       //     <li>delete</li>
                       //   </ul>{" "}
                       // </div>
-                      <div class="menu-nav">
+                      <div
+                        class="menu-nav"
+                        style={{
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                        }}
+                      >
                         <div class="dropdown-container" tabindex="-1">
                           <div class="three-dots"></div>
                           <div class="dropdown2" style={{ textAlign: "left" }}>
@@ -110,7 +116,13 @@ export default function PostCard(post) {
                         </div>
                       </div>
                     ) : (
-                      <div class="menu-nav">
+                      <div
+                        class="menu-nav"
+                        style={{
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                        }}
+                      >
                         <div class="dropdown-container" tabindex="-1">
                           <div class="three-dots"></div>
                           <div class="dropdown2" style={{ textAlign: "left" }}>

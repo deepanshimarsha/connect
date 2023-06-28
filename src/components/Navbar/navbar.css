@@ -3,6 +3,7 @@
     padding: 20px;
     height: 100vh;
     position: fixed;
+   
   }
   .nav-item a{
     display: flex;

@@ -348,6 +348,9 @@ margin-right: 40px;
     font-size: large;
     cursor: pointer;
 }
+.portfolio a{
+    color: rgb(13,110,253);
+}
 @media (min-width: 750px) and (max-width: 1260px) {
     .profile{
         margin-right: 0px !important;

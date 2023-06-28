@@ -14,8 +14,7 @@ import { useEffect } from "react";
 import { useUserContext } from "./context/userContext";
 import { useAuthContext } from "./context/authContext";
 import { usePostContext } from "./context/postContext";
-import NewPostAlert from "./components/Alert/newPostAlert";
-
+import EditProfile from "./components/EditProfile.js/EditProfile";
 function App() {
   const { getCurrentUser, userState } = useUserContext();
   const { logoutSignedInUserOnRefresh, authState } = useAuthContext();
@@ -28,6 +27,7 @@ function App() {
 
   return (
     <div className="App">
+      {/* <EditProfile /> */}
       <Routes>
         <Route
           path="/"

@@ -1,35 +1,42 @@
 import { useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import "./create-modal-form.css";
-import NextModalForm from "./NextModalForm";
-import CreateButton from "../CreateButton/CreateButton";
-import { usePostContext } from "../../context/postContext";
+import "../CreateModalForm.js/create-modal-form.css";
+import { useState } from "react";
+import { useUserContext } from "../../context/userContext";
 
-export default function CreateModalForm() {
-  const { postState, postDispatch } = usePostContext();
-  // const [show, setShow] = useState(false);
-  // const [imagePreview, setImagePreview] = useState(null);
-  // const [videoPreview, setVideoPreview] = useState(null);
+export default function ChangePhotoModal() {
+  const [show, setShow] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imgUrl, setImgUrl] = useState();
+  const { userDispatch } = useUserContext();
+  const [error, setError] = useState("");
+
   const filePicekerRef = useRef(null);
 
-  const imagePreview = postState.createPost.img;
-  const videoPreview = postState.createPost.video;
-  const show = postState.showCreateModal;
   function handleShow() {
-    postDispatch({ type: "CREATE_POST", mode: "CLEAR_DATA" });
-    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "SHOW" });
-    // setShow(true);
+    setShow(true);
   }
   function handleClose() {
-    clearFiles();
-    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
-    // setShow(false);
+    setShow(false);
+  }
+  function clearFile() {
+    setImgUrl(null);
+    setImagePreview(null);
   }
 
-  function handleNext() {
-    postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
-  }
+  const handleSubmit = () => {
+    if (imgUrl === null) {
+      setError("Select Photo");
+    } else {
+      userDispatch({
+        type: "SET_EDITED_PROFILE_INPUT",
+        field: "IMG",
+        data: imgUrl,
+      });
+      setShow(false);
+    }
+  };
 
   function previewFile(e) {
     // Reading New File (open file Picker Box)
@@ -43,62 +50,30 @@ export default function CreateModalForm() {
     reader.onload = (readerEvent) => {
       if (selectedFile.type.includes("image")) {
         const imgUrl = URL.createObjectURL(selectedFile);
-        postDispatch({
-          type: "CREATE_POST",
-          field: "IMAGE",
-          data: readerEvent.target.result,
-        });
-        postDispatch({
-          type: "CREATE_POST",
-          field: "IMAGE_URL",
-          data: imgUrl,
-        });
-        // setImagePreview(readerEvent.target.result);
+        setImgUrl(imgUrl);
+        setImagePreview(readerEvent.target.result);
       } else if (selectedFile.type.includes("video")) {
-        const vidUrl = URL.createObjectURL(selectedFile);
-        postDispatch({
-          type: "CREATE_POST",
-          field: "VIDEO",
-          data: readerEvent.target.result,
-        });
-        postDispatch({
-          type: "CREATE_POST",
-          field: "VIDEO_URL",
-          data: vidUrl,
-        });
-        // setVideoPreview(readerEvent.target.result);
+        //select appropriate file
       }
     };
   }
-  function clearFiles() {
-    postDispatch({ type: "CREATE_POST", field: "IMAGE", data: null });
-    postDispatch({ type: "CREATE_POST", field: "VIDEO", data: null });
-  }
+
   return (
     <>
-      <div onClick={() => handleShow()}>
-        <CreateButton />
-      </div>
-
-      {/* <Button className="me-2 mb-2" >
-        Full screen
-      </Button> */}
+      <div onClick={() => handleShow()}>Uplaod Photo</div>
 
       <Modal
         show={show}
-        onHide={() => {
-          clearFiles();
-          postDispatch({ type: "SHOW_CREATE_MODAL", mode: "DO_NOT_SHOW" });
-        }}
+        onHide={handleClose}
         style={{ flexDirection: "column" }}
       >
         <div className="form-container">
           <Modal.Header>
-            {imagePreview != null || videoPreview != null ? (
+            {imagePreview != null ? (
               <Modal.Title>
                 <div className="preview-title">
                   {" "}
-                  <div onClick={clearFiles} className="cursor-pointer">
+                  <div className="cursor-pointer" onClick={clearFile}>
                     <i
                       class="fa fa-angle-left"
                       style={{ fontSize: "36px" }}
@@ -107,9 +82,9 @@ export default function CreateModalForm() {
                 </div>
               </Modal.Title>
             ) : (
-              <Modal.Title>Create new post</Modal.Title>
+              <Modal.Title>Uplaod profile photo</Modal.Title>
             )}
-            {(imagePreview || videoPreview) && (
+            {imagePreview && (
               <div onClick={handleClose} className="close-icon cursor-pointer">
                 <i class="material-icons" style={{ fontSize: "30px" }}>
                   close
@@ -118,12 +93,9 @@ export default function CreateModalForm() {
             )}
           </Modal.Header>
           <Modal.Body>
-            {imagePreview != null || videoPreview != null ? (
+            {imagePreview != null ? (
               <div className="preview">
                 {imagePreview != null && <img src={imagePreview} alt="" />}
-                {videoPreview != null && (
-                  <video controls src={videoPreview}></video>
-                )}
               </div>
             ) : (
               <>
@@ -132,12 +104,12 @@ export default function CreateModalForm() {
                     <img src="https://img.freepik.com/premium-vector/photo-picture-online-album-digital-gallery-watching-website_212005-272.jpg?w=996" />
                   </div>
                   <div>
-                    <span>Drag photos and videos here</span>
+                    <span>Drag photo here</span>
                   </div>
                   <div>
                     <input
                       ref={filePicekerRef}
-                      accept="image/*, video/*"
+                      accept="image/*"
                       onChange={previewFile}
                       type="file"
                       hidden
@@ -157,16 +129,9 @@ export default function CreateModalForm() {
               </>
             )}
           </Modal.Body>
-          {(imagePreview || videoPreview) && (
+          {imagePreview && (
             <Modal.Footer>
-              <NextModalForm
-                image={imagePreview}
-                video={videoPreview}
-                closePrev={handleNext}
-              />
-              {/* <div className="cursor-pointer">
-                <h5>Next</h5>
-              </div> */}
+              <div onClick={handleSubmit}>Select</div>
             </Modal.Footer>
           )}
         </div>

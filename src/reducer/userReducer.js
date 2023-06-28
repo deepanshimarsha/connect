@@ -30,6 +30,26 @@ const userReducer = (state, action) => {
         userFollower: action.data,
       };
     }
+    case "SET_EDITED_PROFILE_INPUT": {
+      if (action.field === "BIO") {
+        return {
+          ...state,
+          currentUser: { ...state.currentUser, bio: action.data },
+        };
+      }
+      if (action.field === "PORTFOLIO") {
+        return {
+          ...state,
+          currentUser: { ...state.currentUser, portfolio: action.data },
+        };
+      }
+      if (action.field === "IMG") {
+        return {
+          ...state,
+          currentUser: { ...state.currentUser, img: action.data },
+        };
+      }
+    }
   }
 };
 

@@ -7,6 +7,7 @@ import "../styles.css/user-profile.css";
 import { usePostContext } from "../context/postContext";
 import { useUserContext } from "../context/userContext";
 import { useEffect, useState } from "react";
+import EditProfile from "../components/EditProfile.js/EditProfile";
 
 export default function UserProfile() {
   const { postState, getProfilePost, getBookmarkPosts } = usePostContext();
@@ -53,9 +54,10 @@ export default function UserProfile() {
                 <NavLink>
                   <h2>{userState.currentUser.username}</h2>
                 </NavLink>
-                <div className="edit-btn">
+                <EditProfile />
+                {/* <div className="edit-btn">
                   <NavLink>Edit Profile</NavLink>
-                </div>
+                </div> */}
               </div>
               <div className="space-div">
                 <div></div>
@@ -84,8 +86,13 @@ export default function UserProfile() {
                 <span
                   style={{ color: "navy", fontWeight: "400", fontSize: "14px" }}
                 >
-                  @websitelink/bio
+                  {userState.currentUser.bio}
                 </span>
+              </div>
+              <div className="portfolio">
+                <NavLink to={userState.currentUser.portfolio}>
+                  {userState.currentUser.portfolio}
+                </NavLink>
               </div>
             </section>
           </div>

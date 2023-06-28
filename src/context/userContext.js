@@ -67,6 +67,26 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  const updateUser = async () => {
+    try {
+      const requestData = {
+        userData: userState.currentUser,
+      };
+      const response = await fetch("/api/users/edit", {
+        method: "POST",
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(requestData),
+      });
+      const jsonData = await response.json();
+      userDispatch({ type: "SET_CURRENT_USER", user: jsonData.user });
+      console.log(jsonData);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     getAllUsers();
     getCurrentUser();
@@ -81,6 +101,7 @@ const UserContextProvider = ({ children }) => {
         getAllUsers,
         followAnotherUser,
         unfollowAnotherUser,
+        updateUser,
       }}
     >
       {children}

@@ -1,0 +1,92 @@
+.edit-modal{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 100%;
+}
+.body-heading{
+    display: flex;
+    justify-content: flex-start;
+    width: 70%;
+    margin: 0px 50px;
+}
+.edit-body{
+    display: flex;
+    flex-direction: column;
+    
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.edit-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    margin: 30px 0px;
+    box-sizing: border-box;
+}
+.edit-form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+}
+.edit-form form .form-group{
+    display: flex;
+    gap:3rem;
+    justify-content: space-between;
+}
+.labels {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 0.7rem;
+  }
+
+  .input-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    
+    
+    
+  }
+  .avatar-collection{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .avatar-collection div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .avatar-collection div img{
+    
+        float: left;
+        width:  200px;
+        height: 200px;
+        object-fit: cover;
+        cursor: pointer;
+
+  }
+
+  .select-btn{
+    cursor: pointer;
+    color: rgb(13,110,253);
+    font-weight: 500;
+    font-size: larger;
+    margin-right: 20px;
+  }
+  @media (min-width: 750px) and (max-width: 1260px) {
+    .avatar-collection{
+        grid-template-columns: 1fr 1fr 1fr ;
+      }
+  }
