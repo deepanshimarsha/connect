@@ -1,0 +1,41 @@
+.comment-container{
+    display:flex;
+    flex-direction: column;
+}
+
+#postText {
+    display: flex;
+    gap: 1rem;
+        font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 6px;
+   
+}
+
+#username{
+    font-weight: 650;
+}
+.post-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.profile-photo{
+    min-width: 10%;
+}
+.profile-photo img{
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+.division hr{
+   color:rgb(219, 219, 219);
+   margin: 10px 0px;
+}
+.comment-section{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 2rem;
+}

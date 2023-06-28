@@ -131,7 +131,9 @@ export default function ChangePhotoModal() {
           </Modal.Body>
           {imagePreview && (
             <Modal.Footer>
-              <div onClick={handleSubmit}>Select</div>
+              <div className="select-btn" onClick={handleSubmit}>
+                Select
+              </div>
             </Modal.Footer>
           )}
         </div>

@@ -19,6 +19,28 @@ export const posts = [
     username: "beyonce",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -33,6 +55,28 @@ export const posts = [
     username: "badgalriri",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -46,6 +90,28 @@ export const posts = [
     username: "deepee_e",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -59,6 +125,28 @@ export const posts = [
     username: "badgalriri",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -72,6 +160,28 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -85,5 +195,27 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
   },
 ];

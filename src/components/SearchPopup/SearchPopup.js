@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./search-popup.css";
 import SuggestionCard from "../Suggestion.js/SuggestionCard";
 import { useSearchContext } from "../../context/searchContext";

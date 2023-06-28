@@ -33,6 +33,38 @@
 .not-show{
     display: none;
 }
+.detail-card-footer{
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0px !important; 
+    margin: 0px 5px;
+}
+.icons{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.add-comment{
+    color: rgb(142, 142, 142);
+    font-size: 16px;
+    line-height: 17px;
+    letter-spacing: px;
+}
+.add-comment input{
+   width: 100%;
+    border: none;
+    padding: 10px;
+}
+.add-comment input:focus{
+    outline: none;
+}
+.detail-card-header{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 @media (min-width: 750px) and (max-width: 1260px) {
     .modal-content{
        width: 750px;
