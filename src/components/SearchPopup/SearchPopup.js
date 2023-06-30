@@ -2,9 +2,11 @@ import "./search-popup.css";
 import SuggestionCard from "../Suggestion.js/SuggestionCard";
 import { useSearchContext } from "../../context/searchContext";
 import { useUserContext } from "../../context/userContext";
+import { useState } from "react";
 export default function SearchPopup() {
   const { searchState } = useSearchContext();
   const { userState } = useUserContext();
+  const [search, setSearch] = useState("");
   return (
     <>
       <div
@@ -20,6 +22,8 @@ export default function SearchPopup() {
           <div className="search-bar-result">
             <div className="search-bar">
               <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 className="search-input"
                 type="text"
                 placeholder="Search"
@@ -34,10 +38,15 @@ export default function SearchPopup() {
                 {userState.allUsers
                   .filter(
                     ({ username }) =>
-                      username !== localStorage.getItem("username")
+                      username !== localStorage.getItem("username") &&
+                      username.toLowerCase().includes(search.toLowerCase())
                   )
                   .map((user) => {
-                    return <SuggestionCard {...user} />;
+                    return (
+                      <div style={{ padding: "12px 0px" }}>
+                        <SuggestionCard {...user} />
+                      </div>
+                    );
                   })}
               </div>
             </div>

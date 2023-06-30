@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import "./suggestion-card.css";
 import { useUserContext } from "../../context/userContext";
+import { usePostContext } from "../../context/postContext";
 export default function SuggestionCard(user) {
+  const { getUser } = useUserContext();
   const { followAnotherUser, userState, unfollowAnotherUser } =
     useUserContext();
   const { username, firstName, lastName, img, _id, notShow } = user;
@@ -19,12 +21,29 @@ export default function SuggestionCard(user) {
     <div className="suggestion-card">
       <div className="suggested-user">
         <div className="profile-img">
-          <NavLink
-            className="user-link"
-            style={{ height: "44px", width: "44px" }}
-          >
-            <img src={img} />
-          </NavLink>
+          {username === localStorage.getItem("username") ? (
+            <NavLink
+              onClick={() => {
+                getUser(_id);
+              }}
+              to="/profile"
+              className="user-link"
+              style={{ height: "44px", width: "44px" }}
+            >
+              <img src={img} />
+            </NavLink>
+          ) : (
+            <NavLink
+              onClick={() => {
+                getUser(_id);
+              }}
+              to={`/profile/${username}`}
+              className="user-link"
+              style={{ height: "44px", width: "44px" }}
+            >
+              <img src={img} />
+            </NavLink>
+          )}
         </div>
         <div className="profile-name">
           <div className="profile-content">

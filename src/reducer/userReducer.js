@@ -18,6 +18,12 @@ const userReducer = (state, action) => {
         currentUser: action.user,
       };
     }
+    case "SET_USER": {
+      return {
+        ...state,
+        user: action.user,
+      };
+    }
     case "SET_USER_FOLLOWING": {
       return {
         ...state,

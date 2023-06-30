@@ -2,7 +2,7 @@ import "./comment.css";
 import { useUserContext } from "../../context/userContext";
 import { useEffect } from "react";
 import { usePostContext } from "../../context/postContext";
-export default function Comment({ post, edit, setEdit }) {
+export default function Comment({ post, edit, setEdit, commentList }) {
   const { userState, getAllUsers } = useUserContext();
   const { editPost, postState, postDispatch } = usePostContext();
   const { comments, username, likes, content, _id } = post;
@@ -37,7 +37,10 @@ export default function Comment({ post, edit, setEdit }) {
         </div>
         <div className="post-content">
           <div>
-            <b id="username">{username}</b>&nbsp;
+            <span style={{ fontWeight: "600" }} id="username">
+              {username}
+            </span>
+            &nbsp;
             <span id="post-caption">
               {edit ? (
                 <input
@@ -60,7 +63,7 @@ export default function Comment({ post, edit, setEdit }) {
         <hr></hr>
       </div>
       <div className="comment-section">
-        {comments.map(({ comment, username }) => {
+        {commentList.map(({ comment, username }) => {
           return (
             <div id="postText">
               <div className="profile-photo">
@@ -68,7 +71,10 @@ export default function Comment({ post, edit, setEdit }) {
               </div>
               <div className="post-content">
                 <div>
-                  <b id="username">{username}</b>&nbsp;
+                  <span id="username" style={{ fontWeight: "600" }}>
+                    {username}
+                  </span>
+                  &nbsp;
                   <span id="post-comment">{comment}</span>{" "}
                 </div>
               </div>

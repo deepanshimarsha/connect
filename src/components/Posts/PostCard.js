@@ -2,11 +2,15 @@ import "./post-card.css";
 import { useUserContext } from "../../context/userContext";
 import { usePostContext } from "../../context/postContext";
 import { useEffect } from "react";
+
 import { useState } from "react";
 export default function PostCard(post) {
   const { img, content, likes, username, _id, comments } = post;
   const [edit, setEdit] = useState(false);
   const [viewAllComments, showAllComments] = useState(false);
+  const [scrollTop, setScrollTop] = useState(0);
+  const [commentInput, setCommentInput] = useState("");
+  const [commentList, setCommentList] = useState(post.comments);
 
   const {
     likePost,
@@ -17,11 +21,17 @@ export default function PostCard(post) {
     deletePost,
     postDispatch,
     editPost,
+    addComments,
   } = usePostContext();
 
-  const { userState } = useUserContext();
+  const { followAnotherUser, userState, unfollowAnotherUser } =
+    useUserContext();
+  const followingUsername = userState.currentUser.following
+    ? userState.currentUser.following.map(({ username }) => username)
+    : [];
   const [showLike, setShowLike] = useState(false);
 
+  useUserContext();
   const postAuthor = userState.allUsers.find(
     (user) => user.username === username
   );
@@ -58,9 +68,53 @@ export default function PostCard(post) {
       setEdit(false);
     }
   };
-  const handleScroll = () => {
-    setEdit(false);
+
+  const handleRemoveEditPost = () => {
+    if (scrollTop % 400 === 0 && scrollTop !== 0) {
+      setEdit(false);
+    }
   };
+
+  const handleFollow = (another_user) => {
+    if (followingUsername.includes(username)) {
+      unfollowAnotherUser(another_user);
+    } else {
+      followAnotherUser(another_user);
+    }
+  };
+  const handleInputChange = (e) => {
+    setCommentInput(e.target.value);
+  };
+  const handleAddComment = (e) => {
+    if (e.key === "Enter") {
+      showAllComments(true);
+      setCommentList(() => [
+        ...commentList,
+        {
+          username: localStorage.getItem("username"),
+          comment: commentInput,
+        },
+      ]);
+
+      setCommentInput("");
+    }
+  };
+
+  useEffect(() => {
+    handleRemoveEditPost();
+  });
+  useEffect(() => {
+    const handleScroll = (event) => {
+      setScrollTop(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className="column is-5">
       <div className="instaPreviewArea">
@@ -81,12 +135,15 @@ export default function PostCard(post) {
                     class="story-icon is-hidden"
                     id="storyIcon"
                     src={postAuthor.img}
+                    alt="story"
                   />
                 </div>
                 <div class="column is-8 pl-0">
                   {" "}
                   <span class="label username-text mb-0">
-                    <span id="textUserName">{username}</span>
+                    <span id="textUserName" style={{ fontWeight: "600" }}>
+                      {username}
+                    </span>
                     <span id="verifiedIcon" style={{ color: "#1b95e0" }}>
                       <svg width="14" height="14">
                         <use href="/"></use>
@@ -131,19 +188,19 @@ export default function PostCard(post) {
                         </div>
                       </div>
                     ) : (
-                      <div
-                        class="menu-nav"
-                        style={{
-                          justifyContent: "flex-end",
-                          alignItems: "center",
-                        }}
-                      >
-                        <div class="dropdown-container" tabindex="-1">
-                          <div class="three-dots"></div>
-                          <div class="dropdown2" style={{ textAlign: "left" }}>
-                            <div> follow // unfollow</div>
-                          </div>
-                        </div>
+                      <div className="action-btn">
+                        {localStorage.getItem("username") !== username && (
+                          <button
+                            type="button"
+                            onClick={() => handleFollow(postAuthor)}
+                          >
+                            <span className="action">
+                              {followingUsername.includes(username)
+                                ? "Following"
+                                : "Follow"}
+                            </span>
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
@@ -265,7 +322,9 @@ export default function PostCard(post) {
                 </div>{" "}
                 <div id="postTextArea">
                   {" "}
-                  <b id="postTextUserName">{username}</b>
+                  <b id="postTextUserName" style={{ fontWeight: "630" }}>
+                    {username}
+                  </b>
                   &nbsp;
                   <span id="instaPostText" className="content-input">
                     {edit ? (
@@ -280,7 +339,6 @@ export default function PostCard(post) {
                           });
                         }}
                         onKeyDown={(e) => handleEditPost(e)}
-                        onScroll={handleScroll}
                       />
                     ) : (
                       content
@@ -295,16 +353,18 @@ export default function PostCard(post) {
                       style={{ cursor: "pointer" }}
                     >
                       <span>
-                        <span>{viewAllComments ? "Hide" : "View"}</span> all
+                        {viewAllComments
+                          ? "Hide"
+                          : `View All ${commentList.length}`}
                       </span>{" "}
-                      <span id="countComments">{comments.length}</span>{" "}
+                      {/* <span id="countComments">{comments.length}</span>{" "} */}
                       <span>comments</span>{" "}
                     </div>
                   )}
                 </div>{" "}
-                {comments && !viewAllComments && (
+                {commentList && !viewAllComments && (
                   <>
-                    {comments.map((comment, idx) => {
+                    {commentList.map((comment, idx) => {
                       if (idx <= 1) {
                         return (
                           <div
@@ -313,7 +373,12 @@ export default function PostCard(post) {
                           >
                             <div class="column pb-0">
                               {" "}
-                              <b id="commentUsername2">{comment.username}</b>
+                              <b
+                                id="commentUsername2"
+                                style={{ fontWeight: "630" }}
+                              >
+                                {comment.username}
+                              </b>
                               &nbsp;
                               <span id="commentText2">
                                 {comment.comment}
@@ -342,9 +407,9 @@ export default function PostCard(post) {
                     })}
                   </>
                 )}
-                {comments && viewAllComments && (
+                {commentList && viewAllComments && (
                   <>
-                    {comments.map((comment) => {
+                    {commentList.map((comment) => {
                       return (
                         <div
                           class="columns is-mobile comment-area"
@@ -352,7 +417,12 @@ export default function PostCard(post) {
                         >
                           <div class="column pb-0">
                             {" "}
-                            <b id="commentUsername2">{comment.username}</b>
+                            <b
+                              id="commentUsername2"
+                              style={{ fontWeight: "630" }}
+                            >
+                              {comment.username}
+                            </b>
                             &nbsp;
                             <span id="commentText2">
                               {comment.comment}
@@ -379,7 +449,13 @@ export default function PostCard(post) {
                   </>
                 )}
                 <div className="add-comment">
-                  <input type="text" placeholder="Add a comment..." />
+                  <input
+                    value={commentInput}
+                    type="text"
+                    placeholder="Add a comment..."
+                    onChange={(e) => handleInputChange(e)}
+                    onKeyDown={(e) => handleAddComment(e)}
+                  />
                 </div>{" "}
               </div>{" "}
             </div>

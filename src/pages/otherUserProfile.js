@@ -2,26 +2,36 @@ import Navbar from "../components/Navbar/Navbar";
 import TopNav from "../components/Navbar/TopNav";
 import SearchPopup from "../components/SearchPopup/SearchPopup";
 import ModalDetail from "../components/PostDetail/ModalDetail";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import "../styles.css/user-profile.css";
 import { usePostContext } from "../context/postContext";
 import { useUserContext } from "../context/userContext";
 import { useEffect, useState } from "react";
-import EditProfile from "../components/EditProfile.js/EditProfile";
 import FollowersList from "../components/FollowersList.js/FollowersList";
 
-export default function UserProfile() {
-  const { postState, getProfilePost, getBookmarkPosts } = usePostContext();
-  const { userState } = useUserContext();
+export default function OtherUserProfile() {
+  const { postState, getProfilePost } = usePostContext();
+  const { followAnotherUser, userState, unfollowAnotherUser } =
+    useUserContext();
   const [show, setShow] = useState("post");
-  const followers = userState.currentUser.followers;
-  const following = userState.currentUser.following;
-
+  const { username } = useParams();
+  const followers = userState.user.followers;
+  const following = userState.user.following;
+  const followingUsername = userState.currentUser.following
+    ? userState.currentUser.following.map(({ username }) => username)
+    : [];
+  const handleFollow = (another_user) => {
+    if (followingUsername.includes(username)) {
+      unfollowAnotherUser(another_user);
+    } else {
+      followAnotherUser(another_user);
+    }
+  };
   useEffect(() => {
-    getProfilePost(localStorage.getItem("username"));
-    getBookmarkPosts();
+    getProfilePost(username);
   }, []);
-  if (!postState.profilePosts) {
+
+  if (!postState.otherUserprofile) {
     return <h1>No Posts</h1>;
   }
 
@@ -45,7 +55,7 @@ export default function UserProfile() {
               <span className="user-avatar">
                 <img
                   className="user-image"
-                  src={userState.currentUser.img}
+                  src={userState.user.img}
                   alt="profile-pic"
                 />
               </span>
@@ -53,16 +63,29 @@ export default function UserProfile() {
             <section className="profile-page-header">
               <div className="section-header">
                 <NavLink>
-                  <h2>{userState.currentUser.username}</h2>
+                  <h2>{userState.user.username}</h2>
                 </NavLink>
-                <EditProfile />
+                <div className="action-btn">
+                  {localStorage.getItem("username") !== username && (
+                    <button
+                      type="button"
+                      onClick={() => handleFollow(userState.user)}
+                    >
+                      <span className="action">
+                        {followingUsername.includes(username)
+                          ? "Following"
+                          : "Follow"}
+                      </span>
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="space-div">
                 <div></div>
               </div>
               <ul className="sub-header">
                 <li className="list-item">
-                  <span>{postState.profilePosts.length} posts</span>
+                  <span>{postState.otherUserprofile.length} posts</span>
                 </li>
                 <li className="list-item">
                   <FollowersList followers={followers} />
@@ -74,8 +97,7 @@ export default function UserProfile() {
               <div className="section-footer">
                 <div>
                   <span style={{ fontWeight: "600" }}>
-                    {userState.currentUser.firstName}{" "}
-                    {userState.currentUser.lastName}
+                    {userState.user.firstName} {userState.user.lastName}
                   </span>
                 </div>
               </div>
@@ -84,12 +106,12 @@ export default function UserProfile() {
                 <span
                   style={{ color: "navy", fontWeight: "400", fontSize: "14px" }}
                 >
-                  {userState.currentUser.bio}
+                  {userState.user.bio}
                 </span>
               </div>
               <div className="portfolio">
-                <NavLink to={userState.currentUser.portfolio}>
-                  {userState.currentUser.portfolio}
+                <NavLink to={userState.user.portfolio}>
+                  {userState.user.portfolio}
                 </NavLink>
               </div>
             </section>
@@ -109,63 +131,30 @@ export default function UserProfile() {
               >
                 POSTS
               </li>
-              <li
-                style={{
-                  fontWeight: show === "bookmark" ? "600" : "400",
-                  color: show === "bookmark" ? "rgb(84 158 246)" : "black",
-                }}
-                className="padding-right"
-                onClick={() => handleClick("bookmark")}
-              >
-                BOOKMARK
-              </li>
             </ul>
           </div>
-          {show === "post" ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "20px",
-              }}
-            >
-              {" "}
-              {postState.profilePosts.length === 0 ? (
-                <span style={{ fontWeight: "500", fontSize: "18px" }}>
-                  No Posts
-                </span>
-              ) : (
-                <div className="thumbnail-collection">
-                  {postState.profilePosts.map((post) => {
-                    return <ModalDetail {...post} />;
-                  })}
-                </div>
-              )}
-            </div>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "20px",
-              }}
-            >
-              {" "}
-              {postState.bookmark.length === 0 ? (
-                <span style={{ fontWeight: "500", fontSize: "18px" }}>
-                  No bookmarks
-                </span>
-              ) : (
-                <div className="thumbnail-collection">
-                  {postState.bookmark.map((post) => {
-                    return <ModalDetail {...post} />;
-                  })}
-                </div>
-              )}
-            </div>
-          )}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "20px",
+            }}
+          >
+            {" "}
+            {postState.otherUserprofile.length === 0 ? (
+              <span style={{ fontWeight: "500", fontSize: "18px" }}>
+                No Posts
+              </span>
+            ) : (
+              <div className="thumbnail-collection">
+                {postState.otherUserprofile.map((post) => {
+                  return <ModalDetail {...post} />;
+                })}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

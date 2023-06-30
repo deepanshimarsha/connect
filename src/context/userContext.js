@@ -5,6 +5,7 @@ const UserContextProvider = ({ children }) => {
   const initialUserState = {
     allUsers: [],
     currentUser: {},
+    user: {},
   };
   const [userState, userDispatch] = useReducer(userReducer, initialUserState);
 
@@ -41,7 +42,7 @@ const UserContextProvider = ({ children }) => {
       });
       const jsonData = await response.json();
       if (response.status === 200) {
-        const { user, followUser } = jsonData;
+        const { user } = jsonData;
         userDispatch({ type: "SET_CURRENT_USER", user: user });
       }
     } catch (e) {
@@ -87,6 +88,16 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  const getUser = async (userId) => {
+    try {
+      const response = await fetch(`/api/users/${userId}`);
+      const jsonData = await response.json();
+      console.log("res", jsonData);
+      userDispatch({ type: "SET_USER", user: jsonData.user });
+    } catch (e) {
+      console.error(e);
+    }
+  };
   useEffect(() => {
     getAllUsers();
     getCurrentUser();
@@ -102,6 +113,7 @@ const UserContextProvider = ({ children }) => {
         followAnotherUser,
         unfollowAnotherUser,
         updateUser,
+        getUser,
       }}
     >
       {children}

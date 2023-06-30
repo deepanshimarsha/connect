@@ -9,6 +9,7 @@ const PostContextProvider = ({ children }) => {
     profilePosts: [],
     userFeed: [],
     bookmark: [],
+    otherUserprofile: [],
     createPost: {
       image: null,
       video: null,
@@ -20,6 +21,7 @@ const PostContextProvider = ({ children }) => {
     newPost: {},
     showCreateModal: false,
     sort: "",
+    comments: [],
   };
 
   const [postState, postDispatch] = useReducer(postReducer, initialPostState);
@@ -55,19 +57,15 @@ const PostContextProvider = ({ children }) => {
     }
   };
 
-  const getProfilePost = async () => {
+  const getProfilePost = async (username) => {
     try {
-      if (localStorage.getItem("mode") === "login") {
-        const username = localStorage.getItem("username");
-        const response = await fetch(`/api/posts/user/${username}`);
-        const jsonData = await response.json();
+      const response = await fetch(`/api/posts/user/${username}`);
+      const jsonData = await response.json();
+      console.log(jsonData);
+      if (username === localStorage.getItem("username")) {
         postDispatch({ type: "SET_PROFILE_POSTS", posts: jsonData.posts });
-      }
-      if (localStorage.getItem("mode") === "signup") {
-        const username = localStorage.getItem("signedInUsername");
-        const response = await fetch(`/api/posts/user/${username}`);
-        const jsonData = await response.json();
-        postDispatch({ type: "SET_PROFILE_POSTS", posts: jsonData.posts });
+      } else {
+        postDispatch({ type: "SET_OTHER_USER_PROFILE", posts: jsonData.posts });
       }
     } catch (e) {
       console.error(e);
@@ -221,6 +219,7 @@ const PostContextProvider = ({ children }) => {
       console.error(e);
     }
   };
+
   useEffect(() => {
     getExplorePosts();
   }, []);

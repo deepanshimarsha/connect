@@ -7,12 +7,15 @@ import { NavLink } from "react-router-dom";
 import SearchPopup from "../components/SearchPopup/SearchPopup";
 import { usePostContext } from "../context/postContext";
 import { useUserContext } from "../context/userContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import FollowersList from "../components/FollowersList.js/FollowersList";
 
 export default function UserFeed() {
-  const { postState, getUserFeed, postDispatch } = usePostContext();
+  const { postState } = usePostContext();
   const [sort, setSort] = useState("latest");
+
   const { userState } = useUserContext();
+  console.log(userState.currentUser.following);
   let userFeed = [
     ...postState.explorePosts.filter(
       (post) => post.username === localStorage.getItem("username")
@@ -47,10 +50,6 @@ export default function UserFeed() {
   const handleClick = (value) => {
     setSort(value);
   };
-
-  // useEffect(() => {
-  //   postDispatch({ type: "SORT_EXPLORE_POSTS" });
-  // }, [postState.sort]);
 
   return (
     // <div className="main">
@@ -125,18 +124,20 @@ export default function UserFeed() {
                     </div>
                   </div>
                 </div>
-                {!userFeed.length ? (
-                  <div style={{ textAlign: "center" }}>
-                    <h5>
-                      {/* No Posts to Display! Start Following and Liking your
+                <div className="userfeed-post-container">
+                  {!userFeed.length ? (
+                    <div style={{ textAlign: "center" }}>
+                      <h5>
+                        {/* No Posts to Display! Start Following and Liking your
                       Friends Post to get updates on your Feed */}
-                    </h5>
-                  </div>
-                ) : (
-                  userFeed.map((post) => {
-                    return <PostCard {...post} />;
-                  })
-                )}
+                      </h5>
+                    </div>
+                  ) : (
+                    userFeed.map((post) => {
+                      return <PostCard {...post} />;
+                    })
+                  )}
+                </div>
               </div>
             </div>
             <div className="suggestion-container">
@@ -158,17 +159,39 @@ export default function UserFeed() {
                         <span>Suggested for you</span>
                       </div>
                       <NavLink className="see-all-link">
-                        <span>See all</span>
+                        <FollowersList
+                          allOtherUsers={userState.allUsers
+                            .filter(
+                              (user) =>
+                                !userState.currentUser.following
+                                  .map(({ username }) => username)
+                                  .includes(user.username)
+                            )
+                            .filter(
+                              ({ username }) =>
+                                username !== localStorage.getItem("username")
+                            )}
+                        />
                       </NavLink>
                     </div>
                     <div className="list">
                       {userState.allUsers
                         .filter(
+                          (user) =>
+                            !userState.currentUser.following
+                              .map(({ username }) => username)
+                              .includes(user.username)
+                        )
+                        .filter(
                           ({ username }) =>
                             username !== localStorage.getItem("username")
                         )
-                        .map((user) => {
-                          return <SuggestionCard {...user} />;
+                        .map((user, idx) => {
+                          if (idx <= 2) {
+                            return <SuggestionCard {...user} />;
+                          } else {
+                            return <div></div>;
+                          }
                         })}
                     </div>
                   </div>

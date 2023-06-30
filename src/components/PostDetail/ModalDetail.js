@@ -14,6 +14,8 @@ export default function ModalDetail(post) {
   const [showLike, setShowLike] = useState(false);
   const { userState } = useUserContext();
   const [edit, setEdit] = useState();
+  const [commentInput, setCommentInput] = useState("");
+  const [commentList, setCommentList] = useState(post.comments);
   const {
     deletePost,
     disLikePost,
@@ -49,6 +51,22 @@ export default function ModalDetail(post) {
     }
   };
 
+  const handleInputChange = (e) => {
+    setCommentInput(e.target.value);
+  };
+  const handleAddComment = (e) => {
+    if (e.key === "Enter") {
+      setCommentList(() => [
+        ...commentList,
+        {
+          username: localStorage.getItem("username"),
+          comment: commentInput,
+        },
+      ]);
+
+      setCommentInput("");
+    }
+  };
   return (
     <>
       <div onClick={handleShow}>
@@ -112,17 +130,12 @@ export default function ModalDetail(post) {
             </div>
           </Modal.Header>
           <Modal.Body>
-            <Comment post={post} edit={edit} setEdit={setEdit} />
-            {/* <div className="not-show">
-              <PostCard />
-            </div> */}
-            {/* <div className="modal-body-img">
-              <img
-                src="https://pbs.twimg.com/media/Ekzemj2WAAAyDcf.jpg"
-                alt="post-cover"
-                className="post-cover"
-              />
-            </div> */}
+            <Comment
+              post={post}
+              edit={edit}
+              setEdit={setEdit}
+              commentList={commentList}
+            />
           </Modal.Body>
 
           <Modal.Footer>
@@ -236,7 +249,13 @@ export default function ModalDetail(post) {
                 <span>{likes.likeCount} likes</span>{" "}
               </div>{" "}
               <div className="add-comment">
-                <input type="text" placeholder="Add a comment..." />
+                <input
+                  type="text"
+                  placeholder="Add a comment..."
+                  value={commentInput}
+                  onChange={(e) => handleInputChange(e)}
+                  onKeyDown={(e) => handleAddComment(e)}
+                />
               </div>
             </div>
           </Modal.Footer>

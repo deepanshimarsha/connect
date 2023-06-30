@@ -14,11 +14,12 @@ import { useEffect } from "react";
 import { useUserContext } from "./context/userContext";
 import { useAuthContext } from "./context/authContext";
 import { usePostContext } from "./context/postContext";
-import EditProfile from "./components/EditProfile.js/EditProfile";
+
+import OtherUserProfile from "./pages/otherUserProfile";
 function App() {
   const { getCurrentUser, userState } = useUserContext();
   const { logoutSignedInUserOnRefresh, authState } = useAuthContext();
-  const { postState, getExplorePosts } = usePostContext();
+  const { postState } = usePostContext();
   console.log(userState, authState, postState);
   useEffect(() => {
     getCurrentUser();
@@ -58,6 +59,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         <Route path="/mockman" element={<Mockman />} />
+        <Route path="/profile/:username" element={<OtherUserProfile />} />
       </Routes>
     </div>
   );
