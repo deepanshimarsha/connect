@@ -10,7 +10,7 @@ export default function PostCard(post) {
   const [viewAllComments, showAllComments] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const [commentInput, setCommentInput] = useState("");
-  const [commentList, setCommentList] = useState(post.comments);
+  const [commentList, setCommentList] = useState([]);
 
   const {
     likePost,
@@ -31,7 +31,6 @@ export default function PostCard(post) {
     : [];
   const [showLike, setShowLike] = useState(false);
 
-  useUserContext();
   const postAuthor = userState.allUsers.find(
     (user) => user.username === username
   );
@@ -102,6 +101,7 @@ export default function PostCard(post) {
 
   useEffect(() => {
     handleRemoveEditPost();
+    // setCommentList(post.comments);
   });
   useEffect(() => {
     const handleScroll = (event) => {
@@ -115,6 +115,7 @@ export default function PostCard(post) {
     };
   }, []);
 
+  console.log("comments", commentList, commentInput);
   return (
     <div className="column is-5">
       <div className="instaPreviewArea">

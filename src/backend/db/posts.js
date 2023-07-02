@@ -118,7 +118,7 @@ export const posts = [
     content: "",
     img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPLJbYf52cpv_wPhhQJbcvZ4BCo9S_SfuKgg&usqp=CAU",
     likes: {
-      likeCount: 33,
+      likeCount: 22,
       likedBy: [],
       dislikedBy: [],
     },
@@ -189,6 +189,41 @@ export const posts = [
     img: "https://img.buzzfeed.com/buzzfeed-static/static/2022-02/11/19/asset/3f96bbcb5250/sub-buzz-1204-1644607356-24.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto",
     likes: {
       likeCount: 7,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "adarshbalika",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+      {
+        username: "deepee_e",
+        comment:
+          "Why did the did Chris Paul that GM do not know what he’s doing warriors need a Centre not Chris Paul",
+      },
+    ],
+  },
+  {
+    _id: uuid(),
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK_cp6y0xHAyKoBxQHpN0kX6LoAUV9gIf-ew&usqp=CAU",
+    content: "Ahhh! This face.",
+    likes: {
+      likeCount: 10,
       likedBy: [],
       dislikedBy: [],
     },

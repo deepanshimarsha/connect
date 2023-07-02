@@ -22,10 +22,11 @@ const PostContextProvider = ({ children }) => {
     showCreateModal: false,
     sort: "",
     comments: [],
+    isLoading: false,
   };
 
   const [postState, postDispatch] = useReducer(postReducer, initialPostState);
-  console.log(postState);
+
   const { userState } = useUserContext();
 
   const getUserFeed = () => {
@@ -48,17 +49,21 @@ const PostContextProvider = ({ children }) => {
   };
 
   const getExplorePosts = async () => {
+    postDispatch({ type: "SET_IS_LOADING", bool: true });
     try {
       const response = await fetch("/api/posts");
       const jsonData = await response.json();
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
     } catch (e) {
       console.error(e);
+    } finally {
+      postDispatch({ type: "SET_IS_LOADING", bool: false });
     }
   };
 
   const getProfilePost = async (username) => {
     try {
+      postDispatch({ type: "SET_IS_LOADING", bool: true });
       const response = await fetch(`/api/posts/user/${username}`);
       const jsonData = await response.json();
       console.log(jsonData);
@@ -69,6 +74,8 @@ const PostContextProvider = ({ children }) => {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      postDispatch({ type: "SET_IS_LOADING", bool: false });
     }
   };
 
@@ -115,7 +122,7 @@ const PostContextProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const jsonData = await response.json();
-      console.log(jsonData);
+
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
       getProfilePost();
     } catch (e) {
@@ -212,7 +219,7 @@ const PostContextProvider = ({ children }) => {
       });
 
       const jsonData = await response.json();
-      console.log("response", jsonData);
+
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
       getProfilePost();
     } catch (e) {

@@ -11,7 +11,8 @@ import EditProfile from "../components/EditProfile.js/EditProfile";
 import FollowersList from "../components/FollowersList.js/FollowersList";
 
 export default function UserProfile() {
-  const { postState, getProfilePost, getBookmarkPosts } = usePostContext();
+  const { postState, getProfilePost, getBookmarkPosts, getExplorePosts } =
+    usePostContext();
   const { userState } = useUserContext();
   const [show, setShow] = useState("post");
   const followers = userState.currentUser.followers;
@@ -20,6 +21,7 @@ export default function UserProfile() {
   useEffect(() => {
     getProfilePost(localStorage.getItem("username"));
     getBookmarkPosts();
+    getExplorePosts();
   }, []);
   if (!postState.profilePosts) {
     return <h1>No Posts</h1>;
@@ -121,7 +123,7 @@ export default function UserProfile() {
               </li>
             </ul>
           </div>
-          {show === "post" ? (
+          {postState.isLoading && (
             <div
               style={{
                 display: "flex",
@@ -130,38 +132,54 @@ export default function UserProfile() {
                 margin: "20px",
               }}
             >
-              {" "}
-              {postState.profilePosts.length === 0 ? (
-                <span style={{ fontWeight: "500", fontSize: "18px" }}>
-                  No Posts
-                </span>
-              ) : (
-                <div className="thumbnail-collection">
-                  {postState.profilePosts.map((post) => {
-                    return <ModalDetail {...post} />;
-                  })}
-                </div>
-              )}
+              Loading...
             </div>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: "20px",
-              }}
-            >
-              {" "}
-              {postState.bookmark.length === 0 ? (
-                <span style={{ fontWeight: "500", fontSize: "18px" }}>
-                  No bookmarks
-                </span>
+          )}
+          {!postState.isLoading && (
+            <div>
+              {show === "post" ? (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "20px",
+                  }}
+                >
+                  {" "}
+                  {postState.profilePosts.length === 0 ? (
+                    <span style={{ fontWeight: "500", fontSize: "18px" }}>
+                      No Posts
+                    </span>
+                  ) : (
+                    <div className="thumbnail-collection">
+                      {postState.profilePosts.map((post) => {
+                        return <ModalDetail {...post} />;
+                      })}
+                    </div>
+                  )}
+                </div>
               ) : (
-                <div className="thumbnail-collection">
-                  {postState.bookmark.map((post) => {
-                    return <ModalDetail {...post} />;
-                  })}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "20px",
+                  }}
+                >
+                  {" "}
+                  {postState.bookmark.length === 0 ? (
+                    <span style={{ fontWeight: "500", fontSize: "18px" }}>
+                      No bookmarks
+                    </span>
+                  ) : (
+                    <div className="thumbnail-collection">
+                      {postState.bookmark.map((post) => {
+                        return <ModalDetail {...post} />;
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

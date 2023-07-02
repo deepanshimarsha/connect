@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ExplorePostCard from "../Posts/ExplorePostCard";
 import "./modal-detail.css";
@@ -23,8 +23,12 @@ export default function ModalDetail(post) {
     postState,
     removeBookmark,
     addToBookmark,
+    getExplorePosts,
   } = usePostContext();
-  const { content, img, likes, username, _id } = post;
+  const updatedPost = postState.explorePosts.find(
+    ({ _id }) => _id === post._id
+  );
+  const { likes, username, _id } = updatedPost;
   const user = userState.allUsers.find((user) => user.username === username);
 
   function handleShow() {
@@ -67,10 +71,13 @@ export default function ModalDetail(post) {
       setCommentInput("");
     }
   };
+  useEffect(() => {
+    getExplorePosts();
+  }, []);
   return (
     <>
       <div onClick={handleShow}>
-        <ExplorePostCard {...post} />
+        <ExplorePostCard {...updatedPost} />
       </div>
 
       <Modal
@@ -81,10 +88,10 @@ export default function ModalDetail(post) {
         dialogClassName="modal-20w"
       >
         <div className="post-image">
-          <img src={post.img} alt="post-cover" className="post-cover" />
+          <img src={updatedPost.img} alt="post-cover" className="post-cover" />
         </div>
         <div className="not-show">
-          <PostCard {...post} />
+          <PostCard {...updatedPost} />
         </div>
         <div className="post-detail">
           <Modal.Header>
@@ -131,7 +138,7 @@ export default function ModalDetail(post) {
           </Modal.Header>
           <Modal.Body>
             <Comment
-              post={post}
+              post={updatedPost}
               edit={edit}
               setEdit={setEdit}
               commentList={commentList}

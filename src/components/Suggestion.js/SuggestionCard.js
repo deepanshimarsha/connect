@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
 import "./suggestion-card.css";
 import { useUserContext } from "../../context/userContext";
-import { usePostContext } from "../../context/postContext";
+import { useAuthContext } from "../../context/authContext";
 export default function SuggestionCard(user) {
   const { getUser } = useUserContext();
+  const { logoutHandler, authDispatch } = useAuthContext();
   const { followAnotherUser, userState, unfollowAnotherUser } =
     useUserContext();
-  const { username, firstName, lastName, img, _id, notShow } = user;
+  const { username, firstName, lastName, img, _id } = user;
   const followingUsername = userState.currentUser.following
     ? userState.currentUser.following.map(({ username }) => username)
     : [];
@@ -56,6 +57,17 @@ export default function SuggestionCard(user) {
           </div>
         </div>
         <div className="action-btn">
+          {localStorage.getItem("username") === username && (
+            <button
+              type="button"
+              onClick={() => {
+                logoutHandler();
+                authDispatch({ type: "SET_LOGIN_CRED", case: "LOGOUT" });
+              }}
+            >
+              <span className="action">Logout</span>
+            </button>
+          )}
           {localStorage.getItem("username") !== username && (
             <button type="button" onClick={() => handleFollow(user)}>
               <span className="action">

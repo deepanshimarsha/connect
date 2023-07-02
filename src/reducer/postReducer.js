@@ -23,7 +23,7 @@ export const postReducer = (state, action) => {
       if (action.field === "IMAGE") {
         return {
           ...state,
-          createPost: { ...state.createPost, image: action.data },
+          createPost: { ...state.createPost, image: action.data, comments: [] },
         };
       }
       if (action.field === "VIDEO") {
@@ -71,10 +71,12 @@ export const postReducer = (state, action) => {
         newPost: { ...action.post, comments: [] },
       };
     }
-
-    // case "SET_SORT": {
-    //   return { ...state, sort: action.value };
-    // }
+    case "SET_IS_LOADING": {
+      return {
+        ...state,
+        isLoading: action.bool,
+      };
+    }
     case "SORT_EXPLORE_POSTS": {
       let sortedPosts = state.explorePosts.slice();
       if (action.sort === "latest") {

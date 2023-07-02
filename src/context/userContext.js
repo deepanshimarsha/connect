@@ -24,6 +24,7 @@ const UserContextProvider = ({ children }) => {
       const userId = localStorage.getItem("userId");
       const response = await fetch(`/api/users/${userId}`);
       const jsonData = await response.json();
+
       if (response.status === 200) {
         userDispatch({ type: "SET_CURRENT_USER", user: jsonData.user });
       }
@@ -60,7 +61,7 @@ const UserContextProvider = ({ children }) => {
       const jsonData = await response.json();
 
       if (response.status === 200) {
-        const { user, followUser } = jsonData;
+        const { user } = jsonData;
         userDispatch({ type: "SET_CURRENT_USER", user: user });
       }
     } catch (e) {
@@ -82,7 +83,6 @@ const UserContextProvider = ({ children }) => {
       });
       const jsonData = await response.json();
       userDispatch({ type: "SET_CURRENT_USER", user: jsonData.user });
-      console.log(jsonData);
     } catch (e) {
       console.error(e);
     }
@@ -92,7 +92,7 @@ const UserContextProvider = ({ children }) => {
     try {
       const response = await fetch(`/api/users/${userId}`);
       const jsonData = await response.json();
-      console.log("res", jsonData);
+
       userDispatch({ type: "SET_USER", user: jsonData.user });
     } catch (e) {
       console.error(e);

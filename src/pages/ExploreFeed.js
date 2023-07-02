@@ -24,39 +24,6 @@ export default function ExloreFeed() {
             {postState.explorePosts.map((post) => {
               return <ModalDetail {...post} />;
             })}
-            {/* <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail />
-            <ModalDetail /> */}
-            {/* <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard />
-            <ExplorePostCard /> */}
           </div>
         </div>
       </div>

@@ -18,42 +18,49 @@ const AuthContextProvider = ({ children }) => {
     signupCred: {},
     loginError: "",
     signupError: "",
+    isLoading: false,
   };
 
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
 
   const navigate = useNavigate();
-  const { getCurrentUser } = useUserContext();
+  const { getCurrentUser, updateUser, userDispatch, userState } =
+    useUserContext();
 
   //signup
   const signupHandler = async () => {
     try {
+      authDispatch({ type: "SET_IS_LOADING", value: true });
       localStorage.clear();
-      const requestData = {
+      let requestData = {
         email: authState.signupCred.email,
         name: authState.signupCred.name,
         username: authState.signupCred.username,
         password: authState.signupCred.password,
+        img: "https://img.myloview.com/posters/businessman-icon-image-male-avatar-profile-vector-with-glasses-and-beard-hairstyle-400-228654859.jpg",
       };
 
       const responseData = await fetch("/api/auth/signup", {
         method: "POST",
         body: JSON.stringify(requestData),
       });
-      // console.log(await responseData.json());
+
       if (responseData.status === 201) {
         const { encodedToken, createdUser } = await responseData.json();
-        // console.log(encodedToken);
+
         localStorage.setItem("token", encodedToken);
         localStorage.setItem("userId", createdUser._id);
         localStorage.setItem("username", createdUser.username);
         localStorage.setItem("mode", "signup");
         authDispatch({ type: "LOGIN" });
-        // userDispatch({ type: "SET_NEW_USER", newUser: createdUser });
+
         authDispatch({
           type: "SET_SIGNUP_ERROR",
           signupError: "",
         });
+
+        requestData = { ...requestData, following: [], followers: [] };
+        userDispatch({ type: "SET_CURRENT_USER", user: requestData });
         getCurrentUser();
         navigate("/");
       }
@@ -66,6 +73,8 @@ const AuthContextProvider = ({ children }) => {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      authDispatch({ type: "SET_IS_LOADING", value: false });
     }
   };
 
@@ -73,7 +82,7 @@ const AuthContextProvider = ({ children }) => {
   const loginHandler = async () => {
     try {
       localStorage.clear();
-      const requestData = {
+      let requestData = {
         username: authState.loginCred.username,
         password: authState.loginCred.password,
       };
@@ -98,6 +107,8 @@ const AuthContextProvider = ({ children }) => {
           type: "SET_LOGIN_ERROR",
           loginError: "",
         });
+        requestData = { ...requestData, following: [], followers: [] };
+        userDispatch({ type: "SET_CURRENT_USER", user: requestData });
         getCurrentUser();
 
         navigate("/");

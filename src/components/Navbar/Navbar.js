@@ -263,63 +263,21 @@ export default function Navbar() {
       </ul>
       <div className="dropdown border-top nav-item">
         <NavLink
-          to="/more"
-          className="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle"
+          className="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none"
           id="dropdownUser3"
-          data-bs-toggle="dropdown"
           aria-expanded="false"
+          onClick={() => {
+            logoutHandler();
+            authDispatch({ type: "SET_LOGIN_CRED", case: "LOGOUT" });
+          }}
         >
           <div className="nav-icon">
-            <svg
-              aria-label="Settings"
-              class="_ab6-"
-              color="rgb(0, 0, 0)"
-              fill="rgb(0, 0, 0)"
-              height="24"
-              role="img"
-              viewBox="0 0 24 24"
-              width="24"
-              onClick={() => setClickedIconAndHeading("setting")}
-            >
-              <line
-                fill={navState.setting ? "black" : "none"}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                x1="3"
-                x2="21"
-                y1="4"
-                y2="4"
-              ></line>
-              <line
-                fill={navState.setting ? "black" : "none"}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                x1="3"
-                x2="21"
-                y1="12"
-                y2="12"
-              ></line>
-              <line
-                fill={navState.setting ? "black" : "none"}
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                x1="3"
-                x2="21"
-                y1="20"
-                y2="20"
-              ></line>
-            </svg>
+            <i class="fa fa-sign-out" style={{ fontSize: "24px" }}></i>
           </div>
-          <div className="nav-item-heading">More</div>
+          <div className="nav-item-heading">Logout</div>
         </NavLink>
 
-        <ul
+        {/* <ul
           className="dropdown-menu text-small shadow"
           aria-labelledby="dropdownUser3"
         >
@@ -348,7 +306,7 @@ export default function Navbar() {
               Log out
             </NavLink>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

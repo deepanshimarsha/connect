@@ -8,7 +8,7 @@ export default function SearchPopup() {
   const { userState } = useUserContext();
   const [search, setSearch] = useState("");
   return (
-    <>
+    <div className="search-section">
       <div
         className="search-main"
         style={{ display: searchState.showSearchBar ? "block" : "none" }}
@@ -53,6 +53,6 @@ export default function SearchPopup() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

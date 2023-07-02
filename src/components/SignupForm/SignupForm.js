@@ -29,24 +29,17 @@ export default function SignupForm() {
       return;
     }
 
-    // Check if the Email is an Empty string or not.
-
-    // check if the password follows constraints or not.
-
-    // if password length is less than 8 characters, alert invalid form.
-
     if (!password || password.length < 8) {
       setError("Password must contain greater than or equal to 8 characters.");
       return;
     }
 
-    // variable to count upper case characters in the password.
     let countUpperCase = 0;
-    // variable to count lowercase characters in the password.
+
     let countLowerCase = 0;
-    // variable to count digit characters in the password.
+
     let countDigit = 0;
-    // variable to count special characters in the password.
+
     let countSpecialCharacters = 0;
 
     for (let i = 0; i < password.length; i++) {

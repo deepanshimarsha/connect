@@ -7,45 +7,63 @@ import { NavLink } from "react-router-dom";
 import SearchPopup from "../components/SearchPopup/SearchPopup";
 import { usePostContext } from "../context/postContext";
 import { useUserContext } from "../context/userContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FollowersList from "../components/FollowersList.js/FollowersList";
+import { useAuthContext } from "../context/authContext";
 
 export default function UserFeed() {
-  const { postState } = usePostContext();
+  const { authState } = useAuthContext();
+  const { postState, getExplorePosts } = usePostContext();
   const [sort, setSort] = useState("latest");
 
-  const { userState } = useUserContext();
-  console.log(userState.currentUser.following);
-  let userFeed = [
-    ...postState.explorePosts.filter(
-      (post) => post.username === localStorage.getItem("username")
-    ),
-    ...postState.explorePosts.filter((post) => {
-      if (userState.currentUser.following) {
-        return userState.currentUser.following
-          .map(({ username }) => username)
-          .includes(post.username);
-      } else {
-        return false;
-      }
-    }),
-  ];
+  const { userState, getCurrentUser, getAllUsers } = useUserContext();
+  useEffect(() => {
+    getCurrentUser();
+    getAllUsers();
+    getExplorePosts();
+  }, []);
 
-  if (sort === "latest") {
-    userFeed = [...userFeed].sort(
-      (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
-    );
+  if (userState.currentUser === undefined) {
+    return <p>loading...</p>;
   }
-  if (sort === "trending") {
-    userFeed = [...userFeed].sort(
-      (a, b) => b.likes.likeCount - a.likes.likeCount
-    );
-  }
-  if (sort === "oldest") {
-    userFeed = [...userFeed].sort(
-      (a, b) => Date.parse(a.updatedAt) - Date.parse(b.updatedAt)
-    );
-  }
+
+  const getUserFeed = () => {
+    let userFeedPosts = [];
+    if (postState.explorePosts) {
+      userFeedPosts = [
+        ...postState.explorePosts.filter(
+          (post) => post.username === localStorage.getItem("username")
+        ),
+        ...postState.explorePosts.filter((post) => {
+          if (userState.currentUser.following) {
+            return userState.currentUser.following
+              .map(({ username }) => username)
+              .includes(post.username);
+          } else {
+            return false;
+          }
+        }),
+      ];
+    }
+    if (sort === "latest") {
+      userFeedPosts = [...userFeedPosts].sort(
+        (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+      );
+    }
+    if (sort === "trending") {
+      userFeedPosts = [...userFeedPosts].sort(
+        (a, b) => b.likes.likeCount - a.likes.likeCount
+      );
+    }
+    if (sort === "oldest") {
+      userFeedPosts = [...userFeedPosts].sort(
+        (a, b) => Date.parse(a.updatedAt) - Date.parse(b.updatedAt)
+      );
+    }
+    return userFeedPosts;
+  };
+
+  let userFeed = getUserFeed();
 
   const handleClick = (value) => {
     setSort(value);
@@ -124,12 +142,21 @@ export default function UserFeed() {
                     </div>
                   </div>
                 </div>
+
                 <div className="userfeed-post-container">
-                  {!userFeed.length ? (
-                    <div style={{ textAlign: "center" }}>
+                  {userFeed === [] ? (
+                    <div
+                      style={{
+                        textAlign: "center",
+                        display: "flex",
+                        height: "30vh",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <h5>
-                        {/* No Posts to Display! Start Following and Liking your
-                      Friends Post to get updates on your Feed */}
+                        No Posts to Display! Start Following and Liking your
+                        Friends Post to get updates on your Feed
                       </h5>
                     </div>
                   ) : (

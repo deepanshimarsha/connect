@@ -18,6 +18,7 @@ const userReducer = (state, action) => {
         currentUser: action.user,
       };
     }
+
     case "SET_USER": {
       return {
         ...state,
@@ -36,6 +37,7 @@ const userReducer = (state, action) => {
         userFollower: action.data,
       };
     }
+
     case "SET_EDITED_PROFILE_INPUT": {
       if (action.field === "BIO") {
         return {

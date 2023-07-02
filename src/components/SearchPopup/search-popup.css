@@ -157,6 +157,9 @@
     .search-main{
         left: 90px;
     }
+    .search-section{
+        display: flex;
+    }
     
   }
   @media (min-width: 200px) and (max-width: 749px){
@@ -170,7 +173,11 @@
     .search-body{
         height: unset;
     }
-   
+    .search-section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .result-container{
         height: 80%;
         

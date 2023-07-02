@@ -92,6 +92,9 @@ const authReducer = (state, action) => {
     case "SET_SIGNUP_ERROR": {
       return { ...state, signupError: action.signupError };
     }
+    case "SET_IS_LOADING": {
+      return { ...state, isLoading: action.value };
+    }
   }
 };
 
