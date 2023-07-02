@@ -26,8 +26,10 @@
 }
 @media (min-width: 200px) and (max-width: 749px) {
   .explore-main{
-    width: calc(100% - 1px);
+    /* width: calc(100% - 1px); */
+    width: 100%;
   }
+ 
   .explore-content{
     padding: 0px;
     margin: 0px;

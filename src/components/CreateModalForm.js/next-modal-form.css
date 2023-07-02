@@ -70,3 +70,11 @@ aside.EmojiPickerReact.epr-header .epr-header-overlay{
 .final-form-body{
     
 }
+@media (min-width: 200px) and (max-width: 749px) {
+    .picker-float{
+        top:450px;
+        left: 20px;
+        right:0px
+
+    }
+}

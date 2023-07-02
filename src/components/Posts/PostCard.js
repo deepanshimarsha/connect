@@ -10,7 +10,7 @@ export default function PostCard(post) {
   const [viewAllComments, showAllComments] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const [commentInput, setCommentInput] = useState("");
-  const [commentList, setCommentList] = useState([]);
+  const [commentList, setCommentList] = useState(post.comments);
 
   const {
     likePost,
@@ -221,7 +221,10 @@ export default function PostCard(post) {
                 id="likeCommShareBtnArea"
                 style={{ padding: "18px 16px 14px 16px" }}
               >
-                <div style={{ marginBottom: "12px" }}>
+                <div
+                  className="post-card-icons-mobile-view"
+                  style={{ marginBottom: "12px" }}
+                >
                   <span
                     onClick={handlePostLike}
                     id="likeBtnArea"

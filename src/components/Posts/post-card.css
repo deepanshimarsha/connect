@@ -241,3 +241,8 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
 .content-input input{
     width: 70%;
 }
+@media (min-width: 200px) and (max-width: 749px) {
+    .post-card-icons-mobile-view{
+        display: flex;
+    }
+}

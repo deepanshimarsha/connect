@@ -89,4 +89,10 @@
     .avatar-collection{
         grid-template-columns: 1fr 1fr 1fr ;
       }
+
   }
+  @media (min-width: 200px) and (max-width: 749px) {
+    .avatar-collection{
+      grid-template-columns: 1fr 1fr;
+    }
+}

@@ -351,9 +351,82 @@ margin-right: 40px;
 .portfolio a{
     color: rgb(13,110,253);
 }
+
+.profile2{
+    display: none;
+}
 @media (min-width: 750px) and (max-width: 1260px) {
     .profile{
         margin-right: 0px !important;
         margin-left: 0px !important;
     }
+    
+}
+@media (min-width: 200px) and (max-width: 749px) {
+    .user-avatar{
+        height: 90px;
+        width: 90px;
+    }
+    .profile{
+        margin: 0px !important;
+    }
+    .profile-picture{
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+    .profile{
+        display: none;
+    }
+    .profile2{
+        display: block;
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+    .profile2-header{
+        display: flex;
+        flex: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 20px;
+    }
+    .profile-desc{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+    .profile-desc a{
+        color: black;
+        
+    }
+    .profile-desc a {
+        align-self: flex-start;
+       
+    }
+    .profile-desc a h2{
+        align-self: flex-start;
+        font-weight: 400;
+    }
+    .edit-btn{
+        width: 100%;
+        margin: 0px;
+        width: 15rem;
+    }
+    .section-footer{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 5px;
+     
+    }
+    .profile-followers{
+        width: 100%;
+    }
+
+    
 }

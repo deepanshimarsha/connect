@@ -81,6 +81,56 @@ export default function UserFeed() {
           <TopNav />
         </div>
         <div className="main">
+          <div className="suggestions-mob-view">
+            <div className="heading">
+              <div className="heading-container">
+                <span>Suggested for you</span>
+              </div>
+              <NavLink className="see-all-link">
+                <FollowersList
+                  allOtherUsers={userState.allUsers
+                    .filter(
+                      (user) =>
+                        !userState.currentUser.following
+                          .map(({ username }) => username)
+                          .includes(user.username)
+                    )
+                    .filter(
+                      ({ username }) =>
+                        username !== localStorage.getItem("username")
+                    )}
+                />
+              </NavLink>
+            </div>
+            <div className="suggestions">
+              {userState.allUsers
+                .filter(
+                  (user) =>
+                    !userState.currentUser.following
+                      .map(({ username }) => username)
+                      .includes(user.username)
+                )
+                .filter(
+                  ({ username }) =>
+                    username !== localStorage.getItem("username")
+                )
+                .map((user, idx) => {
+                  if (idx <= 1) {
+                    return (
+                      <div
+                        style={{
+                          boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
+                        }}
+                      >
+                        <SuggestionCard {...user} />
+                      </div>
+                    );
+                  } else {
+                    return <div></div>;
+                  }
+                })}
+            </div>
+          </div>
           <SearchPopup />
           <div className="home-container">
             <div className="user-feed">

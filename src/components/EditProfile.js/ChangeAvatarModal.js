@@ -1,5 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import "../CreateModalForm.js/create-modal-form.css";
+import "./edit-profile.css";
 import { useState } from "react";
 import { useUserContext } from "../../context/userContext";
 

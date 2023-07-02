@@ -42,6 +42,66 @@ export default function UserProfile() {
         </div>
         <div className="explore-content margin-top">
           <SearchPopup />
+          <div className="profile2">
+            <div className="profile2-header">
+              <div className="profile-picture">
+                <span className="user-avatar">
+                  <img
+                    className="user-image"
+                    src={userState.currentUser.img}
+                    alt="profile-pic"
+                  />
+                </span>
+              </div>
+              <div className="profile-desc">
+                <NavLink>
+                  <h2>{userState.currentUser.username}</h2>
+                </NavLink>
+                <EditProfile />
+              </div>
+            </div>
+            <div className="profile2-footer">
+              <div className="section-footer">
+                <div>
+                  <span style={{ fontWeight: "600" }}>
+                    {userState.currentUser.firstName}{" "}
+                    {userState.currentUser.lastName}
+                  </span>
+                </div>
+
+                <div>
+                  {" "}
+                  <span
+                    style={{
+                      color: "navy",
+                      fontWeight: "400",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {userState.currentUser.bio}
+                  </span>
+                </div>
+                <div className="portfolio">
+                  <NavLink to={userState.currentUser.portfolio}>
+                    {userState.currentUser.portfolio}
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+            <div className="profile-followers">
+              <ul className="sub-header">
+                <li className="list-item">
+                  <span>{postState.profilePosts.length} posts</span>
+                </li>
+                <li className="list-item">
+                  <FollowersList followers={followers} />
+                </li>
+                <li className="list-item">
+                  <FollowersList following={following} />
+                </li>
+              </ul>
+            </div>
+          </div>
           <div className="profile" style={{ marginLeft: "120px" }}>
             <div className="profile-picture">
               <span className="user-avatar">

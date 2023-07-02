@@ -39,3 +39,8 @@
 .modal-body{
     overflow-y: scroll;
 }
+@media (min-width: 200px) and (max-width: 749px) {
+    .form-container{
+        width: 100%;
+    }
+}
