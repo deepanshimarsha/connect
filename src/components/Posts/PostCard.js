@@ -11,7 +11,7 @@ export default function PostCard(post) {
   const [viewAllComments, showAllComments] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const [commentInput, setCommentInput] = useState("");
-  const [commentList, setCommentList] = useState(post.comments);
+  // const [commentList, setCommentList] = useState(post.comments);
 
   const {
     likePost,
@@ -94,13 +94,13 @@ export default function PostCard(post) {
         postId: _id,
         comment: e.target.value,
       });
-      setCommentList(() => [
-        ...commentList,
-        {
-          username: localStorage.getItem("username"),
-          comment: commentInput,
-        },
-      ]);
+      // setCommentList(() => [
+      //   ...commentList,
+      //   {
+      //     username: localStorage.getItem("username"),
+      //     comment: commentInput,
+      //   },
+      // ]);
 
       setCommentInput("");
     }
@@ -374,24 +374,27 @@ export default function PostCard(post) {
                 </div>{" "}
                 <div id="commentCountTextArea">
                   {" "}
-                  {comments && (
+                  {comments && comments.length >= 2 && (
                     <div
                       onClick={() => showAllComments(!viewAllComments)}
                       style={{ cursor: "pointer" }}
                     >
                       <span>
                         {viewAllComments
-                          ? "Hide"
-                          : `View All ${commentList.length}`}
+                          ? comments.length > 2
+                            ? "Hide comments"
+                            : ""
+                          : comments.length > 2
+                          ? `View All ${comments.length} comments`
+                          : ""}
                       </span>{" "}
                       {/* <span id="countComments">{comments.length}</span>{" "} */}
-                      <span>comments</span>{" "}
                     </div>
                   )}
                 </div>{" "}
-                {commentList && !viewAllComments && (
+                {comments && !viewAllComments && (
                   <>
-                    {commentList.map((comment, idx) => {
+                    {comments.map((comment, idx) => {
                       if (idx <= 1) {
                         return (
                           <div
@@ -434,9 +437,9 @@ export default function PostCard(post) {
                     })}
                   </>
                 )}
-                {commentList && viewAllComments && (
+                {comments && viewAllComments && (
                   <>
-                    {commentList.map((comment) => {
+                    {comments.map((comment) => {
                       return (
                         <div
                           class="columns is-mobile comment-area"

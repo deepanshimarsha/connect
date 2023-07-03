@@ -125,8 +125,10 @@ const PostContextProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const jsonData = await response.json();
+      postDispatch({ type: "ADD_NEW_POST", post: postState.createPost });
       getProfilePost(localStorage.getItem("username"));
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
+      getExplorePosts();
     } catch (e) {
       console.error(e);
     }

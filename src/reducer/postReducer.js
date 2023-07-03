@@ -58,6 +58,13 @@ export const postReducer = (state, action) => {
       }
     }
     // eslint-disable-next-line
+    case "ADD_NEW_POST": {
+      return {
+        ...state,
+        explorePosts: [...state.explorePosts, action.post],
+      };
+    }
+    // eslint-disable-next-line
     case "SHOW_CREATE_MODAL": {
       if (action.mode === "SHOW") {
         return { ...state, showCreateModal: true };
