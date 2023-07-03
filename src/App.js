@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     getCurrentUser();
     logoutSignedInUserOnRefresh();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="App">

@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { authReducer } from "../reducer/authReducer";
@@ -24,8 +24,7 @@ const AuthContextProvider = ({ children }) => {
   const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
 
   const navigate = useNavigate();
-  const { getCurrentUser, updateUser, userDispatch, userState } =
-    useUserContext();
+  const { getCurrentUser, userDispatch } = useUserContext();
 
   //signup
   const signupHandler = async () => {

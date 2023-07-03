@@ -129,7 +129,10 @@ export default function CreateModalForm() {
               <>
                 <div className="select-file-container">
                   <div className="illustration">
-                    <img src="https://img.freepik.com/premium-vector/photo-picture-online-album-digital-gallery-watching-website_212005-272.jpg?w=996" />
+                    <img
+                      src="https://img.freepik.com/premium-vector/photo-picture-online-album-digital-gallery-watching-website_212005-272.jpg?w=996"
+                      alt="profile"
+                    />
                   </div>
                   <div>
                     <span>Drag photos and videos here</span>

@@ -12,5 +12,7 @@ export const searchReducer = (state, action) => {
         showSearchBar: false,
       };
     }
+    default:
+      throw new Error("Unknown action type");
   }
 };

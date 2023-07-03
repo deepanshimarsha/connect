@@ -67,7 +67,7 @@ export default function NextModalForm({ image, video }) {
                       className="user-link"
                       style={{ height: "44px", width: "44px" }}
                     >
-                      <img src="https://github.com/mdo.png" />
+                      <img src="https://github.com/mdo.png" alt="profile" />
                     </NavLink>
                   </div>
                   <div className="profile-name">

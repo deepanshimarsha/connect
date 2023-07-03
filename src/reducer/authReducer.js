@@ -1,3 +1,4 @@
+/*eslint no-fallthrough: "error"*/
 const authReducer = (state, action) => {
   switch (action.type) {
     case "SET_MODE": {
@@ -54,6 +55,7 @@ const authReducer = (state, action) => {
         };
       }
     }
+    // eslint-disable-next-line
     case "SET_SIGNUP_CRED": {
       if (action.field === "EMAIL") {
         return {
@@ -82,7 +84,7 @@ const authReducer = (state, action) => {
         };
       }
     }
-
+    // eslint-disable-next-line
     case "SET_TOKEN": {
       return { ...state, token: action.token };
     }
@@ -95,6 +97,8 @@ const authReducer = (state, action) => {
     case "SET_IS_LOADING": {
       return { ...state, isLoading: action.value };
     }
+    default:
+      throw new Error("Unknown action type");
   }
 };
 

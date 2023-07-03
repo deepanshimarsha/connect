@@ -37,7 +37,7 @@ export default function UserProfile() {
     getProfilePost(localStorage.getItem("username"));
 
     // getProfilePost();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   if (!postState.profilePosts) {
     return <h1>No Posts</h1>;
   }

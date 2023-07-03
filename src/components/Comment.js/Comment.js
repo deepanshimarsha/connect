@@ -5,7 +5,7 @@ import { usePostContext } from "../../context/postContext";
 export default function Comment({ post, edit, setEdit, commentList }) {
   const { userState, getAllUsers } = useUserContext();
   const { editPost, postState, postDispatch } = usePostContext();
-  const { comments, username, likes, content, _id } = post;
+  const { comments, username, content, _id } = post;
 
   const getAuthorImg = (username) => {
     const author = userState.allUsers.find(
@@ -29,7 +29,7 @@ export default function Comment({ post, edit, setEdit, commentList }) {
   useEffect(() => {
     getAllUsers();
     postDispatch({ type: "EDIT_POST", data: content });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (comments === undefined) {
     return <div></div>;
@@ -72,7 +72,7 @@ export default function Comment({ post, edit, setEdit, commentList }) {
           return (
             <div id="postText">
               <div className="profile-photo">
-                <img src={getAuthorImg(username)} />
+                <img src={getAuthorImg(username)} alt="profile" />
               </div>
               <div className="post-content">
                 <div>

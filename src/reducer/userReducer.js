@@ -58,6 +58,9 @@ const userReducer = (state, action) => {
         };
       }
     }
+    // eslint-disable-next-line
+    default:
+      throw new Error("Unknown action type");
   }
 };
 

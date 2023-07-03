@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import ModalHeader from "react-bootstrap/esm/ModalHeader";
 import "./followers-list.css";
 import SuggestionCard from "../Suggestion.js/SuggestionCard";
-import Comment from "../Comment.js/Comment";
 
 export default function FollowersList({
   followers,

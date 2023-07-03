@@ -22,7 +22,7 @@ export default function UserFeed() {
     getAllUsers();
     getExplorePosts();
     getProfilePost(localStorage.getItem("username"));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (userState.currentUser === undefined) {
     return <p>loading...</p>;

@@ -57,6 +57,7 @@ export const postReducer = (state, action) => {
         };
       }
     }
+    // eslint-disable-next-line
     case "SHOW_CREATE_MODAL": {
       if (action.mode === "SHOW") {
         return { ...state, showCreateModal: true };
@@ -65,6 +66,7 @@ export const postReducer = (state, action) => {
         return { ...state, showCreateModal: false };
       }
     }
+    // eslint-disable-next-line
     case "ADD_NEW_POST": {
       return {
         ...state,
@@ -77,6 +79,7 @@ export const postReducer = (state, action) => {
         isLoading: action.bool,
       };
     }
+    // eslint-disable-next-line
     case "SORT_EXPLORE_POSTS": {
       let sortedPosts = state.explorePosts.slice();
       if (action.sort === "latest") {
@@ -84,17 +87,21 @@ export const postReducer = (state, action) => {
           (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
         );
       }
+      // eslint-disable-next-line
       if (action.sort === "oldest") {
         sortedPosts = [...sortedPosts].sort(
           (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
         );
       }
+      // eslint-disable-next-line
       if (action.sort === "trending") {
+        // eslint-disable-next-line
         sortedPosts = [...sortedPosts].sort(
           (a, b) => b.likes.likeCount - a.likes.likeCount
         );
       }
     }
+    // eslint-disable-next-line
     case "EDIT_POST": {
       return {
         ...state,
@@ -223,5 +230,7 @@ export const postReducer = (state, action) => {
         }),
       };
     }
+    default:
+      throw new Error("Unknown action type");
   }
 };

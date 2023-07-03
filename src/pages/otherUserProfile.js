@@ -29,7 +29,7 @@ export default function OtherUserProfile() {
   };
   useEffect(() => {
     getProfilePost(username);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!postState.otherUserprofile) {
     return <h1>No Posts</h1>;
