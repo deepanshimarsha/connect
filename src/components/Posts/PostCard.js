@@ -11,7 +11,7 @@ export default function PostCard(post) {
   const [viewAllComments, showAllComments] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const [commentInput, setCommentInput] = useState("");
-  // const [commentList, setCommentList] = useState(post.comments);
+  // const [commentList, setCommentList] = useState(comments);
 
   const {
     likePost,
@@ -108,8 +108,6 @@ export default function PostCard(post) {
 
   useEffect(() => {
     handleRemoveEditPost();
-
-    // setCommentList(post.comments);
   });
   useEffect(() => {
     const handleScroll = (event) => {

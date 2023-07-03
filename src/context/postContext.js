@@ -3,6 +3,7 @@ import { postReducer } from "../reducer/postReducer";
 import { useUserContext } from "./userContext";
 
 const PostContext = createContext(null);
+
 const PostContextProvider = ({ children }) => {
   const initialPostState = {
     explorePosts: [],
