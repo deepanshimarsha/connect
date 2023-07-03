@@ -8,6 +8,7 @@ import { usePostContext } from "../context/postContext";
 import { useUserContext } from "../context/userContext";
 import { useEffect, useState } from "react";
 import FollowersList from "../components/FollowersList.js/FollowersList";
+import EditProfile from "../components/EditProfile.js/EditProfile";
 
 export default function OtherUserProfile() {
   const { postState, getProfilePost } = usePostContext();
@@ -49,7 +50,82 @@ export default function OtherUserProfile() {
           <TopNav />
         </div>
         <div className="explore-content margin-top">
-          <SearchPopup />
+          <div className="profile2">
+            <div className="profile2-header">
+              <div className="profile-picture">
+                <span className="user-avatar">
+                  <img
+                    className="user-image"
+                    src={userState.user.img}
+                    alt="profile-pic"
+                  />
+                </span>
+              </div>
+              <div className="profile-desc">
+                <div style={{ display: "flex" }}>
+                  <NavLink>
+                    <h2>{userState.user.username}</h2>
+                  </NavLink>
+                  <div className="action-btn">
+                    {localStorage.getItem("username") !== username && (
+                      <button
+                        type="button"
+                        onClick={() => handleFollow(userState.user)}
+                      >
+                        <span className="action">
+                          {followingUsername.includes(username)
+                            ? "Following"
+                            : "Follow"}
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                <EditProfile />
+              </div>
+            </div>
+            <div className="profile2-footer">
+              <div className="section-footer">
+                <div>
+                  <span style={{ fontWeight: "600" }}>
+                    {userState.user.firstName} {userState.user.lastName}
+                  </span>
+                </div>
+
+                <div>
+                  {" "}
+                  <span
+                    style={{
+                      color: "navy",
+                      fontWeight: "400",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {userState.user.bio}
+                  </span>
+                </div>
+                <div className="portfolio">
+                  <NavLink to={userState.user.portfolio}>
+                    {userState.user.portfolio}
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+            <div className="profile-followers">
+              <ul className="sub-header">
+                <li className="list-item">
+                  <span>{postState.profilePosts.length} posts</span>
+                </li>
+                <li className="list-item">
+                  <FollowersList followers={followers} />
+                </li>
+                <li className="list-item">
+                  <FollowersList following={following} />
+                </li>
+              </ul>
+            </div>
+          </div>
           <div className="profile" style={{ marginLeft: "120px" }}>
             <div className="profile-picture">
               <span className="user-avatar">
@@ -156,6 +232,7 @@ export default function OtherUserProfile() {
             )}
           </div>
         </div>
+        <SearchPopup />
       </div>
     </div>
   );

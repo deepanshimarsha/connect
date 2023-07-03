@@ -355,6 +355,7 @@ margin-right: 40px;
 .profile2{
     display: none;
 }
+
 @media (min-width: 750px) and (max-width: 1260px) {
     .profile{
         margin-right: 0px !important;

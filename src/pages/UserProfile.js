@@ -55,8 +55,8 @@ export default function UserProfile() {
         <div className="top-nav">
           <TopNav />
         </div>
+
         <div className="explore-content margin-top">
-          <SearchPopup />
           <div className="profile2">
             <div className="profile2-header">
               <div className="profile-picture">
@@ -171,6 +171,7 @@ export default function UserProfile() {
               </div>
             </section>
           </div>
+
           <div className="margin-bottom">
             <hr></hr>
           </div>
@@ -260,6 +261,7 @@ export default function UserProfile() {
             </div>
           )}
         </div>
+        <SearchPopup />
       </div>
     </div>
   );
