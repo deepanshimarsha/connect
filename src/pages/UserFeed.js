@@ -12,8 +12,8 @@ import FollowersList from "../components/FollowersList.js/FollowersList";
 import { useAuthContext } from "../context/authContext";
 
 export default function UserFeed() {
-  const { authState } = useAuthContext();
-  const { postState, getExplorePosts } = usePostContext();
+  const { logoutHandler, authDispatch } = useAuthContext();
+  const { postState, getExplorePosts, getProfilePost } = usePostContext();
   const [sort, setSort] = useState("latest");
 
   const { userState, getCurrentUser, getAllUsers } = useUserContext();
@@ -21,6 +21,7 @@ export default function UserFeed() {
     getCurrentUser();
     getAllUsers();
     getExplorePosts();
+    getProfilePost(localStorage.getItem("username"));
   }, []);
 
   if (userState.currentUser === undefined) {
@@ -120,6 +121,8 @@ export default function UserFeed() {
                       <div
                         style={{
                           boxShadow: "rgba(0, 0, 0, 0.1) 0px 4px 12px",
+                          padding: "5px",
+                          margin: "2px",
                         }}
                       >
                         <SuggestionCard {...user} />
@@ -228,6 +231,20 @@ export default function UserFeed() {
                     .map((user) => {
                       return <SuggestionCard {...user} />;
                     })}
+                  <div className="action-btn">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        logoutHandler();
+                        authDispatch({
+                          type: "SET_LOGIN_CRED",
+                          case: "LOGOUT",
+                        });
+                      }}
+                    >
+                      <span className="action">Logout</span>
+                    </button>
+                  </div>
                 </div>
                 <div className="suggestion-list">
                   <div className="users-list">

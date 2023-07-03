@@ -47,7 +47,7 @@ export default function FollowersList({ followers, following, allOtherUsers }) {
             Small Modal
           </Modal.Title>
   </Modal.Header>  */}
-          <Modal.Body>
+          <Modal.Body style={{ overflowY: "visible" }}>
             {allOtherUsers && (
               <div>
                 {allOtherUsers.map((user) => {

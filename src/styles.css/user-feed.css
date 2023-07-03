@@ -303,6 +303,11 @@
   .suggestions-mob-view{
     display: none;
   }
+  .suggestion-header{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 6%;
+  }
 
 @media (min-width: 200px) and (max-width: 749px) {
     .suggestion-container{

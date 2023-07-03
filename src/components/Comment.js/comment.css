@@ -17,10 +17,11 @@
 }
 .post-content{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    
+    width: 100%;
 }
+
 .profile-photo{
     min-width: 10%;
 }
@@ -45,6 +46,8 @@
    border-right: grey;
     border-top: grey;
     padding: 5px;
+    
+    
     
 }
 .edit-caption:focus{

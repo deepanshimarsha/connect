@@ -41,6 +41,9 @@
 .top-nav{
   display: none;
 }
+.display-mob{
+  display: none;
+}
   /* Extra small devices (phones, 600px and down) */
   @media (min-width: 750px) and (max-width: 1260px) {
   
@@ -73,7 +76,7 @@
         width: 100%;
         display: flex !important; 
         flex-direction: row !important;
-        
+        justify-content: space-evenly;
         align-items: center;
         z-index: 1;
         
@@ -109,5 +112,11 @@
     }
     .brand-link {
         display: none !important;
+    }
+    .display-pc{
+      display: none;
+    }
+    .display-mob{
+      display: block;
     }
   }

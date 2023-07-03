@@ -101,5 +101,78 @@ export const postReducer = (state, action) => {
         editPost: { ...state.editPost, caption: action.data },
       };
     }
+    case "LIKE_PROFILE_POST": {
+      return {
+        ...state,
+        explorePosts: state.explorePosts.map((post) => {
+          if (post._id === action.postId) {
+            return {
+              ...post,
+              likes: { ...post.likes, likeCount: post.likes.likeCount + 1 },
+            };
+          } else {
+            return post;
+          }
+        }),
+        profilePosts: state.profilePosts.map((post) => {
+          if (post._id === action.postId) {
+            return {
+              ...post,
+              likes: { ...post.likes, likeCount: post.likes.likeCount + 1 },
+            };
+          } else {
+            return post;
+          }
+        }),
+      };
+    }
+    case "DISLIKE_PROFILE_POST": {
+      return {
+        ...state,
+        explorePosts: state.explorePosts.map((post) => {
+          if (post._id === action.postId) {
+            return {
+              ...post,
+              likes: { ...post.likes, likeCount: post.likes.likeCount - 1 },
+            };
+          } else {
+            return post;
+          }
+        }),
+        profilePosts: state.profilePosts.map((post) => {
+          if (post._id === action.postId) {
+            return {
+              ...post,
+              likes: { ...post.likes, likeCount: post.likes.likeCount - 1 },
+            };
+          } else {
+            return post;
+          }
+        }),
+      };
+    }
+
+    case "DELETE_POST": {
+      return {
+        ...state,
+        profilePosts: state.profilePosts.filter(
+          ({ _id }) => _id !== action._id
+        ),
+      };
+    }
+    case "ADD_LIKED_POST": {
+      return {
+        ...state,
+        likedPosts: [...state.likedPosts, action.post],
+      };
+    }
+    case "REMOVE_LIKED_POST": {
+      return {
+        ...state,
+        likedPosts: state.likedPosts.filter(
+          (post) => post._id !== action.post._id
+        ),
+      };
+    }
   }
 };

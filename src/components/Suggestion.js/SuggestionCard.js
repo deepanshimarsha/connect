@@ -57,7 +57,7 @@ export default function SuggestionCard(user) {
           </div>
         </div>
         <div className="action-btn">
-          {localStorage.getItem("username") === username && (
+          {/* {localStorage.getItem("username") === username && (
             <button
               type="button"
               onClick={() => {
@@ -67,7 +67,7 @@ export default function SuggestionCard(user) {
             >
               <span className="action">Logout</span>
             </button>
-          )}
+          )} */}
           {localStorage.getItem("username") !== username && (
             <button type="button" onClick={() => handleFollow(user)}>
               <span className="action">

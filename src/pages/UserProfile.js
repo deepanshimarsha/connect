@@ -19,9 +19,9 @@ export default function UserProfile() {
   const following = userState.currentUser.following;
 
   useEffect(() => {
-    getProfilePost(localStorage.getItem("username"));
     getBookmarkPosts();
     getExplorePosts();
+    getProfilePost();
   }, []);
   if (!postState.profilePosts) {
     return <h1>No Posts</h1>;

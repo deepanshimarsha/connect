@@ -23,6 +23,7 @@ const PostContextProvider = ({ children }) => {
     sort: "",
     comments: [],
     isLoading: false,
+    likedPosts: [],
   };
 
   const [postState, postDispatch] = useReducer(postReducer, initialPostState);
@@ -88,6 +89,7 @@ const PostContextProvider = ({ children }) => {
         },
       });
       const jsonData = await response.json();
+      postDispatch({ type: "LIKE_PROFILE_POST", postId: some_post._id });
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
     } catch (e) {
       console.error(e);
@@ -103,6 +105,7 @@ const PostContextProvider = ({ children }) => {
         },
       });
       const jsonData = await response.json();
+      postDispatch({ type: "DISLIKE_PROFILE_POST", postId: some_post._id });
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
     } catch (e) {
       console.error(e);
@@ -122,9 +125,8 @@ const PostContextProvider = ({ children }) => {
         body: JSON.stringify(post),
       });
       const jsonData = await response.json();
-
+      getProfilePost(localStorage.getItem("username"));
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
-      getProfilePost();
     } catch (e) {
       console.error(e);
     }
@@ -198,6 +200,7 @@ const PostContextProvider = ({ children }) => {
         },
       });
       const jsonData = await response.json();
+      postDispatch({ type: "DELETE_POST", _id: postId });
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
     } catch (e) {
       console.error(e);
