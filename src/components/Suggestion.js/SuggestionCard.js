@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 import "./suggestion-card.css";
 import { useUserContext } from "../../context/userContext";
-import { useAuthContext } from "../../context/authContext";
+
 export default function SuggestionCard(user) {
   const { getUser } = useUserContext();
-  const { logoutHandler, authDispatch } = useAuthContext();
+
   const { followAnotherUser, userState, unfollowAnotherUser } =
     useUserContext();
   const { username, firstName, lastName, img, _id } = user;
@@ -31,7 +31,7 @@ export default function SuggestionCard(user) {
               className="user-link"
               style={{ height: "44px", width: "44px" }}
             >
-              <img src={img} />
+              <img src={img} alt="profile" />
             </NavLink>
           ) : (
             <NavLink
@@ -42,7 +42,7 @@ export default function SuggestionCard(user) {
               className="user-link"
               style={{ height: "44px", width: "44px" }}
             >
-              <img src={img} />
+              <img src={img} alt="profile" />
             </NavLink>
           )}
         </div>
@@ -57,17 +57,6 @@ export default function SuggestionCard(user) {
           </div>
         </div>
         <div className="action-btn">
-          {/* {localStorage.getItem("username") === username && (
-            <button
-              type="button"
-              onClick={() => {
-                logoutHandler();
-                authDispatch({ type: "SET_LOGIN_CRED", case: "LOGOUT" });
-              }}
-            >
-              <span className="action">Logout</span>
-            </button>
-          )} */}
           {localStorage.getItem("username") !== username && (
             <button type="button" onClick={() => handleFollow(user)}>
               <span className="action">

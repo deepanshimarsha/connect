@@ -4,6 +4,7 @@ import { usePostContext } from "../../context/postContext";
 import { useEffect } from "react";
 
 import { useState } from "react";
+import FollowersList from "../FollowersList.js/FollowersList";
 
 export default function PostCard(post) {
   const { img, content, likes, username, _id, comments } = post;
@@ -22,7 +23,6 @@ export default function PostCard(post) {
     deletePost,
     postDispatch,
     editPost,
-    getExplorePosts,
   } = usePostContext();
 
   const { followAnotherUser, userState, unfollowAnotherUser } =
@@ -90,6 +90,11 @@ export default function PostCard(post) {
   const handleAddComment = (e) => {
     if (e.key === "Enter") {
       showAllComments(true);
+      postDispatch({
+        type: "ADD_COMMENTS",
+        postId: _id,
+        comment: e.target.value,
+      });
       setCommentList(() => [
         ...commentList,
         {

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Modal } from "react-bootstrap";
 import ExplorePostCard from "../Posts/ExplorePostCard";
 import "./modal-detail.css";
 import PostCard from "../Posts/PostCard";
@@ -8,10 +8,8 @@ import { useUserContext } from "../../context/userContext";
 import Comment from "../Comment.js/Comment";
 import "../Posts/post-card.css";
 import { usePostContext } from "../../context/postContext";
-import { useNavigate } from "react-router-dom";
 
 export default function ModalDetail(post) {
-  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [showLike, setShowLike] = useState(false);
   const { userState } = useUserContext();
@@ -25,7 +23,6 @@ export default function ModalDetail(post) {
     postState,
     removeBookmark,
     addToBookmark,
-    getExplorePosts,
     postDispatch,
   } = usePostContext();
 
@@ -67,6 +64,11 @@ export default function ModalDetail(post) {
   };
   const handleAddComment = (e) => {
     if (e.key === "Enter") {
+      postDispatch({
+        type: "ADD_COMMENTS",
+        postId: _id,
+        comment: e.target.value,
+      });
       setCommentList(() => [
         ...commentList,
         {

@@ -8,6 +8,10 @@ import ChangePhotoModal from "./changePhotoModal";
 import ChangeAvatarModal from "./ChangeAvatarModal";
 
 export default function EditProfile() {
+  useEffect(() => {
+    getCurrentUser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const { userState, getCurrentUser, userDispatch, updateUser } =
     useUserContext();
   const [show, setShow] = useState(false);
@@ -22,9 +26,7 @@ export default function EditProfile() {
     updateUser();
     handleClose();
   };
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
+
   return (
     <div>
       <div className="edit-btn" onClick={handleShow}>

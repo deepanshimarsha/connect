@@ -20,7 +20,9 @@ function App() {
   const { getCurrentUser, userState } = useUserContext();
   const { logoutSignedInUserOnRefresh, authState } = useAuthContext();
   const { postState } = usePostContext();
-  console.log(userState, authState, postState);
+  console.log("auth", authState);
+  console.log("user", userState);
+  console.log("post", postState);
   useEffect(() => {
     getCurrentUser();
     logoutSignedInUserOnRefresh();
@@ -28,7 +30,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <EditProfile /> */}
       <Routes>
         <Route
           path="/"

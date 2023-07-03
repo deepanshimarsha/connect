@@ -18,3 +18,37 @@
     margin-bottom: 10px !important;
     
 }
+.eye-icon2{
+    position: absolute;
+    bottom: 35px;
+    right: 0px;
+    left: 500px;
+    cursor: pointer;
+    font-size: 20px;
+}
+@media (min-width: 991.31px) and (max-width: 1290px) {
+    .eye-icon2{
+        left: 410px;
+    }
+}
+@media (min-width: 778px) and (max-width: 991.30px) {
+.eye-icon2{
+    left: 270px;
+}
+}
+@media (min-width: 414px) and (max-width: 777px) {
+    .eye-icon2{
+        left: 430px;
+    }
+}
+@media (min-width: 406px) and (max-width: 504px) {
+    .eye-icon2{
+        left: 300px;
+    }
+}
+@media (min-width: 200px) and (max-width: 406px) {
+    .eye-icon2{
+        left: 300px;
+        
+    }
+}

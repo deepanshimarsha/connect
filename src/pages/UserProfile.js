@@ -11,17 +11,32 @@ import EditProfile from "../components/EditProfile.js/EditProfile";
 import FollowersList from "../components/FollowersList.js/FollowersList";
 
 export default function UserProfile() {
-  const { postState, getProfilePost, getBookmarkPosts, getExplorePosts } =
-    usePostContext();
+  const {
+    postState,
+    getProfilePost,
+    getBookmarkPosts,
+    getExplorePosts,
+    postDispatch,
+  } = usePostContext();
   const { userState } = useUserContext();
   const [show, setShow] = useState("post");
   const followers = userState.currentUser.followers;
   const following = userState.currentUser.following;
 
+  const profilePostsManual = () => {
+    const userPost = postState.explorePosts.filter(
+      ({ username }) => username === localStorage.getItem("username")
+    );
+    postDispatch({ type: "SET_PROFILE_POSTS", posts: userPost });
+  };
+
   useEffect(() => {
+    profilePostsManual();
     getBookmarkPosts();
     getExplorePosts();
-    getProfilePost();
+    getProfilePost(localStorage.getItem("username"));
+
+    // getProfilePost();
   }, []);
   if (!postState.profilePosts) {
     return <h1>No Posts</h1>;

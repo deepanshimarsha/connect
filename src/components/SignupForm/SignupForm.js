@@ -6,6 +6,7 @@ export default function SignupForm() {
   const { authState, authDispatch, signupHandler } = useAuthContext();
 
   const [error, setError] = useState();
+  const [showPass, toggleShowPass] = useState(false);
 
   function validateForm(e) {
     // Check if the First Name is an Empty string or not.
@@ -176,10 +177,10 @@ export default function SignupForm() {
                           }}
                           autoComplete="off"
                           type="email"
-                          id="form2Example17"
+                          id="form2Example27"
                           class="form-control form-control-lg"
                         />
-                        <label class="form-label" for="form2Example17">
+                        <label class="form-label" for="form2Example27">
                           Email
                         </label>
                       </div>
@@ -214,10 +215,10 @@ export default function SignupForm() {
                           }}
                           autoComplete="off"
                           type="text"
-                          id="form2Example17"
+                          id="form2Example27"
                           class="form-control form-control-lg"
                         />
-                        <label class="form-label" for="form2Example17">
+                        <label class="form-label" for="form2Example27">
                           Username
                         </label>
                       </div>
@@ -232,16 +233,29 @@ export default function SignupForm() {
                             });
                           }}
                           autoComplete="off"
-                          type="password"
-                          id="form2Example27"
+                          type={showPass ? "text" : "password"}
+                          id="form2Example17"
                           class="form-control form-control-lg"
                         />
-                        <label class="form-label" for="form2Example27">
+                        <label
+                          class="form-label label-pass"
+                          for="form2Example17"
+                        >
+                          <span
+                            className="eye-icon2"
+                            onClick={() => {
+                              toggleShowPass(!showPass);
+                            }}
+                          >
+                            <i
+                              class={showPass ? "fa fa-eye" : "fa fa-eye-slash"}
+                            ></i>
+                          </span>
                           Password
                         </label>
                       </div>
 
-                      <div class="pt-1 mb-4">
+                      <div class="pt-1 mb-4 btn-container">
                         <button
                           onClick={(e) => validateForm(e)}
                           class="btn btn-dark btn-lg btn-block"

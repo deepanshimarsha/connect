@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import "./next-modal-form.css";
 import EmojiPicker from "emoji-picker-react";
 import { usePostContext } from "../../context/postContext";
@@ -8,7 +8,7 @@ import { usePostContext } from "../../context/postContext";
 export default function NextModalForm({ image, video }) {
   const [show, setShow] = useState(false);
   const [showEmojis, setShowEmojis] = useState(false);
-  const [input, setInput] = useState("");
+
   const { postState, postDispatch, createNewPost } = usePostContext();
 
   function handleShow() {
@@ -26,7 +26,6 @@ export default function NextModalForm({ image, video }) {
       field: "CONTENT",
       data: postState.createPost.content + emojiData.emoji,
     });
-    setInput((prevInput) => prevInput + emojiData.emoji);
   };
   function clearFiles() {
     postDispatch({ type: "CREATE_POST", field: "IMAGE", data: null });

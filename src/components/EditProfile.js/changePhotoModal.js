@@ -10,7 +10,6 @@ export default function ChangePhotoModal() {
   const [imagePreview, setImagePreview] = useState(null);
   const [imgUrl, setImgUrl] = useState();
   const { userDispatch } = useUserContext();
-  const [error, setError] = useState("");
 
   const filePicekerRef = useRef(null);
 
@@ -26,9 +25,7 @@ export default function ChangePhotoModal() {
   }
 
   const handleSubmit = () => {
-    if (imgUrl === null) {
-      setError("Select Photo");
-    } else {
+    if (imgUrl !== null) {
       userDispatch({
         type: "SET_EDITED_PROFILE_INPUT",
         field: "IMG",
@@ -101,7 +98,10 @@ export default function ChangePhotoModal() {
               <>
                 <div className="select-file-container">
                   <div className="illustration">
-                    <img src="https://img.freepik.com/premium-vector/photo-picture-online-album-digital-gallery-watching-website_212005-272.jpg?w=996" />
+                    <img
+                      src="https://img.freepik.com/premium-vector/photo-picture-online-album-digital-gallery-watching-website_212005-272.jpg?w=996"
+                      alt="profile"
+                    />
                   </div>
                   <div>
                     <span>Drag photo here</span>

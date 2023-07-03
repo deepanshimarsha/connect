@@ -8,6 +8,7 @@ export default function LoginForm() {
   const { authState, authDispatch, loginHandler } = useAuthContext();
   const { getUserFeed } = usePostContext();
   const [error, setError] = useState();
+  const [showPass, toggleShowPass] = useState(false);
 
   function validateForm(e) {
     e.preventDefault();
@@ -183,11 +184,24 @@ export default function LoginForm() {
                           }}
                           value={authState.loginCred.password}
                           autoComplete="off"
-                          type="password"
+                          type={showPass ? "text" : "password"}
                           id="form2Example27"
                           class="form-control form-control-lg"
                         />
-                        <label class="form-label" for="form2Example27">
+                        <label
+                          class="form-label label-pass"
+                          for="form2Example27"
+                        >
+                          <span
+                            className="eye-icon"
+                            onClick={() => {
+                              toggleShowPass(!showPass);
+                            }}
+                          >
+                            <i
+                              class={showPass ? "fa fa-eye" : "fa fa-eye-slash"}
+                            ></i>
+                          </span>
                           Password
                         </label>
                       </div>
@@ -197,6 +211,7 @@ export default function LoginForm() {
                           onClick={() => guestModeLogin()}
                           class="btn btn-dark btn-lg btn-block"
                           type="button"
+                          style={{ marginTop: "0.5rem" }}
                         >
                           Guest mode
                         </button>

@@ -8,4 +8,34 @@
 .btn-container button {
     background-color: #0095f6;
     border: none;
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+}
+.label-pass{
+    position: relative;
+}
+.eye-icon{
+    position: absolute;
+    bottom: 35px;
+    right: 0px;
+    left: 500px;
+    cursor: pointer;
+    font-size: 20px;
+}
+@media (min-width: 991.31px) and (max-width: 1290px) {
+    .eye-icon{
+        left: 410px;
+    }
+}
+@media (min-width: 778px) and (max-width: 991.30px) {
+.eye-icon{
+    left: 270px;
+}
+}
+@media (min-width: 200px) and (max-width: 777px) {
+    .eye-icon{
+        left: 230px;
+        
+    }
 }

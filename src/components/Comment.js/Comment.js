@@ -16,6 +16,11 @@ export default function Comment({ post, edit, setEdit, commentList }) {
   const handleEditPost = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
+      postDispatch({
+        type: "EDIT_PROFILE_POST",
+        postId: _id,
+        caption: e.target.value,
+      });
       editPost(_id);
       postDispatch({ type: "EDIT_POST", data: "" });
       setEdit(false);

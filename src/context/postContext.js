@@ -67,7 +67,7 @@ const PostContextProvider = ({ children }) => {
       postDispatch({ type: "SET_IS_LOADING", bool: true });
       const response = await fetch(`/api/posts/user/${username}`);
       const jsonData = await response.json();
-      console.log(jsonData);
+
       if (username === localStorage.getItem("username")) {
         postDispatch({ type: "SET_PROFILE_POSTS", posts: jsonData.posts });
       } else {
@@ -222,7 +222,6 @@ const PostContextProvider = ({ children }) => {
       });
 
       const jsonData = await response.json();
-
       postDispatch({ type: "SET_EXPLORE_POSTS", posts: jsonData.posts });
       getProfilePost();
     } catch (e) {

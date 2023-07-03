@@ -174,5 +174,54 @@ export const postReducer = (state, action) => {
         ),
       };
     }
+    case "EDIT_PROFILE_POST": {
+      return {
+        ...state,
+        profilePosts: state.profilePosts.map((post) => {
+          if (post._id === action.postId) {
+            return { ...post, content: action.caption };
+          } else {
+            return post;
+          }
+        }),
+      };
+    }
+    case "ADD_COMMENTS": {
+      return {
+        ...state,
+        profilePosts: state.profilePosts.map((post) => {
+          if (post._id === action.postId) {
+            return {
+              ...post,
+              comments: [
+                ...post.comments,
+                {
+                  username: localStorage.getItem("username"),
+                  comment: action.comment,
+                },
+              ],
+            };
+          } else {
+            return post;
+          }
+        }),
+        explorePosts: state.explorePosts.map((post) => {
+          if (post._id === action.postId) {
+            return {
+              ...post,
+              comments: [
+                ...post.comments,
+                {
+                  username: localStorage.getItem("username"),
+                  comment: action.comment,
+                },
+              ],
+            };
+          } else {
+            return post;
+          }
+        }),
+      };
+    }
   }
 };
