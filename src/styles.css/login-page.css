@@ -9,3 +9,12 @@
     overflow-y: hidden;
     height: 100%;
 }
+@media (min-width: 200px) and (max-width: 749px) {
+    .btn-container{
+        width: 100%;
+    }
+    .btn-container button{
+        width: 150px;
+        height: 50px;
+    }
+}

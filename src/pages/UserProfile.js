@@ -215,6 +215,7 @@ export default function UserProfile() {
             <div>
               {show === "post" ? (
                 <div
+                  className="userprofile-posts-container"
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -237,6 +238,7 @@ export default function UserProfile() {
                 </div>
               ) : (
                 <div
+                  className="userprofile-posts-container"
                   style={{
                     display: "flex",
                     justifyContent: "center",

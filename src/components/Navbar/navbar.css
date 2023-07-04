@@ -68,6 +68,8 @@
   @media (min-width: 200px) and (max-width: 749px) {
     .top-nav{
       display: block;
+      display: flex;
+      justify-content: center;
     }
     .side-navbar{
         position: fixed;

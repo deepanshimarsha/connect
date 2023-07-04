@@ -28,6 +28,7 @@
   .explore-main{
     /* width: calc(100% - 1px); */
     width: 100%;
+  
   }
  
   .explore-content{
@@ -35,5 +36,9 @@
     margin: 0px;
     width: 99.3%;
     padding-left: 4px;
+  }
+  .thumbnail-collection{
+    padding-top: 20px;
+    padding-bottom: 55px;
   }
 }

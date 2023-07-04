@@ -80,7 +80,6 @@ export default function Navbar() {
             data-bs-placement="right"
             data-bs-original-title="Dashboard"
             onClick={() => {
-              setClickedIconAndHeading("search");
               searchDispatch({ type: "TOGGLE_SHOW_SEARCH_BAR" });
             }}
           >

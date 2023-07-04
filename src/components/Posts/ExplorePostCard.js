@@ -7,15 +7,19 @@ export default function ExplorePostCard(post) {
     <div className="explore-post-card">
       <NavLink className="post-detail-link">
         <div className="post-image-container">
-          {img && <img src={img} alt="post-cover" className="post-cover" />}
+          {img && (
+            <img
+              src={img}
+              alt="post-cover"
+              className="post-cover post-images"
+            />
+          )}
 
           {vid && (
             <video
-              width="320"
-              height="240"
               src={vid}
               controls
-              className="video-cover"
+              className="video-cover post-images"
             ></video>
           )}
         </div>

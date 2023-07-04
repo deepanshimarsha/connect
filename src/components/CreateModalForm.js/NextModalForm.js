@@ -24,7 +24,9 @@ export default function NextModalForm({ image, video }) {
     postDispatch({
       type: "CREATE_POST",
       field: "CONTENT",
-      data: postState.createPost.content + emojiData.emoji,
+      data: postState.createPost.content
+        ? postState.createPost.content + emojiData.emoji
+        : emojiData.emoji,
     });
   };
   function clearFiles() {
@@ -90,14 +92,9 @@ export default function NextModalForm({ image, video }) {
           <Modal.Body>
             <div className="preview">
               {image != null && (
-                <img
-                  src={image}
-                  alt="post-cover"
-                  width="200px"
-                  height="200px"
-                />
+                <img src={image} alt="post-cover" height="100%" />
               )}
-              {video != null && <video controls src={video}></video>}
+              {video != null && <video controls src={video} height="100%" />}
             </div>
           </Modal.Body>
           <Modal.Footer width="100%">

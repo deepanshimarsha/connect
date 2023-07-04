@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function PostCard(post) {
-  const { img, content, likes, username, _id, comments } = post;
+  const { img, content, likes, username, _id, comments, vid } = post;
   const [edit, setEdit] = useState(false);
   const [viewAllComments, showAllComments] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
@@ -213,7 +213,8 @@ export default function PostCard(post) {
                 </div>
               </div>
               <div className="post-image1">
-                <img id="postImage" src={img} alt="post" />
+                {img && <img id="postImage" src={img} alt="post" />}
+                {vid && <video id="postImage" controls src={vid} />}
               </div>
               <div class="tag-icon is-hidden" id="tagIconArea">
                 {" "}

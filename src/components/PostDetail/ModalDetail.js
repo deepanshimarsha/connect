@@ -26,9 +26,6 @@ export default function ModalDetail(post) {
     postDispatch,
   } = usePostContext();
 
-  // const post = postState.explorePosts
-  //   ? postState.explorePosts.find(({ _id }) => _id === post._id)
-  //   : [];
   const { likes, username, _id } = post;
   const user = userState.allUsers.find((user) => user.username === username);
 
@@ -97,7 +94,10 @@ export default function ModalDetail(post) {
         dialogClassName="modal-20w"
       >
         <div className="post-image">
-          <img src={post.img} alt="post-cover" className="post-cover" />
+          {post.img && (
+            <img className="post-cover " src={post.img} alt="post-cover" />
+          )}
+          {post.vid && <video className="post-cover" controls src={post.vid} />}
         </div>
         <div className="not-show">
           <PostCard {...post} />
