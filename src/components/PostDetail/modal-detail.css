@@ -129,7 +129,24 @@
     }
     .column{
         box-sizing: border-box;
+        padding-left: 0px;
+        padding-right: 0px;
         width: 100%;
     }
+    .table-container{
+        width: 100%;
+    }
+    .instaPreviewArea{
+        width: 100%;
+    }
+    .fade{
+        width: 100%;
+    }
+    .modal-dialog{
+        box-sizing: border-box;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
     
 }

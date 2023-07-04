@@ -56,6 +56,7 @@ export default function NextModalForm({ image, video }) {
         }}
         className="modal-main"
         dialogClassName="modal-20w"
+        style={{ width: "100%" }}
       >
         <div className="form-container">
           <Modal.Header>
@@ -88,11 +89,18 @@ export default function NextModalForm({ image, video }) {
           </Modal.Header>
           <Modal.Body>
             <div className="preview">
-              {image != null && <img src={image} alt="post-cover" />}
+              {image != null && (
+                <img
+                  src={image}
+                  alt="post-cover"
+                  width="200px"
+                  height="200px"
+                />
+              )}
               {video != null && <video controls src={video}></video>}
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer width="100%">
             <div className="text-area">
               <div className="caption-input">
                 <textarea

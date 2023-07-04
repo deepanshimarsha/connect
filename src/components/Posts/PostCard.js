@@ -212,7 +212,9 @@ export default function PostCard(post) {
                   </div>
                 </div>
               </div>
-              <img id="postImage" src={img} alt="post" />
+              <div className="post-image1">
+                <img id="postImage" src={img} alt="post" />
+              </div>
               <div class="tag-icon is-hidden" id="tagIconArea">
                 {" "}
                 <span class="material-icons has-text-white">
@@ -316,7 +318,7 @@ export default function PostCard(post) {
                       ></polygon>
                     </svg>
                   </span>
-                  <span style={{ marginLeft: "232px" }}>
+                  <span style={{ marginLeft: "200px" }}>
                     <svg
                       onClick={handleBookmark}
                       id="savePostIcon"

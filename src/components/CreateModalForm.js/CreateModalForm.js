@@ -120,7 +120,9 @@ export default function CreateModalForm() {
           <Modal.Body>
             {imagePreview != null || videoPreview != null ? (
               <div className="preview">
-                {imagePreview != null && <img src={imagePreview} alt="" />}
+                {imagePreview != null && (
+                  <img src={imagePreview} alt="" width="300px" height="300px" />
+                )}
                 {videoPreview != null && (
                   <video controls src={videoPreview}></video>
                 )}
