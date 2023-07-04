@@ -82,7 +82,7 @@ export default function UserFeed() {
           <TopNav />
         </div>
         <div className="main">
-          <div className="suggestions-mob-view">
+          {/* <div className="suggestions-mob-view">
             <div className="heading">
               <div className="heading-container">
                 <span>Suggested for you</span>
@@ -133,7 +133,7 @@ export default function UserFeed() {
                   }
                 })}
             </div>
-          </div>
+          </div> */}
           <SearchPopup />
           <div className="home-container">
             <div className="user-feed">
