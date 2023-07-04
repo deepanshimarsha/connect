@@ -5,12 +5,14 @@ import { useSearchContext } from "../../context/searchContext";
 import { useNavContext } from "../../context/navContext";
 import CreateModalForm from "../CreateModalForm.js/CreateModalForm";
 import { useUserContext } from "../../context/userContext";
+import { usePostContext } from "../../context/postContext";
 
 export default function Navbar() {
   const { logoutHandler, authDispatch } = useAuthContext();
   const { navState, setClickedIconAndHeading } = useNavContext();
   const { searchDispatch } = useSearchContext();
   const { userState } = useUserContext();
+  const { postDispatch } = usePostContext();
   return (
     <div className="d-flex flex-column flex-shrink-0 bg-light side-navbar">
       <NavLink
@@ -228,6 +230,7 @@ export default function Navbar() {
           id="dropdownUser3"
           aria-expanded="false"
           onClick={() => {
+            postDispatch({ type: "CLEAR_USER_FEED" });
             logoutHandler();
             authDispatch({ type: "SET_LOGIN_CRED", case: "LOGOUT" });
           }}

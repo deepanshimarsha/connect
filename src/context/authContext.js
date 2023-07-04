@@ -36,7 +36,7 @@ const AuthContextProvider = ({ children }) => {
         name: authState.signupCred.name,
         username: authState.signupCred.username,
         password: authState.signupCred.password,
-        img: "https://img.myloview.com/posters/businessman-icon-image-male-avatar-profile-vector-with-glasses-and-beard-hairstyle-400-228654859.jpg",
+        img: "https://static.vecteezy.com/system/resources/previews/002/002/257/original/beautiful-woman-avatar-character-icon-free-vector.jpg",
       };
 
       const responseData = await fetch("/api/auth/signup", {

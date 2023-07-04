@@ -13,7 +13,8 @@ import { useAuthContext } from "../context/authContext";
 
 export default function UserFeed() {
   const { logoutHandler, authDispatch } = useAuthContext();
-  const { postState, getExplorePosts, getProfilePost } = usePostContext();
+  const { postState, getExplorePosts, getProfilePost, postDispatch } =
+    usePostContext();
   const [sort, setSort] = useState("latest");
 
   const { userState, getCurrentUser, getAllUsers } = useUserContext();
@@ -65,6 +66,7 @@ export default function UserFeed() {
   };
 
   let userFeed = getUserFeed();
+  console.log("userFeed", userFeed.length);
 
   const handleClick = (value) => {
     setSort(value);
@@ -197,7 +199,7 @@ export default function UserFeed() {
                 </div>
 
                 <div className="userfeed-post-container">
-                  {userFeed === [] ? (
+                  {userFeed.length === 0 ? (
                     <div
                       style={{
                         textAlign: "center",
@@ -207,6 +209,7 @@ export default function UserFeed() {
                         alignItems: "center",
                       }}
                     >
+                      {" "}
                       <h5>
                         No Posts to Display! Start Following and Liking your
                         Friends Post to get updates on your Feed
@@ -235,6 +238,7 @@ export default function UserFeed() {
                     <button
                       type="button"
                       onClick={() => {
+                        postDispatch({ type: "CLEAR_USER_FEED" });
                         logoutHandler();
                         authDispatch({
                           type: "SET_LOGIN_CRED",

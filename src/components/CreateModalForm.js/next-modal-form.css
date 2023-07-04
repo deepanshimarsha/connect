@@ -62,26 +62,38 @@ aside.EmojiPickerReact.epr-header .epr-header-overlay{
 }
 .picker-float{
     position: fixed;
-    right: 200px;
-    top: 150px;
+    right: 120px;
+    top: 110px;
 }
+
 .modal-body{
     /* height: 50vh; */
     width: 100%;
 }
+aside.EmojiPickerReact{
+    width: 350px !important;
+    height: 450px !important;
+}
 .final-form-body{
     
 }
+@media (min-width: 750px) and (max-width: 1260px) {
+    .picker-float{
+        position: fixed;
+        right: 20px;
+        top: 0px;
+    }
+}
 @media (min-width: 200px) and (max-width: 749px) {
     .picker-float{
-        top:40px;
+        top:0px;
         left: 30px;
         right:0px
 
     }
     aside.EmojiPickerReact{
         width: 300px !important;
-        height: 450px !important;
+        height: 350px !important;
     }
     .form-container{
         height: 100%;

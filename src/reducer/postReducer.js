@@ -10,6 +10,9 @@ export const postReducer = (state, action) => {
     case "SET_USER_FEED": {
       return { ...state, userFeed: action.data };
     }
+    case "CLEAR_USER_FEED": {
+      return { ...state, userFeed: [] };
+    }
     case "SET_OTHER_USER_PROFILE": {
       return { ...state, otherUserprofile: action.posts };
     }
