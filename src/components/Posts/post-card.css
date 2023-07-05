@@ -19,6 +19,8 @@
     display: flex;
     border-bottom: 1px solid rgb(219, 219, 219);
     margin: 0 auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .instaPostCard{
@@ -124,14 +126,23 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
     text-align: right!important;
 }
 #postImage {
-    width: 400px;
-    height: 400px;
+    height: 450px;
+    max-width: 400px;
+    object-fit: cover;
+    box-sizing: border-box;
     background-image: url("https://codebeautify.org/img/instagram-default-image.jpg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     cursor: pointer;
 }
+.post-image1{
+    width: 400px;
+    height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 .tag-icon {
     position: absolute;
     margin-left: 12px;
@@ -241,8 +252,33 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
 .content-input input{
     width: 70%;
 }
+.icon-right{
+    display: flex;
+}
+.icon-left{
+    display: flex;
+}
+.post-card-icons-mobile-view{
+    display: flex;
+    justify-content: space-between;
+    width: 100% !important;
+}
+.send-icon{
+    display: none;
+}
 @media (min-width: 200px) and (max-width: 749px) {
     .post-card-icons-mobile-view{
         display: flex;
     }
+    .add-comment{
+        position: relative;
+    }
+    .send-icon{
+        display: inline;
+        position: absolute;
+        right: 0px;
+        top: 8px;
+        cursor: pointer;
+    }
+
 }

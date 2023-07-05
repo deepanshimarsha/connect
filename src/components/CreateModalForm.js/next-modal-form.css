@@ -86,8 +86,8 @@ aside.EmojiPickerReact{
 }
 @media (min-width: 200px) and (max-width: 749px) {
     .picker-float{
-        top:0px;
-        left: 30px;
+        top:100px;
+        left: 40px;
         right:0px
 
     }

@@ -111,7 +111,7 @@ export default function UserProfile() {
                 <li className="list-item">
                   <FollowersList followers={followers} />
                 </li>
-                <li className="list-item">
+                <li className="list-item following-div">
                   <FollowersList following={following} />
                 </li>
               </ul>

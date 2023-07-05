@@ -434,5 +434,8 @@ margin-right: 40px;
         width: 100%;
     }
 
+    .following-div span span{
+        margin-right: 0px;
+    }
     
 }
