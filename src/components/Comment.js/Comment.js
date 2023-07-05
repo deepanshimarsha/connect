@@ -2,8 +2,9 @@ import "./comment.css";
 import { useUserContext } from "../../context/userContext";
 import { useEffect } from "react";
 import { usePostContext } from "../../context/postContext";
+import { NavLink } from "react-router-dom";
 export default function Comment({ post, edit, setEdit, commentList }) {
-  const { userState, getAllUsers } = useUserContext();
+  const { userState, getAllUsers, getUser } = useUserContext();
   const { editPost, postState, postDispatch } = usePostContext();
   const { comments, username, content, _id } = post;
 
@@ -12,6 +13,12 @@ export default function Comment({ post, edit, setEdit, commentList }) {
       (user) => user.username === username
     );
     return author.img;
+  };
+  const getAuthorId = (username) => {
+    const author = userState.allUsers.find(
+      (user) => user.username === username
+    );
+    return author._id;
   };
   const handleEditPost = (e) => {
     if (e.key === "Enter") {
@@ -72,7 +79,14 @@ export default function Comment({ post, edit, setEdit, commentList }) {
           return (
             <div id="postText">
               <div className="profile-photo">
-                <img src={getAuthorImg(username)} alt="profile" />
+                <NavLink
+                  onClick={() => {
+                    getUser(getAuthorId(username));
+                  }}
+                  to={`/profile/${username}`}
+                >
+                  <img src={getAuthorImg(username)} alt="profile" />
+                </NavLink>
               </div>
               <div className="post-content">
                 <div>

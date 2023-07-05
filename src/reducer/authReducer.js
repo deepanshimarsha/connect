@@ -34,8 +34,8 @@ const authReducer = (state, action) => {
         return {
           ...state,
           loginCred: {
-            username: "adarshbalika",
-            password: "adarshBalika123#",
+            username: "maximep123",
+            password: "Password123#",
           },
         };
       }

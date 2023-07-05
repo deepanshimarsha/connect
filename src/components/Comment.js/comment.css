@@ -23,12 +23,14 @@
 }
 
 .profile-photo{
-    min-width: 10%;
+    width: 37px;
+    height: 40px;
+    border-radius: 50%;
 }
 .profile-photo img{
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
+    min-width: 37px;
+    max-height: 40px;
 }
 .division hr{
    color:rgb(219, 219, 219);

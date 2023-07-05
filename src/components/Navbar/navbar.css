@@ -44,6 +44,11 @@
 .display-mob{
   display: none;
 }
+
+.nav-icon img{
+  max-width: 28px;
+  max-height: 28px;
+}
   /* Extra small devices (phones, 600px and down) */
   @media (min-width: 750px) and (max-width: 1260px) {
   

@@ -82,8 +82,8 @@
     width: 40px;
   }
   .round-img img{
-    min-width: 40px;
-    max-height: 40px;
+    max-width: 42px;
+    min-height: 42px;
     height: unset;
   }
   .select-btn{

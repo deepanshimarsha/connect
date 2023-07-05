@@ -16,11 +16,13 @@
 } */
 .post-image{
     width: 50%;
+    
    
 }
 .post-image img{
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
 }
 .post-detail {
     width: 50%;
