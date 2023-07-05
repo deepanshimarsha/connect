@@ -30,11 +30,14 @@
 
     flex-basis: 0;
 
-    justify-content: center;
+    
 
-    flex-direction: column;
+
 
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     flex-shrink: 0;
 
@@ -60,20 +63,22 @@
     border-top-left-radius: 50%;
     overflow-y: hidden;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-image{
+    
     padding-left: 0;
     font-size: 100%;
-    width: 100%;
     padding-top: 0;
     margin-top: 0;
     border-left: 0;
     margin-bottom: 0;
-
-        height: 100%;
- 
-        padding-right: 0;
+    min-width: 150px;
+    min-height: 150px;
+    padding-right: 0;
    
         margin-left: 0;
   
@@ -95,6 +100,7 @@
 
    
         cursor: pointer;
+        border-radius: 50%;
     }
 
     .profile-page-header{

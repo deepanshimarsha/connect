@@ -77,7 +77,15 @@
         cursor: pointer;
 
   }
-
+  .round-img{
+    height: 40px;
+    width: 40px;
+  }
+  .round-img img{
+    min-width: 40px;
+    max-height: 40px;
+    height: unset;
+  }
   .select-btn{
     cursor: pointer;
     color: rgb(13,110,253);

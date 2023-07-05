@@ -71,7 +71,7 @@ export default function FollowersList({
             Small Modal
           </Modal.Title>
   </Modal.Header>  */}
-          <Modal.Body style={{ overflowY: "visible" }}>
+          <Modal.Body style={{ overflowY: "scroll", height: "88%" }}>
             {allOtherUsers && (
               <div>
                 {allOtherUsers.map((user) => {
