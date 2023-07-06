@@ -52,4 +52,8 @@
     display: none !important;
   }
 }
-
+@media (min-width: 200px) and (max-width: 749px) {
+  .top-nav{
+    display: none !important;
+  }
+}

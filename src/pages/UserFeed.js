@@ -57,11 +57,7 @@ export default function UserFeed() {
         (a, b) => b.likes.likeCount - a.likes.likeCount
       );
     }
-    if (sort === "oldest") {
-      userFeedPosts = [...userFeedPosts].sort(
-        (a, b) => Date.parse(a.updatedAt) - Date.parse(b.updatedAt)
-      );
-    }
+
     return userFeedPosts;
   };
 
@@ -164,19 +160,6 @@ export default function UserFeed() {
                             >
                               {" "}
                               Latest Posts
-                            </div>
-
-                            <div
-                              onClick={() => handleClick("oldest")}
-                              style={{
-                                fontWeight: sort === "oldest" ? "600" : "400",
-                                color:
-                                  sort === "oldest"
-                                    ? "rgb(84 158 246)"
-                                    : "black",
-                              }}
-                            >
-                              Oldest Posts
                             </div>
 
                             <div

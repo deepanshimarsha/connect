@@ -176,9 +176,17 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
     font-size: 14px;
     line-height: 18px;
     margin-bottom: 6px;
+    display: flex;
+   align-items: center;
+   
    
 }
 
+#postTextArea div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 #postTextUserName{
     font-weight: 650;
 }
@@ -250,7 +258,7 @@ blockquote, body, dd, dl, dt, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, html
     width: 100% !important;
 }
 .content-input input{
-    width: 70%;
+    width: 90%;
 }
 .icon-right{
     display: flex;

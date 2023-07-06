@@ -1,12 +1,15 @@
 import { NavLink } from "react-router-dom";
 import "./suggestion-card.css";
 import { useUserContext } from "../../context/userContext";
+import { usePostContext } from "../../context/postContext";
 
 export default function SuggestionCard(user) {
   const { getUser } = useUserContext();
 
   const { followAnotherUser, userState, unfollowAnotherUser } =
     useUserContext();
+
+  const { getProfilePost } = usePostContext();
   const { username, firstName, lastName, img, _id } = user;
   const followingUsername = userState.currentUser.following
     ? userState.currentUser.following.map(({ username }) => username)
@@ -37,6 +40,7 @@ export default function SuggestionCard(user) {
             <NavLink
               onClick={() => {
                 getUser(_id);
+                getProfilePost(username);
               }}
               to={`/profile/${username}`}
               className="user-link"

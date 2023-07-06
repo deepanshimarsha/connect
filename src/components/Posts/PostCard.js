@@ -4,6 +4,7 @@ import { usePostContext } from "../../context/postContext";
 import { useEffect } from "react";
 
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function PostCard(post) {
   const { img, content, likes, username, _id, comments, vid } = post;
@@ -11,6 +12,7 @@ export default function PostCard(post) {
   const [viewAllComments, showAllComments] = useState(false);
   const [scrollTop, setScrollTop] = useState(0);
   const [commentInput, setCommentInput] = useState("");
+  const { getUser } = useUserContext();
 
   // const [commentList, setCommentList] = useState(comments);
 
@@ -67,12 +69,23 @@ export default function PostCard(post) {
     if (e.key === "Enter") {
       e.preventDefault();
       editPost(_id);
+      postDispatch({ type: "EDIT_POST", data: "" });
       setEdit(false);
     }
   };
+  const handleEditBtnSend = () => {
+    postDispatch({
+      type: "EDIT_PROFILE_POST",
+      postId: _id,
+      caption: postState.editPost.caption,
+    });
+    editPost(_id);
+    postDispatch({ type: "EDIT_POST", data: "" });
+    setEdit(false);
+  };
 
   const handleRemoveEditPost = () => {
-    if (scrollTop % 200 === 0 && scrollTop !== 0) {
+    if (scrollTop % 300 === 0 && scrollTop !== 0) {
       setEdit(false);
     }
   };
@@ -364,23 +377,35 @@ export default function PostCard(post) {
                 <div id="postTextArea">
                   {" "}
                   <b id="postTextUserName" style={{ fontWeight: "630" }}>
-                    {username}
+                    <NavLink to="/profile" style={{ color: "black" }}>
+                      {" "}
+                      {username}
+                    </NavLink>
                   </b>
                   &nbsp;
                   <span id="instaPostText" className="content-input">
                     {edit ? (
-                      <input
-                        className="edit-caption"
-                        type="text"
-                        value={postState.editPost.caption}
-                        onChange={(e) => {
-                          postDispatch({
-                            type: "EDIT_POST",
-                            data: e.target.value,
-                          });
-                        }}
-                        onKeyDown={(e) => handleEditPost(e)}
-                      />
+                      <div>
+                        <input
+                          className="edit-caption"
+                          type="text"
+                          value={postState.editPost.caption}
+                          onChange={(e) => {
+                            postDispatch({
+                              type: "EDIT_POST",
+                              data: e.target.value,
+                            });
+                          }}
+                          onKeyDown={(e) => handleEditPost(e)}
+                        />
+                        <span
+                          className="send-icon"
+                          style={{ position: "static" }}
+                          onClick={() => handleEditBtnSend()}
+                        >
+                          <i class="fa fa-send-o" value="send"></i>
+                        </span>
+                      </div>
                     ) : (
                       content
                     )}
@@ -419,9 +444,23 @@ export default function PostCard(post) {
                               {" "}
                               <b
                                 id="commentUsername2"
-                                style={{ fontWeight: "630" }}
+                                style={{ fontWeight: "630", cursor: "pointer" }}
                               >
-                                {comment.username}
+                                <NavLink
+                                  onClick={() => {
+                                    getUser(
+                                      userState.allUsers.find(
+                                        ({ username }) =>
+                                          username === comment.username
+                                      )._id
+                                    );
+                                  }}
+                                  to={`/profile/${comment.username}`}
+                                  style={{ color: "black" }}
+                                >
+                                  {" "}
+                                  {comment.username}
+                                </NavLink>
                               </b>
                               &nbsp;
                               <span id="commentText2">
@@ -465,7 +504,21 @@ export default function PostCard(post) {
                               id="commentUsername2"
                               style={{ fontWeight: "630" }}
                             >
-                              {comment.username}
+                              <NavLink
+                                onClick={() => {
+                                  getUser(
+                                    userState.allUsers.find(
+                                      ({ username }) =>
+                                        username === comment.username
+                                    )._id
+                                  );
+                                }}
+                                to={`/profile/${comment.username}`}
+                                style={{ color: "black" }}
+                              >
+                                {" "}
+                                {comment.username}
+                              </NavLink>
                             </b>
                             &nbsp;
                             <span id="commentText2">

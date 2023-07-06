@@ -33,6 +33,7 @@ export default function Comment({ post, edit, setEdit, commentList }) {
       setEdit(false);
     }
   };
+
   useEffect(() => {
     getAllUsers();
     postDispatch({ type: "EDIT_POST", data: content });
@@ -50,20 +51,25 @@ export default function Comment({ post, edit, setEdit, commentList }) {
         <div className="post-content">
           <div>
             <span style={{ fontWeight: "600" }} id="username">
-              {username}
+              <NavLink to="/profile" style={{ color: "black" }}>
+                {" "}
+                {username}
+              </NavLink>
             </span>
             &nbsp;
             <span id="post-caption">
               {edit ? (
-                <input
-                  className="edit-caption"
-                  type="text"
-                  value={postState.editPost.caption}
-                  onChange={(e) => {
-                    postDispatch({ type: "EDIT_POST", data: e.target.value });
-                  }}
-                  onKeyDown={(e) => handleEditPost(e)}
-                />
+                <>
+                  <input
+                    className="edit-caption"
+                    type="text"
+                    value={postState.editPost.caption}
+                    onChange={(e) => {
+                      postDispatch({ type: "EDIT_POST", data: e.target.value });
+                    }}
+                    onKeyDown={(e) => handleEditPost(e)}
+                  />
+                </>
               ) : (
                 content
               )}
@@ -90,9 +96,20 @@ export default function Comment({ post, edit, setEdit, commentList }) {
               </div>
               <div className="post-content">
                 <div>
-                  <span id="username" style={{ fontWeight: "600" }}>
+                  <NavLink
+                    onClick={() => {
+                      getUser(
+                        userState.allUsers.find(
+                          (user) => user.username === username
+                        )._id
+                      );
+                    }}
+                    to={`/profile/${username}`}
+                    style={{ color: "black", fontWeight: "500" }}
+                  >
+                    {" "}
                     {username}
-                  </span>
+                  </NavLink>
                   &nbsp;
                   <span id="post-comment">{comment}</span>{" "}
                 </div>
