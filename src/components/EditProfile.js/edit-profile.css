@@ -78,13 +78,13 @@
 
   }
   .round-img{
-    height: 40px;
-    width: 40px;
+    height: 42px;
+    width: 42px;
   }
   .round-img img{
     max-width: 42px;
     min-height: 42px;
-    height: unset;
+    height: 42px;
   }
   .select-btn{
     cursor: pointer;
