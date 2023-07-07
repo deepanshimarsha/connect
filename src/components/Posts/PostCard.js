@@ -385,7 +385,7 @@ export default function PostCard(post) {
                   &nbsp;
                   <span id="instaPostText" className="content-input">
                     {edit ? (
-                      <div>
+                      <span className="edit-post-send-btn">
                         <input
                           className="edit-caption"
                           type="text"
@@ -405,7 +405,7 @@ export default function PostCard(post) {
                         >
                           <i class="fa fa-send-o" value="send"></i>
                         </span>
-                      </div>
+                      </span>
                     ) : (
                       content
                     )}
