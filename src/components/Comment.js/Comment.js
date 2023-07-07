@@ -51,10 +51,27 @@ export default function Comment({ post, edit, setEdit, commentList }) {
         <div className="post-content">
           <div>
             <span style={{ fontWeight: "600" }} id="username">
-              <NavLink to="/profile" style={{ color: "black" }}>
-                {" "}
-                {username}
-              </NavLink>
+              {localStorage.getItem("username") === username ? (
+                <NavLink to="/profile" style={{ color: "black" }}>
+                  {" "}
+                  {username}
+                </NavLink>
+              ) : (
+                <NavLink
+                  onClick={() => {
+                    getUser(
+                      userState.allUsers.find(
+                        (user) => user.username === username
+                      )._id
+                    );
+                  }}
+                  to={`/profile/${username}`}
+                  style={{ color: "black" }}
+                >
+                  {" "}
+                  {username}
+                </NavLink>
+              )}
             </span>
             &nbsp;
             <span id="post-caption">

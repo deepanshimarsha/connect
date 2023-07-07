@@ -377,10 +377,27 @@ export default function PostCard(post) {
                 <div id="postTextArea">
                   {" "}
                   <b id="postTextUserName" style={{ fontWeight: "630" }}>
-                    <NavLink to="/profile" style={{ color: "black" }}>
-                      {" "}
-                      {username}
-                    </NavLink>
+                    {localStorage.getItem("username") === username ? (
+                      <NavLink to="/profile" style={{ color: "black" }}>
+                        {" "}
+                        {username}
+                      </NavLink>
+                    ) : (
+                      <NavLink
+                        onClick={() => {
+                          getUser(
+                            userState.allUsers.find(
+                              (user) => user.username === username
+                            )._id
+                          );
+                        }}
+                        to={`/profile/${username}`}
+                        style={{ color: "black" }}
+                      >
+                        {" "}
+                        {username}
+                      </NavLink>
+                    )}
                   </b>
                   &nbsp;
                   <span id="instaPostText" className="content-input">
