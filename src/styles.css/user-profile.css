@@ -13,32 +13,20 @@
 
 .profile{
     margin-bottom: 44px;
-
     display: flex;
-
     flex-shrink: 0;
-
     align-items: stretch;
-
-    flex-direction: row;
-    
+    flex-direction: row;   
     margin-right:90px ;
    
 }
 .profile-picture{
     flex-grow: 1;
-
     flex-basis: 0;
-
-    
-
-
-
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     flex-shrink: 0;
 
     /* position: relative; */
@@ -78,100 +66,57 @@
     margin-bottom: 0;
     min-width: 150px;
     min-height: 150px;
-    padding-right: 0;
-   
-        margin-left: 0;
-  
-        border-right: 0;
- 
-        padding-bottom: 0;
- 
-        vertical-align: baseline;
-   
-        margin-right: 0;
-
-        border-bottom: 0;
- 
-        border-top: 0;
-
-        border: 0;
-
-        overflow: clip;
-
-   
-        cursor: pointer;
-        border-radius: 50%;
+    padding-right: 0; 
+    margin-left: 0;
+    border-right: 0;
+    padding-bottom: 0;
+    vertical-align: baseline;
+    margin-right: 0;
+    border-bottom: 0;
+    border-top: 0;
+    border: 0;
+    overflow: clip;
+    cursor: pointer;
+    border-radius: 50%;
     }
 
-    .profile-page-header{
-        flex-grow: 2;
-
+.profile-page-header{
+    flex-grow: 2;
     flex-basis: 30px;
-
     flex-shrink: 1;
-
     padding-left: 0;
-
     font-size: 100%;
-
     /* padding-top: 0; */
-
     min-width: 0;
-
     flex-direction: column;
-
     margin-top: 0;
 
     /* border-left: 0; */
-
     margin-bottom: 0;
-
     box-sizing: border-box;
-
     display: flex;
-
     color: rgb(0,0,0);
-
-
     padding-right: 0;
-
     align-items: stretch;
-
     position: relative;
-
     margin-left: 0;
-
     border-right: 0;
-
     padding-bottom: 0;
-
     vertical-align: baseline;
-
     margin-right: 0;
-
     border-bottom: 0;
-
     border-top: 0;
     }
 
 .section-header{
     
     display: flex;
-        flex-shrink: 1;
-
+    flex-shrink: 1;
     min-width: 0;
-
-
     align-items: center;
-
     flex-direction: row;
-
     position: relative;
-
-    
-
     font-size: 100%;
-
     color: rgb(0,0,0);
 }
 
@@ -219,11 +164,8 @@
 
 .sub-header{
    
-
     display: flex;
-
     flex-direction: row;
-
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -233,25 +175,20 @@
 }
 .list-item{
     margin-left: 0;
-
     font-size: var(--system-16-font-size);
-
     margin-right: 10px;
-
     display: list-item;
     text-align: -webkit-match-parent;
-
     list-style-type: none;
 }
 .list-item span{
     font-size: 16px;
-margin-right: 40px;
+    margin-right: 40px;
 }
 
 .edit-btn{
     
         flex-shrink: 1;
-    
         overflow-y: visible;
            align-content: stretch;
           border-bottom-left-radius: 0;
@@ -262,13 +199,10 @@ margin-right: 40px;
             border-bottom-right-radius: 0;
            align-items: stretch;
            flex-direction: row;
-    
         overflow-x: visible;
-   
         align-self: auto;
           justify-content: flex-start;
            position: relative;
-    
         flex-grow: 0;
            border-top-left-radius: 0;
           border-top-right-radius: 0;
@@ -280,12 +214,9 @@ margin-right: 40px;
 .edit-btn a{
    
        color: rgb(0,0,0);
- 
         text-decoration: none;
           font-weight: 600;
-   
         border-bottom-color: rgba(0, 0, 0, 0.4);
-    
         border-left-width: 0;
            text-overflow: ellipsis;
         justify-content: center;
