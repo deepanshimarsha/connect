@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function PostCard(post) {
   const { img, content, likes, username, _id, comments, vid } = post;
@@ -15,6 +16,8 @@ export default function PostCard(post) {
   const { getUser } = useUserContext();
 
   // const [commentList, setCommentList] = useState(comments);
+  let location = useLocation();
+  console.log("location", location.pathname);
 
   const {
     likePost,
@@ -85,7 +88,7 @@ export default function PostCard(post) {
   };
 
   const handleRemoveEditPost = () => {
-    if (scrollTop % 300 === 0 && scrollTop !== 0) {
+    if (scrollTop % 400 === 0 && scrollTop !== 0) {
       setEdit(false);
     }
   };
@@ -183,7 +186,8 @@ export default function PostCard(post) {
                 <div class="column" style={{ width: "50%", padding: "0px" }}>
                   <div class="has-text-right">
                     {" "}
-                    {username === localStorage.getItem("username") ? (
+                    {username === localStorage.getItem("username") &&
+                    location.pathname === "/profile" ? (
                       <div
                         class="menu-nav"
                         style={{
