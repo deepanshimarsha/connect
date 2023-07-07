@@ -1,4 +1,6 @@
-#Features
+# CONNECT - SOCIAL - MEDIA
+
+## FEATURES
 
 1. User Feed
  - List all user posts
@@ -17,3 +19,10 @@
   - Sign-up
   - Login
   - Logout
+
+## FRONTEND
+ReactJs
+CSS
+
+## MOCK BACKEND
+mockBee
