@@ -1,17 +1,16 @@
 import "./post-card.css";
 import { useUserContext } from "../../context/userContext";
 import { usePostContext } from "../../context/postContext";
-import { useEffect } from "react";
 
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function PostCard(post) {
   const { img, content, likes, username, _id, comments, vid } = post;
   const [edit, setEdit] = useState(false);
   const [viewAllComments, showAllComments] = useState(false);
-  const [scrollTop, setScrollTop] = useState(0);
+
   const [commentInput, setCommentInput] = useState("");
   const { getUser } = useUserContext();
 
@@ -87,11 +86,11 @@ export default function PostCard(post) {
     setEdit(false);
   };
 
-  const handleRemoveEditPost = () => {
-    if (scrollTop % 400 === 0 && scrollTop !== 0) {
-      setEdit(false);
-    }
-  };
+  // const handleRemoveEditPost = () => {
+  //   if (scrollTop % 400 === 0 && scrollTop !== 0) {
+  //     setEdit(false);
+  //   }
+  // };
 
   const handleFollow = (another_user) => {
     if (followingUsername.includes(username)) {
@@ -129,20 +128,20 @@ export default function PostCard(post) {
     }
   };
 
-  useEffect(() => {
-    handleRemoveEditPost();
-  });
-  useEffect(() => {
-    const handleScroll = (event) => {
-      setScrollTop(window.scrollY);
-    };
+  // useEffect(() => {
+  //   handleRemoveEditPost();
+  // });
+  // useEffect(() => {
+  //   const handleScroll = (event) => {
+  //     setScrollTop(window.scrollY);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
 
   return (
     <div className="column is-5">
