@@ -22,7 +22,7 @@
 
 ## FRONTEND
 ReactJs
-CSS
+
 
 ## MOCK BACKEND
 mockBee
