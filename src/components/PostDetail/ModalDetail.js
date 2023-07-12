@@ -89,7 +89,10 @@ export default function ModalDetail(post) {
       <Modal
         show={show}
         fullscreen="true"
-        onHide={() => setShow(false)}
+        onHide={() => {
+          setShow(false);
+          setEdit(false);
+        }}
         className="detail-modal"
         dialogClassName="modal-20w"
       >
